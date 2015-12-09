@@ -1,0 +1,57 @@
+header {
+  height: 100px; }
+
+body {
+  background-color: #D4D6D5; }
+
+.logo {
+  background-color: #105E28;
+  height: 100px;
+  color: white;
+  font-family: "Raleway", sans-serif;
+  font-size: 3em; }
+
+.slogan {
+  background-color: #2A7E43;
+  height: 100px;
+  color: white;
+  font-family: "Raleway", sans-serif;
+  font-size: 3em; }
+
+.narrative {
+  width: 90%;
+  margin: 4% auto;
+  font-family: "Philosopher", sans-serif;
+  font-size: 1.4em;
+  line-height: 1.3em; }
+  .narrative h2 {
+    font-family: "Philosopher", sans-serif;
+    font-size: 1.75em; }
+
+.login {
+  margin: 7% auto;
+  width: 90%;
+  background-color: #2A7E43;
+  min-height: 250px;
+  margin-bottom: 15%;
+  padding: 5%;
+  float: left;
+  border-radius: 2%; }
+  .login h3 {
+    color: white;
+    font-size: 2.5em;
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    padding-bottom: 1%; }
+  .login form {
+    text-align: center; }
+
+.btn {
+  width: 25%;
+  margin-left: 2%;
+  text-align: center;
+  float: right; }
+
+footer {
+  width: 100%;
+  text-align: center; }

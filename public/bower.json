@@ -1,0 +1,23 @@
+{
+  "name": "PAMS",
+  "homepage": "https://github.com/alliejay/PAMS",
+  "authors": [
+    "Alison Arsenault"
+  ],
+  "description": "Product Authentication & Management System",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.8.3",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8"
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PAMS | Product Authentication & Management System</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Righteous|Philosopher:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/styles.css" media="screen" title="styles" charset="utf-8">
+</head>
+
+<body ng-app="pamsLogin">
+  <header>
+    <div class="col-md-4 logo">LOGO</div>
+    <div class="col-md-8 slogan">MENU</div>
+  </header>
+
+  <ng-view>
+    <!-- This is where templates load into   -->
+  </ng-view>
+
+  <footer>
+    <div class="col-md-12">
+      &copy; PAMS, Inc. 2015
+    </div>
+  </footer>
+
+<!-- LIBRARIES -->
+  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+  <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+
+<!-- LOGIN MODULE -->
+  <script src="login/login.module.js" charset="utf-8"></script>
+  <script src="login/login.controller.js" charset="utf-8"></script>
+  <script src="login/login.service.js" charset="utf-8"></script>
+</body>
+</html>
