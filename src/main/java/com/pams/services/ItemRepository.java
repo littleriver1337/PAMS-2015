@@ -1,10 +1,10 @@
 package com.pams.services;
 
-import com.sun.tools.javac.jvm.Items;
+import com.pams.entities.Item;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * Created by MattBrown on 12/9/15.
  */
-public interface ItemRepository extends CrudRepository<Items, Integer> {
+public interface ItemRepository extends CrudRepository<Item, Integer> {
 }
