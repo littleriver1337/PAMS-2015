@@ -57,32 +57,25 @@ public class PAMController {
             @RequestBody User user,
              HttpSession session
     ) throws Exception {
-        session.setAttribute("username", user.username);
        User tempUser = users.findOneByUsername(user.username);
         if (tempUser == null) {
-            tempUser = new User();
-            tempUser.username = user.username;
-            tempUser.password = PasswordHash.createHash(user.password);
-            tempUser.accessLevel = User.AccessLevel.ADMIN;
-            users.save(tempUser);
+            users.save(user);
         } else if (!PasswordHash.validatePassword(user.password, tempUser.password)) {
             throw new Exception("Wrong password!");
         }
+        session.setAttribute("username", user.username);
     }
 
-    @RequestMapping("/create-company")
-    public User companyUser(
+    @RequestMapping(path = "/create-company", method = RequestMethod.POST)
+    public void addCompanyUser(
             HttpSession session,
-            String companyUsername,
-            String companyPassword,
-            String companyName,
-            String email
+            User user
     ) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("You cant create a user!");
         }
-        User user = users.findOneByUsername(username);
+        User tempUser = users.findOneByUsername(username);
         if (user == null) {
             user = new User();
             user.username = companyUsername;
