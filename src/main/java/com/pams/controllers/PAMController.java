@@ -1,12 +1,18 @@
 package com.pams.controllers;
 
+import com.pams.entities.Item;
+import com.pams.services.ItemRepository;
 import com.pams.utils.PasswordHash;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
+import com.sun.tools.javac.jvm.Items;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -16,33 +22,49 @@ public class PAMController {
     @Autowired
     UserRepository users;
 
+    @Autowired
+    ItemRepository items;
+
     /*@PostConstruct
     public void loadData(){
-        String fileContent = readFile("players.csv");
-        String[] lines = fileContent.split("\r");
-        if ()
+        String fileContent = readFile("items.csv");
+        String[] lines = fileContent.split("\n");
+        if (items.count() == 0){
 
+        }
     }*/
+    static String readFile(String fileName){
+        File f = new File(fileName);
+        try {
+            FileReader fr = new FileReader(f);
+            int fileSize = (int) f.length();
+            char[] fileContent = new char[fileSize];
+            fr.read(fileContent);
+            return new String(fileContent);
+        }catch (Exception e){
+            return null;
+        }
+    }
 
     @RequestMapping("/login")
     public void login(
             HttpSession session,
             String username,
             String password
-    )throws Exception {
+    ) throws Exception {
         session.setAttribute("username", username);
         User user = users.findOneByUsername(username);
-        if (user == null){
+        if (user == null) {
             user = new User();
             user.username = username;
             user.password = PasswordHash.createHash(password);
             user.accessLevel = User.AccessLevel.ADMIN;
             users.save(user);
-        }
-        else if (!PasswordHash.validatePassword(password, user.password)){
-            throw new Exception ("Wrong password!");
+        } else if (!PasswordHash.validatePassword(password, user.password)) {
+            throw new Exception("Wrong password!");
         }
     }
+
     @RequestMapping("/create-company")
     public User companyUser(
             HttpSession session,
@@ -50,13 +72,13 @@ public class PAMController {
             String companyPassword,
             String companyName,
             String email
-    )throws Exception{
+    ) throws Exception {
         String username = (String) session.getAttribute("username");
-        if (username == null){
-            throw new Exception ("You cant create a user!");
+        if (username == null) {
+            throw new Exception("You cant create a user!");
         }
         User user = users.findOneByUsername(username);
-        if (user == null){
+        if (user == null) {
             user = new User();
             user.username = companyUsername;
             user.password = companyPassword;
@@ -67,6 +89,31 @@ public class PAMController {
         }
         return user;
     }
+
+    @RequestMapping("/edit-company")
+    public User editCompanyUser(
+            HttpSession session,
+            int id
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot edit!");
+        }
+        User user = users.findOne(id);
+        users.save(user);
+        return user;
+    }
+
+    @RequestMapping("/delete-company")
+    public void deleteCompanyUser(
+            HttpSession session,
+            int id
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot delete!");
+        }
+        users.delete(id);
+    }
+
     @RequestMapping("/create-retailer")
     public User retailerUser(
             HttpSession session,
@@ -78,13 +125,13 @@ public class PAMController {
             String city,
             String state,
             int zip
-    )throws Exception{
+    ) throws Exception {
         String username = (String) session.getAttribute("username");
-        if (username == null){
-            throw new Exception ("You cant create a user!");
+        if (username == null) {
+            throw new Exception("You cant create a user!");
         }
         User user = users.findOneByUsername(username);
-        if (user == null){
+        if (user == null) {
             user = new User();
             user.username = retailerUsername;
             user.password = retailerPassword;
@@ -98,20 +145,44 @@ public class PAMController {
             users.save(user);
         }
         return user;
-
     }
+
+    @RequestMapping("/edit-retailer")
+    public User editRetailerUser(
+            HttpSession session,
+            int id
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot edit!");
+        }
+        User user = users.findOne(id);
+        users.save(user);
+        return user;
+    }
+
+    @RequestMapping("/delete-retailer")
+    public void deleteRetailerUser(
+            HttpSession session,
+            int id
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot delete!");
+        }
+        users.delete(id);
+    }
+
     @RequestMapping("create-joe")
     public User joeUser(
             HttpSession session,
             String joeUsername,
             String joePassword
-    )throws Exception{
+    ) throws Exception {
         String username = (String) session.getAttribute("username");
-        if (username == null){
-            throw new Exception ("You cant create a user!");
+        if (username == null) {
+            throw new Exception("You cant create a user!");
         }
         User user = users.findOneByUsername(username);
-        if (user == null){
+        if (user == null) {
             user = new User();
             user.username = joeUsername;
             user.password = joePassword;
@@ -119,5 +190,29 @@ public class PAMController {
             users.save(user);
         }
         return user;
+    }
+
+    @RequestMapping("/edit-joe")
+    public User editJoeUser(
+            HttpSession session,
+            int id
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot edit!");
+        }
+        User user = users.findOne(id);
+        users.save(user);
+        return user;
+    }
+
+    @RequestMapping("/delete-joe")
+    public void deleteJoeUser(
+            HttpSession session,
+            int id
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot delete!");
+        }
+        users.delete(id);
     }
 }
