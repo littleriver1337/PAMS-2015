@@ -10,16 +10,16 @@ import javax.persistence.*;
 public class Item {
     @Id
     @GeneratedValue
-    int id;
+    public int id;
 
     @Column(nullable = false)
-    String serialNumber;
+    public String serialNumber;
 
     @Column(nullable = false)
-    String productModel;
+    public String productModel;
 
     @Column(nullable = false)
-    String companyUser;
+    public String companyUser;
 
     //many items to one user
 }
