@@ -14,7 +14,7 @@
 <div class="col-md-4">
   <div class="login">
   <h3>LOGIN</h3>
-  <form class="form-horizontal" ng-submit="vm.login(user)">
+  <form class="form-horizontal" ng-submit="loginCtrl.login(user)">
     <!-- USERNAME INPUT -->
     <div class="form-group">
       <input type="text" ng-model="user.username" class="form-control" name="username"  placeholder="username" required>
@@ -26,7 +26,7 @@
     <!-- SUBMIT BUTTONS -->
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-success" name="submitLogin" ng-click="loginCtrl.guest(____)">Guest</button>
+        <button class="btn btn-success" name="submitLogin">Guest</button>
         <button type="submit" class="btn btn-primary" name="submitLogin">Login</button>
       </div>
     </div>
