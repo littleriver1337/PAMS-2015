@@ -52,17 +52,19 @@ public class PAMController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public void login(
+    public User login(
             @RequestBody User user,
              HttpSession session
     ) throws Exception {
        User tempUser = users.findOneByUsername(user.username);
         if (tempUser == null) {
+            user.accessLevel = User.AccessLevel.ADMIN;
             users.save(user);
         } else if (!PasswordHash.validatePassword(user.password, tempUser.password)) {
             throw new Exception("Wrong password!");
         }
         session.setAttribute("username", user.username);
+        return user;
     }
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
