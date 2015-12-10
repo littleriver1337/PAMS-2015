@@ -8,11 +8,13 @@ import com.pams.services.UserRepository;
 import com.sun.tools.javac.jvm.Items;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -214,5 +216,23 @@ public class PAMController {
             throw new Exception("You cannot delete!");
         }
         users.delete(id);
+    }
+    @RequestMapping("/import-file")
+    public void importFile(HttpSession session, MultipartFile file) throws IOException {
+        if(items.count() == 0){
+            String fileContentItems = new String(file.getBytes());
+            String [] lineItems = fileContentItems.split("\n");
+
+            for (String linesItems : lineItems){
+                if (linesItems == lineItems[0])
+                    continue;
+                String [] columns = linesItems.split(",");
+                Item item = new Item();
+                item.serialNumber = columns[0];
+                item.productModel = columns [1];
+                item.companyUser = columns [2];
+                items.save(item);
+            }
+        }
     }
 }
