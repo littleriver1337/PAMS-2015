@@ -7,7 +7,10 @@ import com.pams.entities.User;
 import com.pams.services.UserRepository;
 import com.sun.tools.javac.jvm.Items;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +22,7 @@ import java.io.IOException;
 /**
  * Created by MattBrown on 12/8/15.
  */
+@RestController
 public class PAMController {
 
     @Autowired
@@ -48,21 +52,20 @@ public class PAMController {
         }
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
     public void login(
-            HttpSession session,
-            String username,
-            String password
+            @RequestBody User user,
+             HttpSession session
     ) throws Exception {
-        session.setAttribute("username", username);
-        User user = users.findOneByUsername(username);
-        if (user == null) {
-            user = new User();
-            user.username = username;
-            user.password = PasswordHash.createHash(password);
-            user.accessLevel = User.AccessLevel.ADMIN;
-            users.save(user);
-        } else if (!PasswordHash.validatePassword(password, user.password)) {
+        session.setAttribute("username", user.username);
+       User tempUser = users.findOneByUsername(user.username);
+        if (tempUser == null) {
+            tempUser = new User();
+            tempUser.username = user.username;
+            tempUser.password = PasswordHash.createHash(user.password);
+            tempUser.accessLevel = User.AccessLevel.ADMIN;
+            users.save(tempUser);
+        } else if (!PasswordHash.validatePassword(user.password, tempUser.password)) {
             throw new Exception("Wrong password!");
         }
     }
