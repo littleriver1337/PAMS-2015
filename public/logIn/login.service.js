@@ -10,7 +10,7 @@
 
     var login = function(userInfo){
       $http.post(loginRoute, userInfo).success(function(res){
-        console.log("Login info sent: ", userInfo, res);
+        console.log("Login info sent: ", userInfo);
       });
     };
 
