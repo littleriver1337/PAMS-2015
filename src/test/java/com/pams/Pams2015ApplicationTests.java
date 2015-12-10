@@ -1,5 +1,7 @@
 package com.pams;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pams.entities.User;
 import com.pams.services.ItemRepository;
 import com.pams.services.UserRepository;
 import org.junit.Before;
@@ -41,12 +43,17 @@ public class Pams2015ApplicationTests {
 
 	@Test
 	public void loginTest() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = new User();
+		user.username = "TestUser";
+		user.password = "TestPassword";
+		user.accessLevel = User.AccessLevel.ADMIN;
+		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/login")
-						.param("username", "TestUser")
-						.param("password", "password")
-						.param("accessLevel" , "1")
-						.param("email" , "pams@pams.com")
+						.content(json)
+						.header("Content-Type", "application/json")
+
 		);
 		assertTrue(userRepo.count() == 1);
 	}
