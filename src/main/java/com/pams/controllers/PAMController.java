@@ -217,22 +217,22 @@ public class PAMController {
         }
         users.delete(id);
     }
-    @RequestMapping("/import-file")
-    public void importFile(HttpSession session, MultipartFile file) throws IOException {
-        if(items.count() == 0){
-            String fileContentItems = new String(file.getBytes());
-            String [] lineItems = fileContentItems.split("\n");
-
-            for (String linesItems : lineItems){
-                if (linesItems == lineItems[0])
-                    continue;
-                String [] columns = linesItems.split(",");
-                Item item = new Item();
-                item.serialNumber = columns[0];
-                item.productModel = columns [1];
-                item.companyUser = columns [2];
-                items.save(item);
-            }
-        }
-    }
+    // @RequestMapping("/import-file")
+    // public void importFile(HttpSession session, MultipartFile file) throws IOException {
+    //     if(items.count() == 0){
+    //         String fileContentItems = new String(file.getBytes());
+    //         String [] lineItems = fileContentItems.split("\n");
+    //
+    //         for (String linesItems : lineItems){
+    //             if (linesItems == lineItems[0])
+    //                 continue;
+    //             String [] columns = linesItems.split(",");
+    //             Item item = new Item();
+    //             item.serialNumber = columns[0];
+    //             item.productModel = columns [1];
+    //             item.companyUser = columns [2];
+    //             items.save(item);
+    //         }
+    //     }
+    // }
 }
