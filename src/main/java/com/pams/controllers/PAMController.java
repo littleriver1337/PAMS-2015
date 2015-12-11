@@ -2,21 +2,16 @@ package com.pams.controllers;
 
 import com.pams.entities.Item;
 import com.pams.services.ItemRepository;
-import com.pams.utils.PasswordHash;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
-import com.sun.tools.javac.jvm.Items;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -53,18 +48,16 @@ public class PAMController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User login(
-            @RequestBody User user,
-             HttpSession session
+                @RequestBody User user,
+                HttpSession session
     ) throws Exception {
-       User tempUser = users.findOneByUsername(user.username);
-        if (tempUser == null) {
-            user.accessLevel = User.AccessLevel.ADMIN;
-            users.save(user);
-        } else if (!PasswordHash.validatePassword(user.password, tempUser.password)) {
-            throw new Exception("Wrong password!");
-        }
-        session.setAttribute("username", user.username);
-        return user;
+                session.setAttribute("username", user.username);
+                User tempUser = users.findOneByUsername(user.username);
+                if (tempUser == null) {
+                user.accessLevel = User.AccessLevel.ADMIN;
+                users.save(user);
+                }
+                return user;
     }
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
