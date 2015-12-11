@@ -1,0 +1,60 @@
+<h1>ADMIN</h1>
+
+<div class="col-md-4 adminSidebar">
+  <ul>
+    <li><a href="/#/addAdmin">Add Admin</a></li>
+    <li><a href="/#/addCompany">Add Company</a></li>
+    <li><a href="/#/addRetailer">Add Retailer</a></li>
+    <li><a href="/#/admin">Verify Product</a></li>
+  </ul>
+</div>
+
+<div class="col-md-8 adminMain">
+  <section class="addRetailer">
+    <h3>Add Retailer</h3>
+    <form class="form-horizontal" ng-submit="adminCtrl.addRetailer(retailer)">
+      <!-- HARD CODED ACCESS LEVEL -->
+      <div class="form-group hidden">
+        <input type="text" ng-model="retailer.accessLevel" class="form-control" name="retailer"  placeholder="retailer" required>
+      </div>
+      <!-- USERNAME INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="retailer.username" class="form-control" name="username"  placeholder="username" required>
+      </div>
+      <!-- PASSWORD INPUT -->
+      <div class="form-group">
+        <input type="password" ng-model="retailer.password" class="form-control" name="password" placeholder="password" required>
+      </div>
+      <!-- PASSWORD VERIFICATION -->
+      <div class="form-group">
+        <input type="password" class="form-control" name="passwordVerify" placeholder="retype password" required>
+      </div>
+      <!-- EMAIL INPUT -->
+      <div class="form-group">
+        <input type="email" ng-model="retailer.email" class="form-control" name="email" placeholder="email" required>
+      </div>
+      <!-- STREET ADDRESS INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="retailer.stAddress" class="form-control" name="address" placeholder="address" required>
+      </div>
+      <!-- TOWN INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="retailer.town" class="form-control" name="town" placeholder="town" required>
+      </div>
+      <!-- STATE INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="retailer.state" class="form-control" name="state" placeholder="state" required>
+      </div>
+      <!-- ZIP INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="retailer.zip" class="form-control" name="zip" placeholder="zip" required>
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="submitRetailer">Create Retailer</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

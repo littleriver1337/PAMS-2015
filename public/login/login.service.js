@@ -2,41 +2,36 @@
   "use strict";
   angular
     .module('pamsLogin')
-    .factory('LoginService', function($http, _){
+    .factory('LoginService', function($http, _, $location){
 
     var loginRoute = "/login/";
 
-    var allUserInfo = "_____";
-
     var login = function(userInfo){
       $http.post(loginRoute, userInfo).success(function(res){
-        console.log("Login info sent: ", userInfo);
-      });
-    };
-
-    var loginRes = function(){
-      $http.get(allUserInfo).then(function(){
-        if (allUserInfo.accessLevel === 1) {
-          console.log("Admin access");
-        } else if (allUserInfo.accessLevel === 2){
-          console.log("Company access");
-        } else if (allUserInfo.accessLevel === 3) {
-          console.log("AU access");
+        console.log("Login info posted: ", userInfo);
+        console.log("Response: ", res);
+        var currentUser = res;
+        if (currentUser.accessLevel === "ADMIN") {
+          console.log("User is an Admin");
+          $location.path('/admin/');
+        } else if (currentUser.accessLevel === "COMPANY_USER") {
+          console.log("User is a Company");
+        } else if (currentUser.accessLevel === "RETAILER_USER") {
+          console.log("User is a Retailer");
         } else {
-          console.log("Not authorized");
+          console.log("User doesn't exist");
         }
       });
     };
 
     var guest = function () {
-      $http.post(___).success(function(res){
+      $http.post(loginRoute).success(function(res){
         console.log("Guest access");
       });
     };
 
       return {
         login: login,
-        loginRes: loginRes,
         guest: guest
       };
 
