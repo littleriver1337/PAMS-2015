@@ -6,22 +6,22 @@
 
       var itemRoute = "____";
 
-      var adminRoute = "";
+      var userRoute = "/create-user/";
 
       var createAdmin = function(admin){
-        $http.post(adminRoute, admin).success(function(res){
+        $http.post(userRoute, admin).success(function(res){
           console.log("Admin created: ", res);
         });
       };
 
       var createCompany = function(company){
-        $http.post(adminRoute, company).success(function(res){
+        $http.post(userRoute, company).success(function(res){
           console.log("Company created: ", res);
         });
       };
 
       var createRetailer = function(retailer){
-        $http.post(adminRoute, retailer).success(function(res){
+        $http.post(userRoute, retailer).success(function(res){
           console.log("Retailer created: ", res);
         });
       };
