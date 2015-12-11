@@ -46,7 +46,7 @@ public class PAMController {
         }
     }
 
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    @RequestMapping(path = "/login/", method = RequestMethod.POST)
     public User login(
                 @RequestBody User user,
                 HttpSession session
