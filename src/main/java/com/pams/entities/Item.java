@@ -12,6 +12,10 @@ public class Item {
     @GeneratedValue
     public int id;
 
+
+    @Column(nullable = false)
+    public String fileName;
+
     @Column(nullable = false)
     public String serialNumber;
 

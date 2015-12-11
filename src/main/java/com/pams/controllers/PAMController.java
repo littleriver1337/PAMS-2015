@@ -2,22 +2,16 @@ package com.pams.controllers;
 
 import com.pams.entities.Item;
 import com.pams.services.ItemRepository;
-import com.pams.utils.PasswordHash;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
-import com.sun.tools.javac.jvm.Items;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -53,119 +47,146 @@ public class PAMController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public void login(
-            @RequestBody User user,
-             HttpSession session
+    public User login(
+                @RequestBody User user,
+                HttpSession session
     ) throws Exception {
-        session.setAttribute("username", user.username);
-       User tempUser = users.findOneByUsername(user.username);
-        if (tempUser == null) {
-            tempUser = new User();
-            tempUser.username = user.username;
-            tempUser.password = PasswordHash.createHash(user.password);
-            tempUser.accessLevel = User.AccessLevel.ADMIN;
-            users.save(tempUser);
-        } else if (!PasswordHash.validatePassword(user.password, tempUser.password)) {
-            throw new Exception("Wrong password!");
-        }
+                session.setAttribute("username", user.username);
+                User tempUser = users.findOneByUsername(user.username);
+                if (tempUser == null) {
+                user.accessLevel = User.AccessLevel.ADMIN;
+                users.save(user);
+                }
+                return user;
     }
 
-    @RequestMapping("/create-company")
-    public User companyUser(
-            HttpSession session,
-            String companyUsername,
-            String companyPassword,
-            String companyName,
-            String email
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
+    public void addUser(
+            @RequestBody User user,
+            HttpSession session
     ) throws Exception {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            throw new Exception("You cant create a user!");
-        }
-        User user = users.findOneByUsername(username);
-        if (user == null) {
-            user = new User();
-            user.username = companyUsername;
-            user.password = companyPassword;
-            user.accessLevel = User.AccessLevel.COMPANY_USER;
-            user.companyName = companyName;
-            user.email = email;
+        User tempUser = users.findOneByUsername(user.username);
+        if (tempUser == null){
             users.save(user);
         }
-        return user;
+        session.setAttribute("username", user.username);
+    }
+    @RequestMapping(path = "/create-inventory", method = RequestMethod.POST)
+    public void addInventory(
+            @RequestBody Item item,
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+        String username = (String) session.getAttribute("username");
+        if (username == null){
+            throw new Exception("Not logged in!");
+        }
+        File f = File.createTempFile("file", file.getOriginalFilename(), new File ("public"));
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(file.getBytes());
+
+        Item itemFile = new Item();
+        itemFile.fileName = f.getName();
+        items.save(item);
     }
 
-    @RequestMapping("/edit-company")
-    public User editCompanyUser(
-            HttpSession session,
-            int id
+
+    @RequestMapping(path = "/edit-user/{id}", method = RequestMethod.POST)
+    public void editUser(
+            @RequestBody User user,
+            HttpSession session
     ) throws Exception {
         if (session.getAttribute("username") == null) {
             throw new Exception("You cannot edit!");
         }
-        User user = users.findOne(id);
         users.save(user);
-        return user;
+    }
+    @RequestMapping(path = "/edit-inventory/{id}", method = RequestMethod.POST)
+    public void editInventory(
+            @RequestBody Item item,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot edit!");
+        }
+        items.save(item);
     }
 
-    @RequestMapping("/delete-company")
-    public void deleteCompanyUser(
-            HttpSession session,
-            int id
+    @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
+    public void deleteUser(
+            @PathVariable("id") int id,
+            HttpSession session
     ) throws Exception {
         if (session.getAttribute("username") == null) {
             throw new Exception("You cannot delete!");
         }
         users.delete(id);
     }
-
-    @RequestMapping("/create-retailer")
-    public User retailerUser(
-            HttpSession session,
-            String retailerUsername,
-            String retailerPassword,
-            String email,
-            String companyName,
-            String address,
-            String city,
-            String state,
-            int zip
-    ) throws Exception {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            throw new Exception("You cant create a user!");
+    @RequestMapping(path = "/delete-inventory/{id}", method = RequestMethod.DELETE)
+    public void deleteInventory(
+            @PathVariable("id") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot delete!");
         }
-        User user = users.findOneByUsername(username);
-        if (user == null) {
-            user = new User();
-            user.username = retailerUsername;
-            user.password = retailerPassword;
-            user.accessLevel = User.AccessLevel.RETAILER_USER;
-            user.email = email;
-            user.companyName = companyName;
-            user.address = address;
-            user.city = city;
-            user.state = state;
-            user.zip = zip;
+        items.delete(id);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     /* @RequestMapping(path = "/create-retailer", method = RequestMethod.POST)
+    public void addRetailerUser(
+            @RequestBody User user,
+            HttpSession session
+    ) throws Exception {
+        User tempUser = users.findOneByUsername(user.username);
+        if (tempUser == null){
             users.save(user);
         }
-        return user;
+        session.setAttribute("username", user.username);
     }
 
-    @RequestMapping("/edit-retailer")
-    public User editRetailerUser(
-            HttpSession session,
-            int id
+    @RequestMapping(path = "create-joe", method = RequestMethod.POST)
+    public void addJoeUser(
+            @RequestBody User user,
+            HttpSession session
     ) throws Exception {
-        if (session.getAttribute("username") == null) {
-            throw new Exception("You cannot edit!");
+        User tempUser = users.findOneByUsername(user.username);
+        if (tempUser == null){
+            users.save(user);
         }
-        User user = users.findOne(id);
-        users.save(user);
-        return user;
     }
+    */
 
-    @RequestMapping("/delete-retailer")
+    /*@RequestMapping("/delete-retailer")
     public void deleteRetailerUser(
             HttpSession session,
             int id
@@ -174,40 +195,6 @@ public class PAMController {
             throw new Exception("You cannot delete!");
         }
         users.delete(id);
-    }
-
-    @RequestMapping("create-joe")
-    public User joeUser(
-            HttpSession session,
-            String joeUsername,
-            String joePassword
-    ) throws Exception {
-        String username = (String) session.getAttribute("username");
-        if (username == null) {
-            throw new Exception("You cant create a user!");
-        }
-        User user = users.findOneByUsername(username);
-        if (user == null) {
-            user = new User();
-            user.username = joeUsername;
-            user.password = joePassword;
-            user.accessLevel = User.AccessLevel.JOE_USER;
-            users.save(user);
-        }
-        return user;
-    }
-
-    @RequestMapping("/edit-joe")
-    public User editJoeUser(
-            HttpSession session,
-            int id
-    ) throws Exception {
-        if (session.getAttribute("username") == null) {
-            throw new Exception("You cannot edit!");
-        }
-        User user = users.findOne(id);
-        users.save(user);
-        return user;
     }
 
     @RequestMapping("/delete-joe")
@@ -219,8 +206,7 @@ public class PAMController {
             throw new Exception("You cannot delete!");
         }
         users.delete(id);
-    }
-
+    }*/
 //    @RequestMapping("/import-file")
 //    public void importFile(HttpSession session, MultipartFile file) throws IOException {
 //        if(items.count() == 0){
@@ -239,4 +225,25 @@ public class PAMController {
 //            }
 //        }
 //    }
+    /*@RequestMapping(path = "/edit-retailer/{id}", method = RequestMethod.POST)
+    public void editRetailerUser(
+            @RequestBody User user,
+            HttpSession session
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot edit!");
+        }
+        users.save(user);
+    }
+
+    @RequestMapping(path = "/edit-joe/{id}", method = RequestMethod.POST)
+    public void editJoeUser(
+            @RequestBody User user,
+            HttpSession session
+    ) throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot edit!");
+        }
+        users.save(user);
+    }*/
 }
