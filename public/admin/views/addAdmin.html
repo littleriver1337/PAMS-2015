@@ -1,0 +1,40 @@
+<h1>ADMIN</h1>
+
+<div class="col-md-4 adminSidebar">
+  <ul>
+    <li><a href="/#/addAdmin">Add Admin</a></li>
+    <li><a href="/#/addCompany">Add Company</a></li>
+    <li><a href="/#/addRetailer">Add Retailer</a></li>
+    <li><a href="/#/admin">Verify Product</a></li>
+  </ul>
+</div>
+
+<div class="col-md-8 adminMain">
+  <section class="addAdmin">
+    <h3>Add Admin</h3>
+    <form class="form-horizontal" ng-submit="adminCtrl.addAdmin(admin)">
+      <!-- USERNAME INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="admin.username" class="form-control" name="username"  placeholder="username" required>
+      </div>
+      <!-- PASSWORD INPUT -->
+      <div class="form-group">
+        <input type="password" ng-model="admin.password" class="form-control" name="password" placeholder="password" required>
+      </div>
+      <!-- PASSWORD VERIFICATION -->
+      <div class="form-group">
+        <input type="password" class="form-control" name="passwordVerify" placeholder="retype password" required>
+      </div>
+      <!-- EMAIL INPUT -->
+      <div class="form-group">
+        <input type="email" ng-model="admin.email" class="form-control" name="email" placeholder="email" required>
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="submitAdmin">Create Admin</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>
