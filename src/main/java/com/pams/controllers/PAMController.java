@@ -4,6 +4,7 @@ import com.pams.entities.Item;
 import com.pams.services.ItemRepository;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
+import com.pams.utils.PasswordHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,26 +52,40 @@ public class PAMController {
                 @RequestBody User user,
                 HttpSession session
     ) throws Exception {
-                session.setAttribute("username", user.username);
-                User tempUser = users.findOneByUsername(user.username);
-                if (tempUser == null) {
-                user.accessLevel = User.AccessLevel.ADMIN;
-                users.save(user);
+        User tempUser = users.findOneByUsername(user.username);
+        if (tempUser == null) {
+            tempUser = new User();
+            tempUser.username = user.username;
+            tempUser.password = PasswordHash.createHash(user.password);
+            tempUser.accessLevel = User.AccessLevel.ADMIN;
+            users.save(tempUser);
+        }
+        else if (!PasswordHash.validatePassword(user.password, tempUser.password)){
+                    throw new Exception ("Wrong password!");
                 }
-                return user;
+        session.setAttribute("username", user.username);
+                return tempUser;
     }
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
-    public void addUser(
+    public User addUser(
             @RequestBody User user,
             HttpSession session
     ) throws Exception {
         User tempUser = users.findOneByUsername(user.username);
         if (tempUser == null){
-            users.save(user);
+            tempUser = new User();
+            tempUser.username = user.username;
+            tempUser.password = PasswordHash.createHash(user.password);
+            users.save(tempUser);
+        }
+        else if (!PasswordHash.validatePassword(user.password, tempUser.password)){
+            throw new Exception ("Wrong password!");
         }
         session.setAttribute("username", user.username);
+        return tempUser;
     }
+
     @RequestMapping(path = "/create-inventory", method = RequestMethod.POST)
     public void addInventory(
             @RequestBody Item item,
