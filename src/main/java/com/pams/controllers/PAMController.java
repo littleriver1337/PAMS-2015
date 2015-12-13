@@ -1,6 +1,6 @@
 package com.pams.controllers;
 
-import com.pams.entities.Item;
+import com.pams.entities.Club;
 import com.pams.services.ItemRepository;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,16 +25,28 @@ public class PAMController {
     UserRepository users;
 
     @Autowired
-    ItemRepository items;
+    ItemRepository clubs;
 
-    /*@PostConstruct
+    @PostConstruct
     public void loadData(){
-        String fileContent = readFile("items.csv");
+        String fileContent = readFile("golf.csv");
         String[] lines = fileContent.split("\n");
-        if (items.count() == 0){
+        if (clubs.count() == 0){
+            for (String line : lines){
+                if (line == lines [0])
+                    continue;
+                String columns[] = line.split(",");
+                Club club = new Club();
+                club.serialNumber = Integer.valueOf(columns[0]);
+                club.maker = columns[1];
+                club.clubType = columns[2];
+                club.year = Integer.valueOf(columns[3]);
+                club.color = columns[4];
+                clubs.save(club);
+            }
 
         }
-    }*/
+    }
     static String readFile(String fileName){
         File f = new File(fileName);
         try {
@@ -86,27 +99,35 @@ public class PAMController {
         return tempUser;
     }
 
-    @RequestMapping(path = "/create-inventory", method = RequestMethod.POST)
-    public void addInventory(
-            @RequestBody Item item,
+    @RequestMapping(path = "/create-club-inventory", method = RequestMethod.POST)
+    public void addClubsInventory(
+            @RequestBody Club club,
             HttpSession session,
             MultipartFile file
     )throws Exception{
-        String username = (String) session.getAttribute("username");
-        if (username == null){
-            throw new Exception("Not logged in!");
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot edit!");
         }
         File f = File.createTempFile("file", file.getOriginalFilename(), new File ("public"));
         FileOutputStream fos = new FileOutputStream(f);
         fos.write(file.getBytes());
 
-        Item itemFile = new Item();
+        Club itemFile = new Club();
         itemFile.fileName = f.getName();
-        items.save(item);
+        clubs.save(club);
     }
 
+    /*@RequestMapping(path = "/create-balls-inventory", method = RequestMethod.POST)
+    public void addBallsInventory(
+            @RequestBody Balls balls,
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
 
-    @RequestMapping(path = "/edit-user/{id}", method = RequestMethod.POST)
+    }*/
+
+
+    @RequestMapping(path = "/edit-user", method = RequestMethod.POST)
     public void editUser(
             @RequestBody User user,
             HttpSession session
@@ -116,15 +137,15 @@ public class PAMController {
         }
         users.save(user);
     }
-    @RequestMapping(path = "/edit-inventory/{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/edit-inventory", method = RequestMethod.POST)
     public void editInventory(
-            @RequestBody Item item,
+            @RequestBody Club club,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot edit!");
         }
-        items.save(item);
+        clubs.save(club);
     }
 
     @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
@@ -145,7 +166,7 @@ public class PAMController {
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot delete!");
         }
-        items.delete(id);
+        clubs.delete(id);
     }
 
 
@@ -224,7 +245,7 @@ public class PAMController {
     }*/
 //    @RequestMapping("/import-file")
 //    public void importFile(HttpSession session, MultipartFile file) throws IOException {
-//        if(items.count() == 0){
+//        if(clubs.count() == 0){
 //            String fileContentItems = new String(file.getBytes());
 //            String [] lineItems = fileContentItems.split("\n");
 //
@@ -232,11 +253,11 @@ public class PAMController {
 //                if (linesItems == lineItems[0])
 //                    continue;
 //                String [] columns = linesItems.split(",");
-//                Item item = new Item();
+//                Club item = new Club();
 //                item.serialNumber = columns[0];
 //                item.productModel = columns [1];
 //                item.companyUser = columns [2];
-//                items.save(item);
+//                clubs.save(item);
 //            }
 //        }
 //    }

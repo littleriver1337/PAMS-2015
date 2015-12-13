@@ -26,7 +26,7 @@ public class Pams2015ApplicationTests {
 	UserRepository userRepo;
 
 	@Autowired
-	ItemRepository itemRepo;
+	ItemRepository clubRepo;
 
 	MockMvc mockMvc;
 
@@ -36,7 +36,7 @@ public class Pams2015ApplicationTests {
 	@Before
 	public void before() {
 		userRepo.deleteAll();
-		itemRepo.deleteAll();
+		clubRepo.deleteAll();
 		mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
 	}
 
@@ -56,6 +56,64 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(userRepo.count() == 1);
 	}
+
+	@Test
+	public void addUserTest() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = new User();
+		user.username = "TestUser";
+		user.password = "TestPassword";
+		String json = mapper.writeValueAsString(user);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-user")
+				.content(json)
+				.header("Content-Type", "application/json")
+		);
+		assertTrue(userRepo.count() == 1);
+	}
+
+	@Test
+	public void editTestUser() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = new User();
+		user.username = "TestUser";
+		user.password = "TestPassword";
+		String json = mapper.writeValueAsString(user);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-user")
+						.content(json)
+						.header("Content-Type", "application/json")
+		);
+		ObjectMapper mapper2 = new ObjectMapper();
+		User user2 = new User();
+		user2.username = "NewUsername";
+		user2.password = "NewPassword";
+		String json2 = mapper2.writeValueAsString(user2);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("edit-user")
+				.content(json2)
+				.header("Content-Type", "application/json")
+		);
+		assertTrue(userRepo.count() == 1);
+	}
+	/*@Test
+	public void deleteUserTesT() throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		User user = new User();
+		user.username = "ThisUser";
+		user.password = "ThisPassword";
+		user.accessLevel = User.AccessLevel.ADMIN;
+		String json = mapper.writeValueAsString(user);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-user")
+				.content(json)
+				.header("Content-Type", "application/json")
+		);
+		*//*userRepo.findOne(id);
+		ObjectMapper mapper2 = new ObjectMapper();
+		User user2 = new User();
+		user2.id = userRepo.findOne(Integer.valueOf(id));*//*
+	}*/
 
 //	@Test
 //	public void importFileTest()throws Exception{
