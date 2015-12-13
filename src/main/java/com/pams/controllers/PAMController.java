@@ -101,6 +101,13 @@ public class PAMController {
             tempUser = new User();
             tempUser.username = user.username;
             tempUser.password = PasswordHash.createHash(user.password);
+            tempUser.accessLevel = user.getAccessLevel();
+            tempUser.companyName = user.companyName;
+            tempUser.address = user.address;
+            tempUser.city = user.city;
+            tempUser.state = user.state;
+            tempUser.zip = user.zip;
+            tempUser.email = user.email;
             users.save(tempUser);
         }
         else if (!PasswordHash.validatePassword(user.password, tempUser.password)){

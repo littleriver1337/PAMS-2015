@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 @SpringApplicationConfiguration(classes = Pams2015Application.class)
 @WebAppConfiguration
 public class Pams2015ApplicationTests {
-	@Autowired
+/*	@Autowired
 	UserRepository userRepo;
 
 	@Autowired
@@ -95,7 +95,7 @@ public class Pams2015ApplicationTests {
 				.header("Content-Type", "application/json")
 		);
 		assertTrue(userRepo.count() == 1);
-	}
+	}*/
 	/*@Test
 	public void deleteUserTesT() throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
