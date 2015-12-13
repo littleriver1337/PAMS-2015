@@ -9,25 +9,32 @@
       var userRoute = "/create-user/";
 
       var createAdmin = function(admin){
+        admin.accessLevel = "ADMIN";
         $http.post(userRoute, admin).success(function(res){
-          console.log("Admin created: ", res);
+          console.log("New admin posted: ", admin);
+          console.log("Response: ", res);
         });
       };
 
       var createCompany = function(company){
+        company.accessLevel = "COMPANY_USER";
         $http.post(userRoute, company).success(function(res){
-          console.log("Company created: ", res);
+          console.log("New company posted: ", company);
+          console.log("Response: ", res);
         });
       };
 
       var createRetailer = function(retailer){
+        retailer.accessLevel = "RETAILER_USER";
         $http.post(userRoute, retailer).success(function(res){
-          console.log("Retailer created: ", res);
+          console.log("New retailer posted: ", retailer);
+          console.log("Response: ", res);
         });
       };
 
       var checkItem = function(item) {
         $http.post(itemRoute, item).success(function(res){
+          console.log("Posted Item: ", item);
           console.log("Response: ", res);
         });
       };
