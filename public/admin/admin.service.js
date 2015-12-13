@@ -4,7 +4,7 @@
     .module('pamsAdmin')
     .factory('AdminService', function($http, _){
 
-      var itemRoute = "____";
+      var itemRoute = "/find-club/";
 
       var userRoute = "/create-user/";
 
