@@ -3,7 +3,8 @@
   angular
     .module('pamsLogin', [
       'ngRoute',
-      'underscore'
+      'underscore',
+      'pamsAdmin'
     ])
     .config(function ($routeProvider) {
       $routeProvider
