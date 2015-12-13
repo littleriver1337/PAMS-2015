@@ -43,7 +43,7 @@
     @Column
     public String email;
 
-    @Column(nullable = false)
+    @Column
     public AccessLevel accessLevel;
 
     public void setId(int id) {

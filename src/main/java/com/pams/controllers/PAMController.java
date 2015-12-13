@@ -1,6 +1,6 @@
 package com.pams.controllers;
 
-import com.pams.entities.Clubs;
+import com.pams.entities.Club;
 import com.pams.services.ItemRepository;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
@@ -36,13 +36,13 @@ public class PAMController {
                 if (line == lines [0])
                     continue;
                 String columns[] = line.split(",");
-                Clubs clubs = new Clubs();
-                clubs.serialNumber = Integer.valueOf(columns[0]);
-                clubs.maker = columns[1];
-                clubs.clubType = columns[2];
-                clubs.year = Integer.valueOf(columns[3]);
-                clubs.color = columns[4];
-                this.clubs.save(clubs);
+                Club club = new Club();
+                club.serialNumber = Integer.valueOf(columns[0]);
+                club.maker = columns[1];
+                club.clubType = columns[2];
+                club.year = Integer.valueOf(columns[3]);
+                club.color = columns[4];
+                clubs.save(club);
             }
 
         }
@@ -90,7 +90,6 @@ public class PAMController {
             tempUser = new User();
             tempUser.username = user.username;
             tempUser.password = PasswordHash.createHash(user.password);
-            tempUser.accessLevel = User.AccessLevel.ADMIN;
             users.save(tempUser);
         }
         else if (!PasswordHash.validatePassword(user.password, tempUser.password)){
@@ -100,9 +99,9 @@ public class PAMController {
         return tempUser;
     }
 
-    @RequestMapping(path = "/create-clubs-inventory", method = RequestMethod.POST)
+    @RequestMapping(path = "/create-club-inventory", method = RequestMethod.POST)
     public void addClubsInventory(
-            @RequestBody Clubs clubs,
+            @RequestBody Club club,
             HttpSession session,
             MultipartFile file
     )throws Exception{
@@ -113,9 +112,9 @@ public class PAMController {
         FileOutputStream fos = new FileOutputStream(f);
         fos.write(file.getBytes());
 
-        Clubs itemFile = new Clubs();
+        Club itemFile = new Club();
         itemFile.fileName = f.getName();
-        this.clubs.save(clubs);
+        clubs.save(club);
     }
 
     /*@RequestMapping(path = "/create-balls-inventory", method = RequestMethod.POST)
@@ -140,13 +139,13 @@ public class PAMController {
     }
     @RequestMapping(path = "/edit-inventory", method = RequestMethod.POST)
     public void editInventory(
-            @RequestBody Clubs clubs,
+            @RequestBody Club club,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot edit!");
         }
-        this.clubs.save(clubs);
+        clubs.save(club);
     }
 
     @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
@@ -254,7 +253,7 @@ public class PAMController {
 //                if (linesItems == lineItems[0])
 //                    continue;
 //                String [] columns = linesItems.split(",");
-//                Clubs item = new Clubs();
+//                Club item = new Club();
 //                item.serialNumber = columns[0];
 //                item.productModel = columns [1];
 //                item.companyUser = columns [2];
