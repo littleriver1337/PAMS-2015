@@ -63,7 +63,6 @@ public class Pams2015ApplicationTests {
 		User user = new User();
 		user.username = "TestUser";
 		user.password = "TestPassword";
-		user.accessLevel = User.AccessLevel.ADMIN;
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
@@ -79,7 +78,6 @@ public class Pams2015ApplicationTests {
 		User user = new User();
 		user.username = "TestUser";
 		user.password = "TestPassword";
-		user.accessLevel = User.AccessLevel.ADMIN;
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
@@ -90,7 +88,6 @@ public class Pams2015ApplicationTests {
 		User user2 = new User();
 		user2.username = "NewUsername";
 		user2.password = "NewPassword";
-		user2.accessLevel = User.AccessLevel.ADMIN;
 		String json2 = mapper2.writeValueAsString(user2);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("edit-user")
