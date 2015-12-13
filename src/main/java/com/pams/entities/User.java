@@ -35,7 +35,8 @@
     @Column
     public String city;
 
-    @Column public String state;
+    @Column
+    public String state;
 
     @Column
     public int zip;
