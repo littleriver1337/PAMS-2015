@@ -60,6 +60,17 @@ public class PAMController {
         }
     }
 
+    @RequestMapping(path = "/find-club" , method = RequestMethod.GET)
+    public Club findClub(
+            @RequestBody Club club,
+            @RequestBody User user,
+            HttpSession session
+    )throws Exception{
+        Club thisClub = clubs.findOneBySerialNumber(club.serialNumber);
+        session.setAttribute("username" , user.username);
+        return thisClub;
+    }
+
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User login(
             @RequestBody User user,
