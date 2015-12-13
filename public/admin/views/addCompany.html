@@ -13,10 +13,10 @@
   <section class="addCompany">
     <h3>Add Company</h3>
     <form class="form-horizontal" ng-submit="adminCtrl.addCompany(company)">
-      <!-- HARD CODED ACCESS LEVEL -->
-      <!-- <div class="form-group">
-        <input type="text" ng-model="company.accessLevel" class="form-control" name="accessLevel"  placeholder="COMPANY_USER" required>
-      </div> -->
+      <!-- COMPANY NAME INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="company.companyName" class="form-control" name="companyName"  placeholder="company name" required>
+      </div>
       <!-- USERNAME INPUT -->
       <div class="form-group">
         <input type="text" ng-model="company.username" class="form-control" name="username"  placeholder="username" required>
@@ -35,11 +35,11 @@
       </div>
       <!-- STREET ADDRESS INPUT -->
       <div class="form-group">
-        <input type="text" ng-model="company.stAddress" class="form-control" name="address" placeholder="address" required>
+        <input type="text" ng-model="company.address" class="form-control" name="address" placeholder="address" required>
       </div>
       <!-- TOWN INPUT -->
       <div class="form-group">
-        <input type="text" ng-model="company.town" class="form-control" name="town" placeholder="town" required>
+        <input type="text" ng-model="company.city" class="form-control" name="town" placeholder="town" required>
       </div>
       <!-- STATE INPUT -->
       <div class="form-group">
