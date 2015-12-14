@@ -33,7 +33,7 @@
       };
 
       var checkItem = function(item) {
-        $http.post(itemRoute, item).success(function(res){
+        $http.get(itemRoute + item.serialNumber).success(function(res){
           console.log("Posted Item: ", item);
           console.log("Response: ", res);
         });
