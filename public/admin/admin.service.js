@@ -39,11 +39,27 @@
         });
       };
 
+      var getUsers = function(){
+        return $http.get(userRoute);
+      };
+
+      var getID = function(user){
+        return user.id;
+      };
+
+      var removeUser = function(user){
+        var userID = getID(user);
+        $http.delete(userRoute + "/" + userID);
+      };
+
       return {
         createAdmin: createAdmin,
         createCompany: createCompany,
         createRetailer: createRetailer,
-        checkItem: checkItem
+        checkItem: checkItem,
+        getUsers: getUsers,
+        getID: getID,
+        removeUser: removeUser
       };
 
     });

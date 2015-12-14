@@ -24,6 +24,10 @@
           templateUrl: 'admin/views/addRetailer.html',
           controller: 'AdminController as adminCtrl',
         })
+        .when('/users', {
+          templateUrl: 'admin/views/users.html',
+          controller: 'AdminController as adminCtrl',
+        })
         .otherwise({ redirectTo: '/404'});
     });
 
