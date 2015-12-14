@@ -21,21 +21,26 @@ angular
       AdminService.createRetailer(retailer);
     };
 
-    AdminService.getUsers().then(function(users){
-      vm.allUsers = _.map(users, function(el, idx, arr) {
-        console.log("Users: ", uesrs);
-        return {
-          username: el.username,
-          companyName: el.companyName,
-          email: el.email,
-          id: el.id,
-          address: el.address,
-          city: el.city,
-          state: el.state,
-          zip: el.zip
-        };
-      });
-    });
+    vm.check = function(item) {
+      console.log("SUBMITTED", item);
+      AdminService.checkItem(item);
+    };
+
+    // AdminService.getUsers().then(function(users){
+    //   vm.allUsers = _.map(users, function(el, idx, arr) {
+    //     console.log("Users: ", uesrs);
+    //     return {
+    //       username: el.username,
+    //       companyName: el.companyName,
+    //       email: el.email,
+    //       id: el.id,
+    //       address: el.address,
+    //       city: el.city,
+    //       state: el.state,
+    //       zip: el.zip
+    //     };
+    //   });
+    // });
 
   });
 })();
