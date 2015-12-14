@@ -31,7 +31,7 @@ public class PAMController {
     @PostConstruct
     public void loadData(){
         String fileContent = readFile("golf.csv");
-        String[] lines = fileContent.split("\n");
+        String[] lines = fileContent.split("\r");
         if (clubs.count() == 0){
             for (String line : lines){
                 if (line == lines [0])
@@ -156,11 +156,11 @@ public class PAMController {
         return club;
     }*/
 
-    @RequestMapping(path = "/find-club/{id}" , method = RequestMethod.GET)
+    @RequestMapping(path = "/find-club/{serialNumber}" , method = RequestMethod.GET)
     public Club findClub(
-            @PathVariable ("id") int id
+            @PathVariable ("serialNumber") int serialNumber
     )throws Exception{
-        return clubs.findOne(id);
+        return clubs.findOneBySerialNumber(serialNumber);
     }
 
     @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
