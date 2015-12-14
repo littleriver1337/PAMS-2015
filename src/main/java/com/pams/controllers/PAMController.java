@@ -5,6 +5,7 @@ import com.pams.services.ItemRepository;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
 import com.pams.utils.PasswordHash;
+import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -60,17 +61,6 @@ public class PAMController {
         }
     }
 
-    @RequestMapping(path = "/find-club" , method = RequestMethod.GET)
-    public Club findClub(
-            @RequestBody Club club,
-            @RequestBody User user,
-            HttpSession session
-    )throws Exception{
-        Club thisClub = clubs.findOneBySerialNumber(club.serialNumber);
-        session.setAttribute("username" , user.username);
-        return thisClub;
-    }
-
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User login(
             @RequestBody User user,
@@ -116,34 +106,12 @@ public class PAMController {
         session.setAttribute("username", user.username);
         return tempUser;
     }
-
-    @RequestMapping(path = "/create-club-inventory", method = RequestMethod.POST)
-    public void addClubsInventory(
-            @RequestBody Club club,
-            HttpSession session,
-            MultipartFile file
+    @RequestMapping(path = "/find-user" , method = RequestMethod.GET)
+    public User findUser(
+            @RequestBody User user
     )throws Exception{
-        if (session.getAttribute("username") == null) {
-            throw new Exception("You cannot edit!");
-        }
-        File f = File.createTempFile("file", file.getOriginalFilename(), new File ("public"));
-        FileOutputStream fos = new FileOutputStream(f);
-        fos.write(file.getBytes());
-
-        Club itemFile = new Club();
-        itemFile.fileName = f.getName();
-        clubs.save(club);
+        return users.findOneByUsername(user.username);
     }
-
-    /*@RequestMapping(path = "/create-balls-inventory", method = RequestMethod.POST)
-    public void addBallsInventory(
-            @RequestBody Balls balls,
-            HttpSession session,
-            MultipartFile file
-    )throws Exception{
-
-    }*/
-
 
     @RequestMapping(path = "/edit-user", method = RequestMethod.POST)
     public void editUser(
@@ -154,16 +122,6 @@ public class PAMController {
             throw new Exception("You cannot edit!");
         }
         users.save(user);
-    }
-    @RequestMapping(path = "/edit-inventory", method = RequestMethod.POST)
-    public void editInventory(
-            @RequestBody Club club,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot edit!");
-        }
-        clubs.save(club);
     }
 
     @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
@@ -176,13 +134,52 @@ public class PAMController {
         }
         users.delete(id);
     }
-    @RequestMapping(path = "/delete-inventory/{id}", method = RequestMethod.DELETE)
-    public void deleteInventory(
-            @PathVariable("id") int id,
+
+    @RequestMapping(path ="/create-club", method = RequestMethod.POST)
+    public Club addClub(
+            @RequestBody Club club,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot delete!");
+            throw new Exception ("You cannot create this club!");
+        }
+        Club thisClub = findClub(club);
+        if (thisClub == null){
+            thisClub = new Club();
+            thisClub.serialNumber = club.serialNumber;
+            thisClub.maker = club.maker;
+            thisClub.clubType = club.clubType;
+            thisClub.year = club.year;
+            thisClub.color = club.color;
+            clubs.save(club);
+        }
+        return club;
+    }
+
+    @RequestMapping(path = "/find-club" , method = RequestMethod.GET)
+    public Club findClub(
+            @RequestBody Club club
+    )throws Exception{
+        return clubs.findOneBySerialNumber(club.serialNumber);
+    }
+
+    @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
+    public void editClub(
+            @RequestBody Club club,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot edit this club!");
+        }
+        clubs.save(club);
+    }
+    @RequestMapping(path = "/delete-club/{id}", method = RequestMethod.DELETE)
+    public void deleteClub(
+            @PathVariable ("id") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot delete this club!");
         }
         clubs.delete(id);
     }
@@ -206,13 +203,27 @@ public class PAMController {
 
 
 
+    @RequestMapping(path = "/edit-inventory", method = RequestMethod.POST)
+    public void editInventory(
+            @RequestBody Club club,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot edit!");
+        }
+        clubs.save(club);
+    }
 
-
-
-
-
-
-
+    @RequestMapping(path = "/delete-inventory/{id}", method = RequestMethod.DELETE)
+    public void deleteInventory(
+            @PathVariable("id") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot delete!");
+        }
+        clubs.delete(id);
+    }
 
 
 
@@ -299,5 +310,31 @@ public class PAMController {
             throw new Exception("You cannot edit!");
         }
         users.save(user);
+    }*/
+     /* @RequestMapping(path = "/upload-club-inventory", method = RequestMethod.POST)
+    public void uploadClubsInventory(
+            @RequestBody Club club,
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot edit!");
+        }
+        File f = File.createTempFile("file", file.getOriginalFilename(), new File ("public"));
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(file.getBytes());
+
+        Club itemFile = new Club();
+        itemFile.fileName = f.getName();
+        clubs.save(club);
+    }*/
+
+    /*@RequestMapping(path = "/create-balls-inventory", method = RequestMethod.POST)
+    public void addBallsInventory(
+            @RequestBody Balls balls,
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+
     }*/
 }
