@@ -14,22 +14,16 @@
 <div class="col-md-8 adminMain">
   <section class="productVerification">
     <h3>Verify Product</h3>
-      <form class="form-horizontal" ng-submit="adminCtrl.checkItem(item)">
-    <!-- <div class="form-group">
-      <label for="coName" class="col-sm-2 control-label">Company Name</label>
-      <div class="col-sm-10">
-        <input ng-model="item.companyName" type="coName" class="form-control" id="coName">
-      </div>
-    </div> -->
+      <form class="form-horizontal" ng-submit="adminCtrl.check(item)">
     <div class="form-group">
       <label for="serialNumber" class="col-sm-2 control-label">Serial Number</label>
       <div class="col-sm-10">
-        <input ng-model="item.serialNumber" type="text" class="form-control" id="serialNumber">
+        <input ng-model="item.serialNumber" type="number" class="form-control" id="serialNumber">
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Check Item</button>
+        <button type="submit" class="btn btn-default" name="verifyItem">Check Item</button>
       </div>
     </div>
   </form>
