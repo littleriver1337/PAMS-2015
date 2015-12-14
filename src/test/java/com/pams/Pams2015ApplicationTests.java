@@ -17,11 +17,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.junit.Assert.assertTrue;
-//@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Pams2015Application.class)
 @WebAppConfiguration
 public class Pams2015ApplicationTests {
-/*	@Autowired
+	@Autowired
 	UserRepository userRepo;
 
 	@Autowired
@@ -40,7 +40,8 @@ public class Pams2015ApplicationTests {
 	}
 
 	@Test
-	public void loginTest() throws Exception {
+	public void loginTest()
+			throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
@@ -57,11 +58,19 @@ public class Pams2015ApplicationTests {
 	}
 
 	@Test
-	public void addUserTest() throws Exception {
+	public void addUserTest()
+			throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
 		user.password = "TestPassword";
+		user.accessLevel = User.AccessLevel.ADMIN;
+		user.companyName = "Wells Fargo";
+		user.address = "405 Jefferson Street";
+		user.city = "Hamlet";
+		user.state = "NC";
+		user.zip = 28345;
+		user.email = "littleriver1337@gmail.com";
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
@@ -72,11 +81,19 @@ public class Pams2015ApplicationTests {
 	}
 
 	@Test
-	public void editTestUser() throws Exception {
+	public void editTestUser()
+			throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
 		user.password = "TestPassword";
+		user.accessLevel = User.AccessLevel.ADMIN;
+		user.companyName = "Wells Fargo";
+		user.address = "405 Jefferson Street";
+		user.city = "Hamlet";
+		user.state = "NC";
+		user.zip = 28345;
+		user.email = "littleriver1337@gmail.com";
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
@@ -87,6 +104,13 @@ public class Pams2015ApplicationTests {
 		User user2 = new User();
 		user2.username = "NewUsername";
 		user2.password = "NewPassword";
+		user.accessLevel = User.AccessLevel.COMPANY_USER;
+		user.companyName = "PAMS";
+		user.address = "1112 Deerberry Road";
+		user.city = "Hannahan";
+		user.state = "SC";
+		user.zip = 29401;
+		user.email = "littleriver1337@gmail.com";
 		String json2 = mapper2.writeValueAsString(user2);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("edit-user")
@@ -94,24 +118,40 @@ public class Pams2015ApplicationTests {
 				.header("Content-Type", "application/json")
 		);
 		assertTrue(userRepo.count() == 1);
-	}*/
-	/*@Test
-	public void deleteUserTesT() throws Exception{
+	}
+	@Test
+	public void deleteUserTesT()
+			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "ThisUser";
 		user.password = "ThisPassword";
 		user.accessLevel = User.AccessLevel.ADMIN;
+		user.companyName = "Wells Fargo";
+		user.address = "405 Jefferson Street";
+		user.city = "Hamlet";
+		user.state = "NC";
+		user.zip = 28345;
+		user.email = "littleriver1337@gmail.com";
+
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
 				.content(json)
 				.header("Content-Type", "application/json")
 		);
-		*//*userRepo.findOne(id);
-		ObjectMapper mapper2 = new ObjectMapper();
-		User user2 = new User();
-		user2.id = userRepo.findOne(Integer.valueOf(id));*//*
+		User user2 = userRepo.findOneByUsername(user.username);
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/delete-user/" + user2.id)
+				.sessionAttr("username", "TestUser")
+
+		);
+		assertTrue(userRepo.count() == 0);
+	}
+	/*@Test
+	public void addClubTest()
+			throws Exception{
+
 	}*/
 
 //	@Test
