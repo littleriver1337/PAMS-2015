@@ -11,19 +11,28 @@
 </div>
 
 <div class="col-md-8 adminMain">
-  <section ng-repeat="el in adminCtrl.allUsers" class="userList">
+  <section ng-repeat="el in adminCtrl.allUsers" class="userList" data-id="{{el.id}}">
     <form ng-submit="adminCtrl.editUser(user)">
     <h3>{{el.companyName}}</h3>
     <input type="text" ng-model="user.companyName" placeholder="{{el.companyName}}">
+
     <h4>{{el.username}}</h4>
+    <input type="text" ng-model="user.username" placeholder="{{el.username}}">
+
     <h4>Change Password</h4>
+    <input type="text" ng-model="user.password" placeholder="{{el.password}}">
+
     <h5>{{el.email}}</h5>
+    <input type="text" ng-model="user.email" placeholder="{{el.email}}">
+
     <address>
       <strong>{{el.companyName}}</strong><br>
-      {{el.address}}<br>
-      {{el.city}}, {{el.state}} {{el.zip}}<br>
+      {{el.address}}
+      <input type="text" ng-model="user.address" placeholder="{{el.address}}"><br>
+      {{el.city}}<input type="text" ng-model="user.city" placeholder="{{el.city}}">, {{el.state}}    <input type="text" ng-model="user.state" placeholder="{{el.state}}"> {{el.zip}}    <input type="text" ng-model="user.zip" placeholder="{{el.zip}}"><br>
     </address>
     <button type="submit" name="button">Edit User</button>
     </form>
+    <button type="delete" name="button" ng-click="adminCtrl.deleteUser(el.id)">Delete</button>
   </section>
 </div>

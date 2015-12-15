@@ -12,6 +12,8 @@
 
       var findUsersRoute = "/find-users/";
 
+      var deleteUserRoute = "/delete-user/";
+
       var createAdmin = function(admin){
         admin.accessLevel = "ADMIN";
         $http.post(userRoute, admin).success(function(res){
@@ -55,6 +57,12 @@
         });
       };
 
+      var deleteUser = function(user){
+        $http.delete(deleteUserRoute, user).success(function(res){
+          console.log("DELETED USER: ", user);
+        });
+      };
+
       // var getID = function(user){
       //   return user.id;
       // };
@@ -70,7 +78,8 @@
         createRetailer: createRetailer,
         checkItem: checkItem,
         getUsers: getUsers,
-        editUser: editUser
+        editUser: editUser,
+        deleteUser: deleteUser
         // getID: getID,
         // removeUser: removeUser
       };
