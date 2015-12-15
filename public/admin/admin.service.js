@@ -8,6 +8,10 @@
 
       var userRoute = "/create-user/";
 
+      var editUserRoute = "/edit-user/";
+
+      var findUsersRoute = "/find-users/";
+
       var createAdmin = function(admin){
         admin.accessLevel = "ADMIN";
         $http.post(userRoute, admin).success(function(res){
@@ -36,13 +40,21 @@
         $http.get(itemRoute + item.serialNumber).success(function(res){
           console.log("Posted Item: ", item);
           console.log("Response: ", res);
+          var currentItem = res;
         });
       };
 
-      // var getUsers = function(){
-      //   return $http.get(userRoute);
-      // };
-      //
+      var getUsers = function(){
+        return $http.get(findUsersRoute);
+      };
+
+      var editUser = function(user){
+        $http.put(editUserRoute, user).success(function(res){
+          console.log("SUCCESSFUL PUT: ", user);
+          console.log("Response: ", res);
+        });
+      };
+
       // var getID = function(user){
       //   return user.id;
       // };
@@ -56,8 +68,9 @@
         createAdmin: createAdmin,
         createCompany: createCompany,
         createRetailer: createRetailer,
-        checkItem: checkItem
-        // getUsers: getUsers,
+        checkItem: checkItem,
+        getUsers: getUsers,
+        editUser: editUser
         // getID: getID,
         // removeUser: removeUser
       };
