@@ -120,6 +120,16 @@ public class PAMController {
         if (session.getAttribute("username") == null) {
             throw new Exception("You cannot edit!");
         }
+        User user2 = users.findOneByUsername(user.username);
+        user2.username = user.username;
+        user2.password = PasswordHash.createHash(user.password);
+        user2.accessLevel = user.getAccessLevel();
+        user2.companyName = user.companyName;
+        user2.address = user.address;
+        user2.city = user.city;
+        user2.state = user.state;
+        user2.zip = user.zip;
+        user2.email = user.email;
         users.save(user);
     }
 
@@ -134,16 +144,15 @@ public class PAMController {
         users.delete(id);
     }
 
-    @RequestMapping(path ="/create-club", method = RequestMethod.POST)
+   /* @RequestMapping(path ="/create-club", method = RequestMethod.POST)
     public Club addClub(
             @RequestBody Club club,
-            @PathVariable("serialNumber") int serialNumber,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot create this club!");
         }
-        Club thisClub = findClub(serialNumber);
+
         if (thisClub == null){
             thisClub = new Club();
             thisClub.serialNumber = club.serialNumber;
@@ -154,7 +163,7 @@ public class PAMController {
             clubs.save(club);
         }
         return club;
-    }
+    }*/
 
     @RequestMapping(path = "/find-club/{serialNumber}" , method = RequestMethod.GET)
     public Club findClub(
