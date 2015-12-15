@@ -10,10 +10,16 @@
   </ul>
 </div>
 
-
 <div class="col-md-8 adminMain">
   <section ng-repeat="el in adminCtrl.allUsers" class="userList">
+    <h3>{{el.companyName}}</h3>
     <h4>{{el.username}}</h4>
-
+    <h4>Change Password</h4>
+    <h5>{{el.email}}</h5>
+    <address>
+      <strong>{{el.companyName}}</strong><br>
+      {{el.address}}<br>
+      {{el.city}}, {{el.state}} {{el.zip}}<br>
+    </address>
   </section>
 </div>
