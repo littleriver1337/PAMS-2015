@@ -13,8 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.util.Scanner;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -27,6 +29,26 @@ public class PAMController {
 
     @Autowired
     ItemRepository clubs;
+
+
+    /*@PostConstruct
+    public void init() throws FileNotFoundException {
+        if (clubs.count() == 0){
+            Scanner scanner = new Scanner(new File("golf.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String [] columns = line.split(",");
+                Club c = new Club();
+                c.serialNumber = Integer.valueOf(columns[0]);
+                c.maker = columns[1];
+                c.clubType = columns[2];
+                c.year = Integer.valueOf(columns[3]);
+                c.color = columns[4];
+                clubs.save(c);
+            }
+        }
+    }*/
 
     @PostConstruct
     public void loadData(){
@@ -184,25 +206,6 @@ public class PAMController {
         }
         clubs.delete(id);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @RequestMapping(path = "/edit-inventory", method = RequestMethod.POST)
     public void editInventory(
