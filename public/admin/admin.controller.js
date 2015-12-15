@@ -48,5 +48,10 @@ angular
       AdminService.editUser(user);
     };
 
+    vm.deleteUser = function(user){
+      console.log("SUBMITTED DELETE: ", user);
+      AdminService.deleteUser(user);
+    };
+
   });
 })();
