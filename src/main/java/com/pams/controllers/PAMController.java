@@ -112,25 +112,17 @@ public class PAMController {
         return users.findAll();
     }
 
-    @RequestMapping(path = "/edit-user", method = RequestMethod.POST)
-    public void editUser(
+    @RequestMapping(path = "/edit-user", method = RequestMethod.PUT)
+    public User editUser(
             @RequestBody User user,
             HttpSession session
     ) throws Exception {
         if (session.getAttribute("username") == null) {
             throw new Exception("You cannot edit!");
         }
-        User user2 = users.findOneByUsername(user.username);
-        user2.username = user.username;
-        user2.password = PasswordHash.createHash(user.password);
-        user2.accessLevel = user.getAccessLevel();
-        user2.companyName = user.companyName;
-        user2.address = user.address;
-        user2.city = user.city;
-        user2.state = user.state;
-        user2.zip = user.zip;
-        user2.email = user.email;
         users.save(user);
+
+        return user;
     }
 
     @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
@@ -144,7 +136,7 @@ public class PAMController {
         users.delete(id);
     }
 
-   /* @RequestMapping(path ="/create-club", method = RequestMethod.POST)
+    /*@RequestMapping(path ="/create-club", method = RequestMethod.POST)
     public Club addClub(
             @RequestBody Club club,
             HttpSession session
