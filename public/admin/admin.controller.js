@@ -27,8 +27,8 @@ angular
     };
 
     AdminService.getUsers().then(function(users){
-      vm.allUsers = _.map(users, function(el, idx, arr) {
-        console.log("Users: ", users);
+      vm.allUsers = _.map(users.data, function(el, idx, arr) {
+        console.log("Users: ", users.data);
         return {
           username: el.username,
           password: el.password,
@@ -42,6 +42,11 @@ angular
         };
       });
     });
+
+    vm.editUser = function(user){
+      console.log("SUBMITTED EDIT: ", user);
+      AdminService.editUser(user);
+    };
 
   });
 })();

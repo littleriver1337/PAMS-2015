@@ -8,7 +8,9 @@
 
       var userRoute = "/create-user/";
 
-      var findUsersRoute = "/find-user/";
+      var editUserRoute = "/edit-user/";
+
+      var findUsersRoute = "/find-users/";
 
       var createAdmin = function(admin){
         admin.accessLevel = "ADMIN";
@@ -46,6 +48,13 @@
         return $http.get(findUsersRoute);
       };
 
+      var editUser = function(user){
+        $http.put(editUserRoute, user).success(function(res){
+          console.log("SUCCESSFUL PUT: ", user);
+          console.log("Response: ", res);
+        });
+      };
+
       // var getID = function(user){
       //   return user.id;
       // };
@@ -60,7 +69,8 @@
         createCompany: createCompany,
         createRetailer: createRetailer,
         checkItem: checkItem,
-        getUsers: getUsers
+        getUsers: getUsers,
+        editUser: editUser
         // getID: getID,
         // removeUser: removeUser
       };
