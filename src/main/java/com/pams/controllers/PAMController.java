@@ -13,8 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.util.Scanner;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -27,6 +29,26 @@ public class PAMController {
 
     @Autowired
     ItemRepository clubs;
+
+
+    /*@PostConstruct
+    public void init() throws FileNotFoundException {
+        if (clubs.count() == 0){
+            Scanner scanner = new Scanner(new File("golf.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String [] columns = line.split(",");
+                Club c = new Club();
+                c.serialNumber = Integer.valueOf(columns[0]);
+                c.maker = columns[1];
+                c.clubType = columns[2];
+                c.year = Integer.valueOf(columns[3]);
+                c.color = columns[4];
+                clubs.save(c);
+            }
+        }
+    }*/
 
     @PostConstruct
     public void loadData(){
@@ -112,25 +134,17 @@ public class PAMController {
         return users.findAll();
     }
 
-    @RequestMapping(path = "/edit-user", method = RequestMethod.POST)
-    public void editUser(
+    @RequestMapping(path = "/edit-user", method = RequestMethod.PUT)
+    public User editUser(
             @RequestBody User user,
             HttpSession session
     ) throws Exception {
         if (session.getAttribute("username") == null) {
             throw new Exception("You cannot edit!");
         }
-        User user2 = users.findOneByUsername(user.username);
-        user2.username = user.username;
-        user2.password = PasswordHash.createHash(user.password);
-        user2.accessLevel = user.getAccessLevel();
-        user2.companyName = user.companyName;
-        user2.address = user.address;
-        user2.city = user.city;
-        user2.state = user.state;
-        user2.zip = user.zip;
-        user2.email = user.email;
         users.save(user);
+
+        return user;
     }
 
     @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
@@ -144,7 +158,7 @@ public class PAMController {
         users.delete(id);
     }
 
-   /* @RequestMapping(path ="/create-club", method = RequestMethod.POST)
+    /*@RequestMapping(path ="/create-club", method = RequestMethod.POST)
     public Club addClub(
             @RequestBody Club club,
             HttpSession session
@@ -192,25 +206,6 @@ public class PAMController {
         }
         clubs.delete(id);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @RequestMapping(path = "/edit-inventory", method = RequestMethod.POST)
     public void editInventory(
