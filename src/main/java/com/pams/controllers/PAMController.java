@@ -53,7 +53,7 @@ public class PAMController {
     @PostConstruct
     public void loadData(){
         String fileContent = readFile("golf.csv");
-        String[] lines = fileContent.split("\n");
+        String[] lines = fileContent.split("\r");
         if (clubs.count() == 0){
             for (String line : lines){
                 if (line == lines [0])
@@ -128,15 +128,14 @@ public class PAMController {
         session.setAttribute("username", user.username);
         return tempUser;
     }
-    @RequestMapping(path = "/find-user" , method = RequestMethod.GET)
-    public User findUser(
-            @RequestBody User user
+    @RequestMapping(path = "/find-users" , method = RequestMethod.GET)
+    public Iterable<User> findUsers(
     )throws Exception{
-        return users.findOneByUsername(user.username);
+        return users.findAll();
     }
 
-    @RequestMapping(path = "/edit-user", method = RequestMethod.POST)
-    public void editUser(
+    @RequestMapping(path = "/edit-user", method = RequestMethod.PUT)
+    public User editUser(
             @RequestBody User user,
             HttpSession session
     ) throws Exception {
@@ -144,6 +143,8 @@ public class PAMController {
             throw new Exception("You cannot edit!");
         }
         users.save(user);
+
+        return user;
     }
 
     @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
@@ -165,7 +166,7 @@ public class PAMController {
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot create this club!");
         }
-        //Club thisClub = findClub(club);
+
         if (thisClub == null){
             thisClub = new Club();
             thisClub.serialNumber = club.serialNumber;
@@ -178,11 +179,11 @@ public class PAMController {
         return club;
     }*/
 
-    @RequestMapping(path = "/find-club/{id}" , method = RequestMethod.GET)
+    @RequestMapping(path = "/find-club/{serialNumber}" , method = RequestMethod.GET)
     public Club findClub(
-            @PathVariable ("id") int id
+            @PathVariable ("serialNumber") int serialNumber
     )throws Exception{
-        return clubs.findOne(id);
+        return clubs.findOneBySerialNumber(serialNumber);
     }
 
     @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
