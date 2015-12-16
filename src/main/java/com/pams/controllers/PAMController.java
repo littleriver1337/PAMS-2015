@@ -158,7 +158,7 @@ public class PAMController {
         users.delete(id);
     }
 
-    /*@RequestMapping(path ="/create-club", method = RequestMethod.POST)
+    @RequestMapping(path ="/create-club", method = RequestMethod.POST)
     public Club addClub(
             @RequestBody Club club,
             HttpSession session
@@ -166,30 +166,19 @@ public class PAMController {
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot create this club!");
         }
-
-        if (thisClub == null){
-            thisClub = new Club();
-            thisClub.serialNumber = club.serialNumber;
-            thisClub.maker = club.maker;
-            thisClub.clubType = club.clubType;
-            thisClub.year = club.year;
-            thisClub.color = club.color;
-            clubs.save(club);
-        }
+        clubs.save(club);
         return club;
-    }*/
+    }
 
     @RequestMapping(path = "/find-club/{serialNumber}" , method = RequestMethod.GET)
     public Club findClub(
             @PathVariable ("serialNumber") int serialNumber
     )throws Exception{
-        boolean isAuthentic =false;
         if(!(clubs.findOneBySerialNumber(serialNumber) == null)){
             return clubs.findOneBySerialNumber(serialNumber);
-            //isAuthentic = true;
         }
         else{
-            return new Club((fakeNum+1), "Fake Maker", "Fake Club Type", (fakeNum+2), "Fake Color", false);
+            return new Club((fakeNum+1), "Fake Make", "Fake Club Type", (fakeNum+2), "Fake Color", false);
         }
     }
 
