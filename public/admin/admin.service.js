@@ -2,7 +2,7 @@
   "use strict";
   angular
     .module('pamsAdmin')
-    .factory('AdminService', function($http, _){
+    .factory('AdminService', function($http, _, $location){
 
       var itemRoute = "/find-club/";
       var userRoute = "/create-user/";
@@ -31,14 +31,6 @@
         $http.post(userRoute, retailer).success(function(res){
           console.log("New retailer posted: ", retailer);
           console.log("Response: ", res);
-        });
-      };
-
-      var checkItem = function(item) {
-        $http.get(itemRoute + item.serialNumber).success(function(res){
-          console.log("Posted Item: ", item);
-          console.log("Response: ", res);
-          var currentItem = res;
         });
       };
 
@@ -78,14 +70,27 @@
         });
       };
 
+      var checkItem = function(item) {
+        $http.get(itemRoute + item.serialNumber).success(function(res){
+          console.log("Posted Item: ", item);
+          console.log("Response: ", res);
+          var currentItem = res;
+          if (res.clubType !== null) {
+            $location.path("/true/");
+          } else {
+            $location.path("/false/");
+          }
+        });
+      };
+
       return {
         createAdmin: createAdmin,
         createCompany: createCompany,
         createRetailer: createRetailer,
-        checkItem: checkItem,
         getUsers: getUsers,
         editUser: editUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        checkItem: checkItem
       };
 
     });
