@@ -55,6 +55,22 @@ body {
   text-align: center;
   float: right; }
 
+.addAdmin {
+  width: 80%;
+  margin: 0 auto; }
+
+.addCompany {
+  width: 80%;
+  margin: 0 auto; }
+
+.addRetailer {
+  width: 80%;
+  margin: 0 auto; }
+
+.userInfo {
+  width: 80%;
+  margin: 0 auto; }
+
 footer {
   width: 100%;
   text-align: center; }

@@ -27,29 +27,37 @@ angular
     };
 
     AdminService.getUsers().then(function(users){
-      vm.allUsers = _.map(users.data, function(el, idx, arr) {
-        console.log("Users: ", users.data);
-        return {
-          username: el.username,
-          password: el.password,
-          companyName: el.companyName,
-          email: el.email,
-          id: el.id,
-          address: el.address,
-          city: el.city,
-          state: el.state,
-          zip: el.zip
-        };
-      });
+      vm.users = users;
+      if($routeParams.id) {
+        var something = vm.users;
+        var currUser;
+        currUser = something.filter(function(el) {
+          return el.id === +$routeParams.id;
+        });
+        vm.user = currUser[0];
+      }
+      $scope.user = {};
+      $scope.user.accessLevel = vm.user.accessLevel;
+      $scope.user.id = vm.user.id;
+      $scope.user.companyName = vm.user.companyName;
+      $scope.user.username = vm.user.username;
+      $scope.user.password = vm.user.password;
+      $scope.user.email = vm.user.email;
+      $scope.user.address = vm.user.address;
+      $scope.user.city = vm.user.city;
+      $scope.user.state = vm.user.state;
+      $scope.user.zip = vm.user.zip;
+      window.thing = vm.user;
+      console.log("user: ", vm.user);
     });
 
     vm.editUser = function(user){
-      console.log("SUBMITTED EDIT: ", user);
+      console.log("SUBMITTED ", user);
       AdminService.editUser(user);
     };
 
     vm.deleteUser = function(user){
-      console.log("SUBMITTED DELETE: ", user);
+      console.log("SUBMITTED ", user);
       AdminService.deleteUser(user);
     };
 
