@@ -31,6 +31,7 @@ public class PAMController {
     ItemRepository clubs;
 
 
+    static int fakeNum = 1000;
     /*@PostConstruct
     public void init() throws FileNotFoundException {
         if (clubs.count() == 0){
@@ -65,6 +66,7 @@ public class PAMController {
                 club.clubType = columns[2];
                 club.year = Integer.valueOf(columns[3]);
                 club.color = columns[4];
+                club.isAuthentic = true;
                 clubs.save(club);
             }
 
@@ -183,7 +185,14 @@ public class PAMController {
     public Club findClub(
             @PathVariable ("serialNumber") int serialNumber
     )throws Exception{
-        return clubs.findOneBySerialNumber(serialNumber);
+        boolean isAuthentic =false;
+        if(!(clubs.findOneBySerialNumber(serialNumber) == null)){
+            return clubs.findOneBySerialNumber(serialNumber);
+            //isAuthentic = true;
+        }
+        else{
+            return new Club((fakeNum+1), "Fake Maker", "Fake Club Type", (fakeNum+2), "Fake Color", false);
+        }
     }
 
     @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
