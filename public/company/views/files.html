@@ -1,8 +1,20 @@
-<h1>IMPORT FILE</h1>
-<form ng-submit="companyCtrl.importFile(file)">
-  <div class="form-group">
-    <label for="ImportFile">Import File</label>
-    <input type="file" id="ImportFile">
-  </div>
-  <button type="submit" class="btn btn-success">Upload</button>
-</form>
+<h1>COMPANY</h1>
+
+<div class="col-md-4 companySidebar">
+  <ul>
+    <li><a href="/#/files">Import File</a></li>
+    <li><a href="/#/verify">Verify Product</a></li>
+  </ul>
+</div>
+
+<div class="col-md-8">
+  <section class="importSection">
+    <form ng-submit="companyCtrl.importFile(file)">
+      <div class="form-group">
+        <label for="ImportFile">Import File</label>
+        <input type="file" id="ImportFile">
+      </div>
+      <button id="upload" type="submit" class="btn btn-success">Upload</button>
+    </form>
+  </section>
+</div>

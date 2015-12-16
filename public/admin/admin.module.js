@@ -12,7 +12,7 @@
       $routeProvider
         .when('/admin', {
           templateUrl: 'admin/views/list.html',
-          controller: 'AdminController as adminCtrl',
+          controller: 'VerificationController as verificationCtrl',
         })
         .when('/addAdmin', {
           templateUrl: 'admin/views/addAdmin.html',

@@ -14,6 +14,10 @@
           templateUrl: 'company/views/files.html',
           controller: 'CompanyController as companyCtrl',
         })
+        .when('/verify', {
+          templateUrl: 'company/views/verify.html',
+          controller: 'VerificationController as verificationCtrl',
+        })
         .otherwise({ redirectTo: '/404'});
     });
 
