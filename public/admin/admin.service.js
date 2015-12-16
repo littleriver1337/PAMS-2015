@@ -5,13 +5,9 @@
     .factory('AdminService', function($http, _){
 
       var itemRoute = "/find-club/";
-
       var userRoute = "/create-user/";
-
       var editUserRoute = "/edit-user/";
-
       var findUsersRoute = "/find-users/";
-
       var deleteUserRoute = "/delete-user/";
 
       var createAdmin = function(admin){
@@ -46,8 +42,27 @@
         });
       };
 
+      var mapData = function (collection){
+        return _.map(collection, function(el){
+          return {
+              accessLevel: el.accessLevel,
+              username: el.username,
+              password: el.password,
+              companyName: el.companyName,
+              email: el.email,
+              id: el.id,
+              address: el.address,
+              city: el.city,
+              state: el.state,
+              zip: el.zip
+          };
+        });
+      };
+
       var getUsers = function(){
-        return $http.get(findUsersRoute);
+        return $http.get(findUsersRoute).then(function(user){
+          return mapData(user.data);
+        });
       };
 
       var editUser = function(user){
@@ -58,19 +73,10 @@
       };
 
       var deleteUser = function(user){
-        $http.delete(deleteUserRoute, user).success(function(res){
+        $http.delete(deleteUserRoute + user.id).success(function(res){
           console.log("DELETED USER: ", user);
         });
       };
-
-      // var getID = function(user){
-      //   return user.id;
-      // };
-      //
-      // var removeUser = function(user){
-      //   var userID = getID(user);
-      //   $http.delete(userRoute + "/" + userID);
-      // };
 
       return {
         createAdmin: createAdmin,
@@ -80,8 +86,6 @@
         getUsers: getUsers,
         editUser: editUser,
         deleteUser: deleteUser
-        // getID: getID,
-        // removeUser: removeUser
       };
 
     });

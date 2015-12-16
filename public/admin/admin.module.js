@@ -28,6 +28,10 @@
           templateUrl: 'admin/views/users.html',
           controller: 'AdminController as adminCtrl',
         })
+        .when('/:id', {
+          templateUrl: 'admin/views/edit.html',
+          controller: 'AdminController as adminCtrl',
+        })
         .otherwise({ redirectTo: '/404'});
     });
 
