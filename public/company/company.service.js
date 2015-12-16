@@ -4,23 +4,17 @@
     .module('pamsCompany')
     .factory('CompanyService', function($http, _, $location){
 
-    var itemRoute = "/find-club/";
+    var fileRoute = "/______/";
 
-    var checkItem = function(item) {
-      $http.get(itemRoute + item.serialNumber).success(function(res){
-        console.log("Posted Item: ", item);
+    var importFile = function(file) {
+      $http.post(fileRoute, file).success(function(res){
+        console.log("POSTED FILE: ", file);
         console.log("Response: ", res);
-        var currentItem = res;
-        if (res !== null) {
-          $location.path("/true/");
-        } else {
-          $location.path("/false/");
-        }
       });
     };
 
       return {
-        checkItem: checkItem
+        importFile: importFile
       };
 
     });

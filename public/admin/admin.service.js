@@ -75,7 +75,7 @@
           console.log("Posted Item: ", item);
           console.log("Response: ", res);
           var currentItem = res;
-          if (res.clubType !== null) {
+          if (res.isAuthentic) {
             $location.path("/true/");
           } else {
             $location.path("/false/");

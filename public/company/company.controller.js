@@ -6,9 +6,9 @@ angular
   .controller('CompanyController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, $routeParams) {
     var vm = this;
 
-    vm.check = function(item) {
-      console.log("SUBMITTED", item);
-      VerificationService.checkItem(item);
+    vm.importFile = function(file) {
+      console.log("SUBMITTED", file);
+      CompanyService.importFile(file);
     };
 
   });
