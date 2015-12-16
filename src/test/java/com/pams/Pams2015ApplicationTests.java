@@ -1,6 +1,7 @@
 package com.pams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pams.entities.Club;
 import com.pams.entities.User;
 import com.pams.services.ItemRepository;
 import com.pams.services.UserRepository;
@@ -74,8 +75,8 @@ public class Pams2015ApplicationTests {
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
-				.content(json)
-				.header("Content-Type", "application/json")
+						.content(json)
+						.header("Content-Type", "application/json")
 		);
 		assertTrue(userRepo.count() == 1);
 	}
@@ -114,13 +115,13 @@ public class Pams2015ApplicationTests {
 		String json2 = mapper2.writeValueAsString(user2);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("edit-user")
-				.content(json2)
-				.header("Content-Type", "application/json")
+						.content(json2)
+						.header("Content-Type", "application/json")
 		);
 		assertTrue(userRepo.count() == 1);
 	}
 	@Test
-	public void deleteUserTesT()
+	public void deleteUserTest()
 			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
@@ -137,23 +138,98 @@ public class Pams2015ApplicationTests {
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
-				.content(json)
-				.header("Content-Type", "application/json")
+						.content(json)
+						.header("Content-Type", "application/json")
 		);
 		User user2 = userRepo.findOneByUsername(user.username);
 		mockMvc.perform(
 				MockMvcRequestBuilders.delete("/delete-user/" + user2.id)
-				.sessionAttr("username", "TestUser")
+						.sessionAttr("username", "TestUser")
 
 		);
 		assertTrue(userRepo.count() == 0);
 	}
-	/*@Test
+	@Test
 	public void addClubTest()
 			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Club club = new Club();
+		club.serialNumber = 123456;
+		club.maker = "TestMaker";
+		club.clubType = "TestType";
+		club.year = 1985;
+		club.color = "Green";
 
-	}*/
+		String json = mapper.writeValueAsString(club);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-club")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(clubRepo.count() == 1);
+	}
+	@Test
+	public void editTestClub()
+		throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Club club = new Club();
+		club.serialNumber = 111234;
+		club.maker = "TestMaker";
+		club.clubType = "TestType";
+		club.year = 1985;
+		club.color = "Green";
 
+		String json = mapper.writeValueAsString(club);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-club")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+		ObjectMapper mapper2 = new ObjectMapper();
+		Club club2 = new Club();
+		club.serialNumber = 1123131;
+		club.maker = "TestEdit";
+		club.clubType = "TestEdited";
+		club.year = 1998;
+		club.color = "Red";
+
+		String json2 = mapper2.writeValueAsString(club2);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-club") //when this is set to put it does not work for some reason? Ask Zac.
+						.content(json2)
+						.header("Content-Type", "application/json") //what does this do specifically?  Ask Zac.
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(clubRepo.count() == 1);
+	}
+	/*@Test
+	public void deleteClubTest()
+		throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Club club = new Club();
+		club.serialNumber = 1231231;
+		club.maker = "TestMaker";
+		club.clubType = "TestType";
+		club.year = 1998;
+		club.color = "Yellow";
+
+		String json = mapper.writeValueAsString(club);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-club")
+				.content(json)
+				.header("Content Type", "application/json")
+				.sessionAttr("username", "TestUser")
+		);
+		Club club2 = clubRepo.findOneByMaker(club.maker);
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/delete-club/" + club2.id)
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(clubRepo.count() == 0);
+	}
+*/
 //	@Test
 //	public void importFileTest()throws Exception{
 //		MockMultipartFile testFile = new MockMultipartFile("file", "test_items.csv", "text/csv", "test csv".getBytes());
