@@ -32,9 +32,6 @@ public class Club {
     @Column(nullable=false)
     public boolean isAuthentic;
 
-    @ManyToOne
-    public User user;
-
     public Club() {
     }
 
@@ -47,5 +44,7 @@ public class Club {
         this.isAuthentic = isAuthentic;
     }
 
+    @ManyToOne
+    public User user;
 }
 
