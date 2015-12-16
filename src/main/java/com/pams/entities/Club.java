@@ -29,7 +29,23 @@ public class Club {
     @Column(nullable = false)
     public String color;
 
+    @Column(nullable=false)
+    public boolean isAuthentic;
+
     @ManyToOne
     public User user;
+
+    public Club() {
+    }
+
+    public Club(int serialNumber, String maker, String clubType, int year, String color, boolean isAuthentic) {
+        this.serialNumber = serialNumber;
+        this.maker = maker;
+        this.clubType = clubType;
+        this.year = year;
+        this.color = color;
+        this.isAuthentic = isAuthentic;
+    }
+
 }
 
