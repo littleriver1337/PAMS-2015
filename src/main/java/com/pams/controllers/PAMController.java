@@ -225,8 +225,6 @@ public class PAMController {
         clubs.delete(id);
     }
 
-
-
      /* @RequestMapping(path = "/create-retailer", method = RequestMethod.POST)
     public void addRetailerUser(
             @RequestBody User user,

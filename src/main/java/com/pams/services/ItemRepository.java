@@ -10,4 +10,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface ItemRepository extends CrudRepository<Club, Integer> {
     Club findOneBySerialNumber(int serialNumber);
     Club findOneByMaker(String maker);
+    Club findOneByIsAuthentic(boolean isAuthentic);
 }
