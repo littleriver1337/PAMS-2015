@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.Scanner;
@@ -150,11 +151,41 @@ public class PAMController {
         }
     }
 
-    @RequestMapping(path = "/list-jacks", method = RequestMethod.POST)
+
+    @RequestMapping(path = "/list-jacks", method = RequestMethod.GET)
     public Iterable<Club> listJacks()
-        throws Exception{
-        return clubs.findOneByIsAuthentic(false);
+            throws Exception{
+        return clubs.findAllByIsAuthentic(false);
     }
+
+    @RequestMapping(path = "/search-by-maker/{maker}", method = RequestMethod.GET)
+    public Iterable<Club> searchByMaker(
+            @PathVariable ("maker") String maker
+    ) throws Exception{
+        return clubs.findAllByMaker(maker);
+    }
+
+    @RequestMapping(path = "/search-by-clubType/{clubType}", method = RequestMethod.GET)
+    public Iterable<Club> searchByClubType(
+            @PathVariable ("clubType") String clubType
+    ) throws Exception{
+        return clubs.findAllByClubType(clubType);
+    }
+
+    @RequestMapping(path = "/search-by-year/{year}", method = RequestMethod.GET)
+    public Iterable<Club> searchByYear(
+            @PathVariable ("year") int year
+    ) throws Exception{
+        return clubs.findAllByYear(year);
+    }
+
+    @RequestMapping(path = "/search-by-lie-angle/{lieAngle}", method = RequestMethod.GET)
+    public Iterable<Club> searchByLieAngle(
+            @PathVariable ("lieAngle") String lieAngle
+    ) throws Exception{
+        return clubs.findAllByLieAngle(lieAngle);
+    }
+
 
     @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
     public void editClub(
@@ -221,6 +252,13 @@ public class PAMController {
             throw new Exception ("You cannot delete!");
         }
         clubs.delete(id);
+    }
+
+    @RequestMapping("/logout")
+    public void logout(
+            HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
     }
 }
 

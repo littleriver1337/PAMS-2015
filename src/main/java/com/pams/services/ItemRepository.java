@@ -12,5 +12,9 @@ import java.util.List;
 public interface ItemRepository extends CrudRepository<Club, Integer> {
     Club findOneBySerialNumber(int serialNumber);
     Club findOneByMaker(String maker);
-    List<Club> findOneByIsAuthentic(boolean isAuthentic);
+    List<Club> findAllByIsAuthentic(boolean isAuthentic);
+    List<Club> findAllByClubType (String clubType);
+    List<Club> findAllByMaker (String maker);
+    List<Club> findAllByYear (int year);
+    List<Club> findAllByLieAngle(String lieAngle);
 }
