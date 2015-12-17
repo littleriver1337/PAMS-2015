@@ -39,7 +39,7 @@
     public String state;
 
     @Column
-    public int zip;
+    public String zip;
 
     @Column
     public String email;
@@ -75,7 +75,7 @@
         this.state = state;
     }
 
-    public void setZip(int zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
@@ -116,7 +116,7 @@
         return state;
     }
 
-    public int getZip() {
+    public String getZip() {
         return zip;
     }
 
