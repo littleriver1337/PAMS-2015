@@ -1,6 +1,9 @@
 package com.pams.entities;
 
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -32,16 +35,20 @@ public class Club {
     @Column(nullable=false)
     public boolean isAuthentic;
 
+    @Column(nullable = false)
+    public LocalDateTime time;
+
     public Club() {
     }
 
-    public Club(int serialNumber, String maker, String clubType, int year, String lieAngle, boolean isAuthentic) {
+    public Club(int serialNumber, String maker, String clubType, int year, String lieAngle, boolean isAuthentic, LocalDateTime time) {
         this.serialNumber = serialNumber;
         this.maker = maker;
         this.clubType = clubType;
         this.year = year;
         this.lieAngle = lieAngle;
         this.isAuthentic = isAuthentic;
+        this.time = time;
     }
 
     @ManyToOne
