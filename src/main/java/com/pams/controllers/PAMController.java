@@ -5,6 +5,7 @@ import com.pams.services.ItemRepository;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
 import com.pams.utils.PasswordHash;
+import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,8 +27,8 @@ public class PAMController {
     @Autowired
     ItemRepository clubs;
 
-
     static int fakeNum = 1000;
+
     /*@PostConstruct
     public void init() throws FileNotFoundException {
         if (clubs.count() == 0){
@@ -41,8 +42,8 @@ public class PAMController {
                 c.maker = columns[1];
                 c.clubType = columns[2];
                 c.year = Integer.valueOf(columns[3]);
+                c.color = columns[4];
                 c.isAuthentic = true;
-                c.lieAngle = columns[4];
                 clubs.save(c);
             }
         }
@@ -62,7 +63,7 @@ public class PAMController {
                 club.maker = columns[1];
                 club.clubType = columns[2];
                 club.year = Integer.valueOf(columns[3]);
-                club.lieAngle = columns[4];
+                club.color = columns[4];
                 club.isAuthentic = true;
                 clubs.save(club);
             }
@@ -165,16 +166,6 @@ public class PAMController {
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot create this club!");
         }
-
-        /*if (thisClub == null){
-            thisClub = new Club();
-            thisClub.serialNumber = club.serialNumber;
-            thisClub.maker = club.maker;
-            thisClub.clubType = club.clubType;
-            thisClub.year = club.year;
-            thisClub.lieAngle = club.lieAngle;
-            clubs.save(club);
-        }*/
         clubs.save(club);
         return club;
     }
@@ -187,7 +178,7 @@ public class PAMController {
             return clubs.findOneBySerialNumber(serialNumber);
         }
         else{
-            return new Club((fakeNum+1), "Fake Make", "Fake Club Type", (fakeNum+2), "Fake Lie Angle", false);
+            return new Club((fakeNum+1), "Fake Make", "Fake Club Type", (fakeNum+2), "Fake Color", false);
         }
     }
 
@@ -293,7 +284,7 @@ public class PAMController {
             c.maker = columns[1];
             c.clubType = columns[2];
             c.year = Integer.valueOf(columns[3]);
-            c.lieAngle = columns[4];
+            c.color = columns[4];
             c.isAuthentic = true;
             clubs.save(c);
 
@@ -310,7 +301,7 @@ public class PAMController {
                 club.maker = columns[1];
                 club.clubType = columns[2];
                 club.year = Integer.valueOf(columns[3]);
-                club.lieAngle = columns[4];
+                club.color = columns[4];
                 club.isAuthentic = true;
                 clubs.save(club);
             }

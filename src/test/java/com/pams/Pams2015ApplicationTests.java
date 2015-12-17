@@ -151,7 +151,6 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(userRepo.count() == 0);
 	}
-/*
 	@Test
 	public void addClubTest()
 			throws Exception{
@@ -161,8 +160,7 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1985;
-		club.lieAngle = "Green";
-		club.isAuthentic = true;
+		club.color = "Green";
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -182,8 +180,7 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1985;
-		club.lieAngle = "Green";
-		club.isAuthentic = true;
+		club.color = "Green";
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -195,13 +192,11 @@ public class Pams2015ApplicationTests {
 
 		Club club2 = clubRepo.findOneBySerialNumber(club.serialNumber);
 		ObjectMapper mapper2 = new ObjectMapper();
-		Club club2 = new Club();
-		club.serialNumber = 1123131;
-		club.maker = "TestEdit";
-		club.clubType = "TestEdited";
-		club.year = 1998;
-		club.lieAngle = "Red";
-		club.isAuthentic = true;
+		club2.serialNumber = 1123131;
+		club2.maker = "TestEdit";
+		club2.clubType = "TestEdited";
+		club2.year = 1998;
+		club2.color = "Red";
 
 		String json2 = mapper2.writeValueAsString(club2);
 		mockMvc.perform(
@@ -212,7 +207,7 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(clubRepo.count() == 1);
 	}
-	/*@Test
+	@Test
 	public void deleteClubTest()
 		throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
@@ -221,7 +216,7 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1998;
-		club.lieAngle = "Yellow";
+		club.color = "Yellow";
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
