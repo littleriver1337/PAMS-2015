@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -45,6 +46,7 @@ public class PAMController {
                 c.year = Integer.valueOf(columns[3]);
                 c.lieAngle = columns[4];
                 c.isAuthentic = true;
+                c.time = LocalDateTime.now();
                 clubs.save(c);
             }
         }
@@ -145,7 +147,7 @@ public class PAMController {
             return clubs.findOneBySerialNumber(serialNumber);
         }
         else{
-            Club jackClub = new Club(serialNumber, "Fake Make", "Fake Club Type", (fakeNum+1), "Fake Lie Angle", false);
+            Club jackClub = new Club(serialNumber, "Fake Make", "Fake Club Type", (fakeNum+1), "Fake Lie Angle", false, LocalDateTime.now());
             clubs.save(jackClub);
             return jackClub;
         }
@@ -185,7 +187,13 @@ public class PAMController {
     ) throws Exception{
         return clubs.findAllByLieAngle(lieAngle);
     }
-
+    
+    /*@RequestMapping(path = "/search-by-time/{time}", method = RequestMethod.GET)
+    public Iterable<Club> searchByTime(
+            @PathVariable ("time") LocalDateTime time
+    ) throws Exception{
+        return clubs.findAllByTime(time);
+    }*/
 
     @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
     public void editClub(
