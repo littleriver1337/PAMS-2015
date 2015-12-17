@@ -3,7 +3,7 @@
 
 angular
   .module('pamsAdmin')
-  .controller('AdminController', function ($scope, AdminService, LoginService, VerificationService, CompanyService, $routeParams, _) {
+  .controller('AdminController', function ($scope, AdminService, LoginService, VerificationService, CompanyService, RetailerService, $routeParams, _) {
     var vm = this;
 
     vm.addAdmin = function(admin){

@@ -6,7 +6,8 @@
       'underscore',
       'pamsAdmin',
       'pamsVerification',
-      'pamsCompany'
+      'pamsCompany',
+      'pamsRetailer'
     ])
     .config(function ($routeProvider) {
       $routeProvider

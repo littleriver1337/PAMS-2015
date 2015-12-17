@@ -4,7 +4,7 @@
     .module('pamsCompany')
     .factory('CompanyService', function($http, _, $location){
 
-    var fileRoute = "/______/";
+    var fileRoute = "/import-file/";
 
     var importFile = function(file) {
       $http.post(fileRoute, file).success(function(res){
@@ -19,3 +19,10 @@
 
     });
 })();
+
+// var upload = Upload.upload({
+//   url: '/import-file/',
+//   data: {key: file, otherInfo: uploadInfo},
+//   method: 'POST',
+//
+// });
