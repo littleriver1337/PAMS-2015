@@ -1,0 +1,43 @@
+<h1>COMPANY</h1>
+
+<div class="col-md-4 companySidebar">
+  <ul>
+    <li><a href="/#/files">Import File</a></li>
+    <li><a href="/#/verify">Verify Product</a></li>
+  </ul>
+</div>
+
+<div class="col-md-8">
+  <section class="importSection">
+
+    <form action="/import-file/" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="ImportFile">Import File</label>
+        <input type="file" id="ImportFile" ng-model="file">
+      </div>
+      <input type="submit" name="upload" value="Upload" class="btn btn-success">
+      <!-- <button id="upload" type="submit" class="btn btn-success">Upload</button> -->
+    </form>
+
+<!--
+      <form name="myForm">
+        <fieldset>
+          <legend>Upload</legend>
+
+          <input type="file" ngf-select ng-model="companyFile" name="file"
+          required>
+
+          <button ng-disabled="!myForm.$valid"
+                  ng-click="uploadPic(companyFile)">Submit</button>
+
+          <span class="progress" ng-show="picFile.progress >= 0">
+            <div style="width:{{picFile.progress}}%"
+                ng-bind="picFile.progress + '%'"></div>
+          </span>
+
+        </fieldset>
+        <br>
+      </form> -->
+
+  </section>
+</div>

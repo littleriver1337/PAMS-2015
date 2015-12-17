@@ -4,13 +4,16 @@
     .module('pamsAdmin', [
       'ngRoute',
       'underscore',
-      'pamsLogin'
+      'pamsLogin',
+      'pamsVerification',
+      'pamsCompany',
+      'pamsRetailer'
     ])
     .config(function ($routeProvider) {
       $routeProvider
         .when('/admin', {
           templateUrl: 'admin/views/list.html',
-          controller: 'AdminController as adminCtrl',
+          controller: 'VerificationController as verificationCtrl',
         })
         .when('/addAdmin', {
           templateUrl: 'admin/views/addAdmin.html',
@@ -30,6 +33,14 @@
         })
         .when('/:id', {
           templateUrl: 'admin/views/edit.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/true', {
+          templateUrl: 'verification/views/true.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/false', {
+          templateUrl: 'verification/views/false.html',
           controller: 'AdminController as adminCtrl',
         })
         .otherwise({ redirectTo: '/404'});

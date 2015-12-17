@@ -16,6 +16,7 @@
           $location.path('/admin/');
         } else if (currentUser.accessLevel === "COMPANY_USER") {
           console.log("User is a Company");
+          $location.path('/files/');
         } else if (currentUser.accessLevel === "RETAILER_USER") {
           console.log("User is a Retailer");
         } else {

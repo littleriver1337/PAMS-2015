@@ -28,7 +28,6 @@ body {
 }
 
 // HOMEPAGE NARRATIVE
-
 .narrative {
   width: 90%;
   margin: 4% auto;
@@ -71,7 +70,6 @@ body {
 }
 
 // ADD ADMIN/COMPANY/RETAILER
-
 .addAdmin {
   width: 80%;
   margin: 0 auto;
@@ -87,11 +85,20 @@ body {
   margin: 0 auto;
 }
 
-// EDIT USER
+  // EDIT USER
+  .userInfo {
+    width: 80%;
+    margin: 0 auto;
+  }
 
-.userInfo {
+//COMPANY SECTION
+.importSection {
   width: 80%;
   margin: 0 auto;
+}
+
+#upload {
+  float: left;
 }
 
 // FOOTER

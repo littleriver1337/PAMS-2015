@@ -1,19 +1,23 @@
 (function () {
   "use strict";
   angular
-    .module('pamsLogin', [
+    .module('pamsCompany', [
       'ngRoute',
       'underscore',
+      'pamsLogin',
       'pamsAdmin',
       'pamsVerification',
-      'pamsCompany',
       'pamsRetailer'
     ])
     .config(function ($routeProvider) {
       $routeProvider
-        .when('/', {
-          templateUrl: 'login/views/login.html',
-          controller: 'LoginController as loginCtrl',
+        .when('/files', {
+          templateUrl: 'company/views/files.html',
+          controller: 'CompanyController as companyCtrl',
+        })
+        .when('/verify', {
+          templateUrl: 'company/views/verify.html',
+          controller: 'VerificationController as verificationCtrl',
         })
         .otherwise({ redirectTo: '/404'});
     });
