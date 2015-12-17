@@ -178,7 +178,9 @@ public class PAMController {
             return clubs.findOneBySerialNumber(serialNumber);
         }
         else{
-            return new Club((fakeNum+1), "Fake Make", "Fake Club Type", (fakeNum+2), "Fake Color", false);
+            Club jackClub = new Club((fakeNum+1), "Fake Make", "Fake Club Type", (fakeNum+2), "Fake Lie Angle", false);
+            clubs.save(jackClub);
+            return jackClub;
         }
     }
 
