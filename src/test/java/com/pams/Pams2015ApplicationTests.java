@@ -72,7 +72,7 @@ public class Pams2015ApplicationTests {
 		user.address = "405 Jefferson Street";
 		user.city = "Hamlet";
 		user.state = "NC";
-		user.zip = 28345;
+		user.zip = "28345";
 		user.email = "littleriver1337@gmail.com";
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
@@ -95,7 +95,7 @@ public class Pams2015ApplicationTests {
 		user.address = "405 Jefferson Street";
 		user.city = "Hamlet";
 		user.state = "NC";
-		user.zip = 28345;
+		user.zip = "28345";
 		user.email = "littleriver1337@gmail.com";
 		String json = mapper.writeValueAsString(user);
 		mockMvc.perform(
@@ -112,7 +112,7 @@ public class Pams2015ApplicationTests {
 		user.address = "1112 Deerberry Road";
 		user.city = "Hannahan";
 		user.state = "SC";
-		user.zip = 29401;
+		user.zip = "29401";
 		user.email = "littleriver1337@gmail.com";
 		String json2 = mapper2.writeValueAsString(user2);
 		mockMvc.perform(
@@ -134,7 +134,7 @@ public class Pams2015ApplicationTests {
 		user.address = "405 Jefferson Street";
 		user.city = "Hamlet";
 		user.state = "NC";
-		user.zip = 28345;
+		user.zip = "28345";
 		user.email = "littleriver1337@gmail.com";
 
 		String json = mapper.writeValueAsString(user);
