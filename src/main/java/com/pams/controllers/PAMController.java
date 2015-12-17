@@ -184,6 +184,12 @@ public class PAMController {
         }
     }
 
+    @RequestMapping(path = "/list-jacks" , method = RequestMethod.GET)
+    public Iterable<Club> listJacks()
+            throws Exception{
+        return clubs.findOneByIsAuthentic(false);
+    }
+
     @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
     public void editClub(
             @RequestBody Club club,
@@ -226,8 +232,6 @@ public class PAMController {
         }
         clubs.delete(id);
     }
-
-
 
      /* @RequestMapping(path = "/create-retailer", method = RequestMethod.POST)
     public void addRetailerUser(
