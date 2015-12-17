@@ -160,7 +160,7 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1985;
-		club.color = "Green";
+		club.lieAngle = "Green";
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -180,7 +180,7 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1985;
-		club.color = "Green";
+		club.lieAngle = "Green";
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -196,7 +196,7 @@ public class Pams2015ApplicationTests {
 		club2.maker = "TestEdit";
 		club2.clubType = "TestEdited";
 		club2.year = 1998;
-		club2.color = "Red";
+		club2.lieAngle = "Red";
 
 		String json2 = mapper2.writeValueAsString(club2);
 		mockMvc.perform(
@@ -216,7 +216,7 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1998;
-		club.color = "Yellow";
+		club.lieAngle = "Yellow";
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(

@@ -63,7 +63,7 @@ public class PAMController {
                 club.maker = columns[1];
                 club.clubType = columns[2];
                 club.year = Integer.valueOf(columns[3]);
-                club.color = columns[4];
+                club.lieAngle = columns[4];
                 club.isAuthentic = true;
                 clubs.save(club);
             }
@@ -284,7 +284,7 @@ public class PAMController {
             c.maker = columns[1];
             c.clubType = columns[2];
             c.year = Integer.valueOf(columns[3]);
-            c.color = columns[4];
+            c.lieAngle = columns[4];
             c.isAuthentic = true;
             clubs.save(c);
 
