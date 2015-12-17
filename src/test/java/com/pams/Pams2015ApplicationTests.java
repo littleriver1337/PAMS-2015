@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Pams2015Application.class)
@@ -190,6 +192,8 @@ public class Pams2015ApplicationTests {
 						.header("Content-Type", "application/json")
 						.sessionAttr("username", "TestUser")
 		);
+
+		Club club2 = clubRepo.findOneBySerialNumber(club.serialNumber);
 		ObjectMapper mapper2 = new ObjectMapper();
 		Club club2 = new Club();
 		club.serialNumber = 1123131;
@@ -208,7 +212,6 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(clubRepo.count() == 1);
 	}
-*/
 	/*@Test
 	public void deleteClubTest()
 		throws Exception{
@@ -224,25 +227,25 @@ public class Pams2015ApplicationTests {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-club")
 				.content(json)
-				.header("Content Type", "application/json")
+				.header("Content-Type", "application/json")
 				.sessionAttr("username", "TestUser")
 		);
-		Club club2 = clubRepo.findOneByMaker(club.maker);
+		Club club2 = clubRepo.findOneBySerialNumber(club.serialNumber);
 		mockMvc.perform(
 				MockMvcRequestBuilders.delete("/delete-club/" + club2.id)
 						.sessionAttr("username", "TestUser")
 		);
 		assertTrue(clubRepo.count() == 0);
 	}
-*/
-//	@Test
-//	public void importFileTest()throws Exception{
-//		MockMultipartFile testFile = new MockMultipartFile("file", "test_items.csv", "text/csv", "test csv".getBytes());
-//
-//		mockMvc.perform(
-//				MockMvcRequestBuilders.fileUpload("/import-file")
-//						.file(testFile)
-//		);
-//		assertTrue(itemRepo.count() > 0);
-//	}
+
+	/*@Test
+	public void importFileTest()throws Exception{
+		MockMultipartFile testFile = new MockMultipartFile("file", "test_items.csv", "text/csv", "test csv".getBytes());
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/import-file")
+						.file(testFile)
+		);
+		assertTrue(itemRepo.count() > 0);
+	}*/
 }

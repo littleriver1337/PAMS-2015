@@ -4,21 +4,21 @@ header {
 }
 
 body {
-  background-lieAngle: $bodyBG;
+  background-color: $bodyBG;
 }
 
 .logo {
-  background-lieAngle: $darkerColor;
+  background-color: $darkerColor;
   height: 100px;
-  lieAngle: white;
+  color: white;
   font-family: $font;
   font-size: 3em;
 }
 
 .slogan {
-  background-lieAngle: $mainColor;
+  background-color: $mainColor;
   height: 100px;
-  lieAngle: white;
+  color: white;
   font-family: $font;
   font-size: 3em;
 }
@@ -45,14 +45,14 @@ body {
 .login {
   margin: 7% auto;
   width: 90%;
-  background-lieAngle: $mainColor;
+  background-color: $mainColor;
   min-height: 250px;
   margin-bottom: 15%;
   padding: 5%;
   float: left;
   border-radius: 2%;
   h3 {
-    lieAngle: white;
+    color: white;
     font-size: 2.5em;
     font-family: $font;
     text-align: center;

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -40,6 +41,7 @@ public class PAMController {
                 c.maker = columns[1];
                 c.clubType = columns[2];
                 c.year = Integer.valueOf(columns[3]);
+                c.isAuthentic = true;
                 c.lieAngle = columns[4];
                 clubs.save(c);
             }
@@ -155,7 +157,7 @@ public class PAMController {
         users.delete(id);
     }
 
-    /*@RequestMapping(path ="/create-club", method = RequestMethod.POST)
+    @RequestMapping(path ="/create-club", method = RequestMethod.POST)
     public Club addClub(
             @RequestBody Club club,
             HttpSession session
@@ -164,7 +166,7 @@ public class PAMController {
             throw new Exception ("You cannot create this club!");
         }
 
-        if (thisClub == null){
+        /*if (thisClub == null){
             thisClub = new Club();
             thisClub.serialNumber = club.serialNumber;
             thisClub.maker = club.maker;
@@ -172,9 +174,10 @@ public class PAMController {
             thisClub.year = club.year;
             thisClub.lieAngle = club.lieAngle;
             clubs.save(club);
-        }
+        }*/
+        clubs.save(club);
         return club;
-    }*/
+    }
 
     @RequestMapping(path = "/find-club/{serialNumber}" , method = RequestMethod.GET)
     public Club findClub(
@@ -182,10 +185,9 @@ public class PAMController {
     )throws Exception{
         if(!(clubs.findOneBySerialNumber(serialNumber) == null)){
             return clubs.findOneBySerialNumber(serialNumber);
-            //isAuthentic = true;
         }
         else{
-            return new Club((fakeNum+1), "Fake Maker", "Fake Club Type", (fakeNum+2), "Fake Color", false);
+            return new Club((fakeNum+1), "Fake Make", "Fake Club Type", (fakeNum+2), "Fake Lie Angle", false);
         }
     }
 
@@ -281,7 +283,21 @@ public class PAMController {
     }*/
     @RequestMapping("/import-file")
     public void importFile(HttpSession session, MultipartFile file) throws IOException {
-        if(clubs.count() == 0){
+        Scanner scanner = new Scanner (file.getInputStream());
+        scanner.nextLine();
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            String[] columns = line.split(",");
+            Club c = new Club();
+            c.serialNumber = Integer.valueOf(columns[0]);
+            c.maker = columns[1];
+            c.clubType = columns[2];
+            c.year = Integer.valueOf(columns[3]);
+            c.lieAngle = columns[4];
+            c.isAuthentic = true;
+            clubs.save(c);
+
+        /*if(clubs.count() == 0){
             String fileContentItems = new String(file.getBytes());
             String [] lineItems = fileContentItems.split("\n");
 
@@ -298,6 +314,7 @@ public class PAMController {
                 club.isAuthentic = true;
                 clubs.save(club);
             }
+        }*/
         }
     }
     /*@RequestMapping(path = "/edit-retailer/{id}", method = RequestMethod.POST)
@@ -347,4 +364,5 @@ public class PAMController {
     )throws Exception{
 
     }*/
+
 }
