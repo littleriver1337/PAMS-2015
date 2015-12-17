@@ -27,7 +27,7 @@ public class Club {
     public int year;
 
     @Column(nullable = false)
-    public String color;
+    public String lieAngle;
 
     @Column(nullable=false)
     public boolean isAuthentic;
@@ -38,12 +38,12 @@ public class Club {
     public Club() {
     }
 
-    public Club(int serialNumber, String maker, String clubType, int year, String color, boolean isAuthentic) {
+    public Club(int serialNumber, String maker, String clubType, int year, String lieAngle, boolean isAuthentic) {
         this.serialNumber = serialNumber;
         this.maker = maker;
         this.clubType = clubType;
         this.year = year;
-        this.color = color;
+        this.lieAngle = lieAngle;
         this.isAuthentic = isAuthentic;
     }
 

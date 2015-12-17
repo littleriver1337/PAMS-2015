@@ -5,18 +5,13 @@ import com.pams.services.ItemRepository;
 import com.pams.entities.User;
 import com.pams.services.UserRepository;
 import com.pams.utils.PasswordHash;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.util.Scanner;
+import java.io.*;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -45,7 +40,7 @@ public class PAMController {
                 c.maker = columns[1];
                 c.clubType = columns[2];
                 c.year = Integer.valueOf(columns[3]);
-                c.color = columns[4];
+                c.lieAngle = columns[4];
                 clubs.save(c);
             }
         }
@@ -65,7 +60,7 @@ public class PAMController {
                 club.maker = columns[1];
                 club.clubType = columns[2];
                 club.year = Integer.valueOf(columns[3]);
-                club.color = columns[4];
+                club.lieAngle = columns[4];
                 club.isAuthentic = true;
                 clubs.save(club);
             }
@@ -175,7 +170,7 @@ public class PAMController {
             thisClub.maker = club.maker;
             thisClub.clubType = club.clubType;
             thisClub.year = club.year;
-            thisClub.color = club.color;
+            thisClub.lieAngle = club.lieAngle;
             clubs.save(club);
         }
         return club;
@@ -185,7 +180,6 @@ public class PAMController {
     public Club findClub(
             @PathVariable ("serialNumber") int serialNumber
     )throws Exception{
-        boolean isAuthentic =false;
         if(!(clubs.findOneBySerialNumber(serialNumber) == null)){
             return clubs.findOneBySerialNumber(serialNumber);
             //isAuthentic = true;
@@ -285,24 +279,27 @@ public class PAMController {
         }
         users.delete(id);
     }*/
-//    @RequestMapping("/import-file")
-//    public void importFile(HttpSession session, MultipartFile file) throws IOException {
-//        if(clubs.count() == 0){
-//            String fileContentItems = new String(file.getBytes());
-//            String [] lineItems = fileContentItems.split("\n");
-//
-//            for (String linesItems : lineItems){
-//                if (linesItems == lineItems[0])
-//                    continue;
-//                String [] columns = linesItems.split(",");
-//                Club item = new Club();
-//                item.serialNumber = columns[0];
-//                item.productModel = columns [1];
-//                item.companyUser = columns [2];
-//                clubs.save(item);
-//            }
-//        }
-//    }
+    @RequestMapping("/import-file")
+    public void importFile(HttpSession session, MultipartFile file) throws IOException {
+        if(clubs.count() == 0){
+            String fileContentItems = new String(file.getBytes());
+            String [] lineItems = fileContentItems.split("\n");
+
+            for (String linesItems : lineItems){
+                if (linesItems == lineItems[0])
+                    continue;
+                String [] columns = linesItems.split(",");
+                Club club = new Club();
+                club.serialNumber = Integer.valueOf(columns[0]);
+                club.maker = columns[1];
+                club.clubType = columns[2];
+                club.year = Integer.valueOf(columns[3]);
+                club.lieAngle = columns[4];
+                club.isAuthentic = true;
+                clubs.save(club);
+            }
+        }
+    }
     /*@RequestMapping(path = "/edit-retailer/{id}", method = RequestMethod.POST)
     public void editRetailerUser(
             @RequestBody User user,

@@ -149,6 +149,7 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(userRepo.count() == 0);
 	}
+/*
 	@Test
 	public void addClubTest()
 			throws Exception{
@@ -158,7 +159,8 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1985;
-		club.color = "Green";
+		club.lieAngle = "Green";
+		club.isAuthentic = true;
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -178,7 +180,8 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1985;
-		club.color = "Green";
+		club.lieAngle = "Green";
+		club.isAuthentic = true;
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -193,7 +196,8 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestEdit";
 		club.clubType = "TestEdited";
 		club.year = 1998;
-		club.color = "Red";
+		club.lieAngle = "Red";
+		club.isAuthentic = true;
 
 		String json2 = mapper2.writeValueAsString(club2);
 		mockMvc.perform(
@@ -204,6 +208,7 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(clubRepo.count() == 1);
 	}
+*/
 	/*@Test
 	public void deleteClubTest()
 		throws Exception{
@@ -213,7 +218,7 @@ public class Pams2015ApplicationTests {
 		club.maker = "TestMaker";
 		club.clubType = "TestType";
 		club.year = 1998;
-		club.color = "Yellow";
+		club.lieAngle = "Yellow";
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
