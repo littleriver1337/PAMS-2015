@@ -187,7 +187,7 @@ public class PAMController {
     ) throws Exception{
         return clubs.findAllByLieAngle(lieAngle);
     }
-    
+
     /*@RequestMapping(path = "/search-by-time/{time}", method = RequestMethod.GET)
     public Iterable<Club> searchByTime(
             @PathVariable ("time") LocalDateTime time

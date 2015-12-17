@@ -4,6 +4,7 @@ import com.pams.entities.Club;
 import com.pams.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,4 +18,7 @@ public interface ItemRepository extends CrudRepository<Club, Integer> {
     List<Club> findAllByMaker (String maker);
     List<Club> findAllByYear (int year);
     List<Club> findAllByLieAngle(String lieAngle);
+
+
+    //List<Club> findAllByTime(LocalDateTime time);
 }
