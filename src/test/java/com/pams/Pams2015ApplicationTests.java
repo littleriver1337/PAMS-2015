@@ -174,7 +174,7 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(clubRepo.count() == 1);
 	}
-	/*@Test
+	@Test
 	public void editTestClub()
 		throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
@@ -184,7 +184,7 @@ public class Pams2015ApplicationTests {
 		club.clubType = "TestType";
 		club.year = 1985;
 		club.lieAngle = "Green";
-		club.time = LocalDateTime.now();
+		club.time = LocalDateTime.now().toString();
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -201,7 +201,7 @@ public class Pams2015ApplicationTests {
 		club2.clubType = "TestEdited";
 		club2.year = 1998;
 		club2.lieAngle = "Red";
-		club2.time = LocalDateTime.now();
+		club2.time = LocalDateTime.now().toString();
 
 		String json2 = mapper2.writeValueAsString(club2);
 		mockMvc.perform(
@@ -222,7 +222,7 @@ public class Pams2015ApplicationTests {
 		club.clubType = "TestType";
 		club.year = 1998;
 		club.lieAngle = "Yellow";
-		club.time = LocalDateTime.now();
+		club.time = LocalDateTime.now().toString();
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -237,7 +237,7 @@ public class Pams2015ApplicationTests {
 						.sessionAttr("username", "TestUser")
 		);
 		assertTrue(clubRepo.count() == 0);
-	}*/
+	}
 
 	/*@Test
 	public void importFileTest()throws Exception{
