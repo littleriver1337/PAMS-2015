@@ -46,7 +46,7 @@ public class Pams2015ApplicationTests {
 
 	@Test
 	public void loginTest()
-			throws Exception {
+			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
@@ -64,7 +64,7 @@ public class Pams2015ApplicationTests {
 
 	@Test
 	public void addUserTest()
-			throws Exception {
+			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
@@ -87,7 +87,7 @@ public class Pams2015ApplicationTests {
 
 	@Test
 	public void editTestUser()
-			throws Exception {
+			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
@@ -153,7 +153,7 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(userRepo.count() == 0);
 	}
-	/*@Test
+	@Test
 	public void addClubTest()
 			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
@@ -163,7 +163,7 @@ public class Pams2015ApplicationTests {
 		club.clubType = "TestType";
 		club.year = 1985;
 		club.lieAngle = "Green";
-		club.time = LocalDateTime.now();
+		club.time = LocalDateTime.now().toString();
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -174,7 +174,7 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(clubRepo.count() == 1);
 	}
-	@Test
+	/*@Test
 	public void editTestClub()
 		throws Exception{
 		ObjectMapper mapper = new ObjectMapper();

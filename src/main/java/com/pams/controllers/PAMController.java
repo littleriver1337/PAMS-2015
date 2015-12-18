@@ -46,7 +46,7 @@ public class PAMController {
                 c.year = Integer.valueOf(columns[3]);
                 c.lieAngle = columns[4];
                 c.isAuthentic = true;
-                c.time = LocalDateTime.now();
+                c.time = LocalDateTime.now().toString();
                 clubs.save(c);
             }
         }
@@ -99,7 +99,11 @@ public class PAMController {
     }
     @RequestMapping(path = "/find-users" , method = RequestMethod.GET)
     public Iterable<User> findUsers(
+            HttpSession session
     )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot find a user!");
+        }
         return users.findAll();
     }
 
@@ -135,28 +139,36 @@ public class PAMController {
         if (session.getAttribute("username") == null){
             throw new Exception ("You cannot create this club!");
         }
+        club.time = LocalDateTime.now().toString();
         clubs.save(club);
         return club;
     }
 
     @RequestMapping(path = "/find-club/{serialNumber}" , method = RequestMethod.GET)
     public Club findClub(
-            @PathVariable ("serialNumber") int serialNumber
+            @PathVariable ("serialNumber") int serialNumber,
+            HttpSession session
     )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot find a club!");
+        }
         if(!(clubs.findOneBySerialNumber(serialNumber) == null)){
             return clubs.findOneBySerialNumber(serialNumber);
         }
         else{
-            Club jackClub = new Club(serialNumber, "Fake Make", "Fake Club Type", (fakeNum+1), "Fake Lie Angle", false, LocalDateTime.now());
+            Club jackClub = new Club(serialNumber, "Fake Make", "Fake Club Type", (fakeNum+1), "Fake Lie Angle", false, LocalDateTime.now().toString());
             clubs.save(jackClub);
             return jackClub;
         }
     }
 
-
-    @RequestMapping(path = "/list-jacks", method = RequestMethod.GET)
-    public Iterable<Club> listJacks()
-            throws Exception{
+    @RequestMapping(path = "/list-jacks", method = RequestMethod.POST)
+    public Iterable<Club> listJacks(
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot list jacks!");
+        }
         return clubs.findAllByIsAuthentic(false);
     }
 
@@ -220,9 +232,9 @@ public class PAMController {
     public void importFile(
             HttpSession session,
             MultipartFile file
-    )throws Exception{
+    ) throws IOException {
         if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot import!");
+            throw new IOException ("You cannot import!");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();

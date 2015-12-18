@@ -35,13 +35,13 @@ public class Club {
     @Column(nullable=false)
     public boolean isAuthentic;
 
-    @Column(nullable = false)
-    public LocalDateTime time;
+
+    public String time;
 
     public Club() {
     }
 
-    public Club(int serialNumber, String maker, String clubType, int year, String lieAngle, boolean isAuthentic, LocalDateTime time) {
+    public Club(int serialNumber, String maker, String clubType, int year, String lieAngle, boolean isAuthentic, String time) {
         this.serialNumber = serialNumber;
         this.maker = maker;
         this.clubType = clubType;
