@@ -1,9 +1,5 @@
 package com.pams.entities;
-
-import org.apache.tomcat.jni.Local;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /**
  * Created by MattBrown on 12/8/15.
@@ -34,7 +30,6 @@ public class Club {
 
     @Column(nullable=false)
     public boolean isAuthentic;
-
 
     public String time;
 
