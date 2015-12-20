@@ -31,6 +31,10 @@
           templateUrl: 'admin/views/users.html',
           controller: 'AdminController as adminCtrl',
         })
+        .when('/addBag', {
+          templateUrl: 'admin/views/addBag.html',
+          controller: 'AdminController as adminCtrl',
+        })
         .when('/:id', {
           templateUrl: 'admin/views/edit.html',
           controller: 'AdminController as adminCtrl',

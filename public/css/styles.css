@@ -88,6 +88,10 @@ body {
 .login, .narrative {
   vertical-align: middle; }
 
+.addItem {
+  width: 80%;
+  margin: 0 auto; }
+
 .addAdmin {
   width: 80%;
   margin: 0 auto; }

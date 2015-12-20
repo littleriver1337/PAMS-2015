@@ -61,5 +61,10 @@ angular
       AdminService.deleteUser(user);
     };
 
+    vm.addBag = function(item){
+      console.log("SUBMITTED", item);
+      AdminService.addBag(item);
+    };
+
   });
 })();

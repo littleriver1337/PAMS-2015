@@ -5,7 +5,11 @@
     .factory('AdminService', function($http, _, $location){
 
       var itemRoute = "/find-club/";
+      var createClubRoute = "/create-club/";
+
+      var createBagRoute = "/create-bag/";
       var userRoute = "/create-user/";
+
       var editUserRoute = "/edit-user/";
       var findUsersRoute = "/find-users/";
       var deleteUserRoute = "/delete-user/";
@@ -83,6 +87,13 @@
         });
       };
 
+      var addBag = function(item){
+        $http.post(createBagRoute, item).success(function(res){
+          console.log("Bag Created: ", item);
+          console.log("Response: ", res);
+        });
+      };
+
       return {
         createAdmin: createAdmin,
         createCompany: createCompany,
@@ -90,7 +101,8 @@
         getUsers: getUsers,
         editUser: editUser,
         deleteUser: deleteUser,
-        checkItem: checkItem
+        checkItem: checkItem,
+        addBag: addBag
       };
 
     });
