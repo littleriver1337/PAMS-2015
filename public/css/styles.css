@@ -2,42 +2,64 @@ header {
   height: 100px; }
 
 body {
-  background-color: #D4D6D5; }
+  background-color: #C1CAE2;
+  font-family: "Raleway", sans-serif; }
 
 .logo {
-  background-color: #105E28;
+  background-color: #05083B;
   height: 100px;
-  color: white;
-  font-family: "Raleway", sans-serif;
-  font-size: 3em; }
+  color: white; }
+  .logo h1 {
+    font-family: "Orbitron", sans-serif;
+    font-size: 5.5em;
+    padding-left: 10%; }
+
+#logoImg {
+  height: 100px; }
 
 .slogan {
-  background-color: #2A7E43;
+  background-color: #353771;
   height: 100px;
-  color: white;
-  font-family: "Raleway", sans-serif;
-  font-size: 3em; }
+  color: white; }
+  .slogan h1 {
+    font-family: "Philosopher", sans-serif;
+    font-size: 2.9em;
+    padding-left: 1%;
+    padding-top: 1%; }
 
 .hidden {
   display: none; }
 
+.menuItems {
+  list-style-type: none; }
+  .menuItems li {
+    padding: 2%;
+    background-color: #353771; }
+
 .narrative {
+  background-color: white;
+  border-radius: 5%;
+  opacity: .85;
   width: 90%;
-  margin: 4% auto;
+  margin: 7.5% auto;
   font-family: "Philosopher", sans-serif;
   font-size: 1.4em;
   line-height: 1.3em; }
   .narrative h2 {
     font-family: "Philosopher", sans-serif;
-    font-size: 1.75em; }
+    font-size: 1.75em;
+    padding: 2%; }
+  .narrative p {
+    padding: 2%; }
 
 .login {
-  margin: 7% auto;
+  margin: 28% auto;
   width: 90%;
-  background-color: #2A7E43;
+  background-color: #0C1055;
   min-height: 250px;
   margin-bottom: 15%;
-  padding: 5%;
+  padding-left: 8%;
+  padding-right: 8%;
   float: left;
   border-radius: 2%; }
   .login h3 {
@@ -55,6 +77,17 @@ body {
   text-align: center;
   float: right; }
 
+.bg {
+  height: 500px;
+  background-image: url(../security-vector.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: .8; }
+
+.login, .narrative {
+  vertical-align: middle; }
+
 .addAdmin {
   width: 80%;
   margin: 0 auto; }
@@ -71,6 +104,17 @@ body {
   width: 80%;
   margin: 0 auto; }
 
+.importSection {
+  width: 80%;
+  margin: 0 auto; }
+
+#upload {
+  float: left; }
+
 footer {
   width: 100%;
-  text-align: center; }
+  height: 80px;
+  color: white;
+  text-align: center;
+  padding-top: 2%;
+  background-color: #05083B; }
