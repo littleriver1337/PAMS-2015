@@ -217,8 +217,92 @@ public class PAMController {
     }
 
 
+    //Bag Group
+    @RequestMapping(path = "/create-bag", method = RequestMethod.POST)
+    public Bag createBag(
+            @RequestBody Bag bag,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot create a bag!");
+        }
+       Bag tempBag = bags.findOneByMaker(bag.maker);
+        if (tempBag == null){
+            tempBag = new Bag();
+            tempBag.maker = bag.maker;
+            tempBag.stand = bag.stand;
+            tempBag.harness = bag.harness;
+            tempBag.teamName = bag.teamName;
+            tempBag.schoolName = bag.schoolName;
+            tempBag.price = bag.price;
+            tempBag.time = LocalDateTime.now().toString();
+            bags.save(bag);
+        }
+        return bag;
+    }
+
+    @RequestMapping(path = "/edit-bag", method = RequestMethod.POST)
+    public void editBag(
+            @RequestBody Bag bag,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot edit a bag!");
+        }
+        bags.save(bag);
+    }
+
+    @RequestMapping(path = "/delete-bag/{id}", method = RequestMethod.DELETE)
+    public void deleteBag(
+            @PathVariable("int") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot delete this bag!");
+        }
+        bags.delete(id);
+    }
+
+
+    //Ball Group
+    @RequestMapping(path = "/create-ball", method = RequestMethod.POST)
+    public Ball createBall(
+            @RequestBody Ball ball,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot create a ball!");
+        }
+        ball.time = LocalDateTime.now().toString();
+        balls.save(ball);
+        return ball;
+    }
+
+    @RequestMapping(path = "edit-ball", method = RequestMethod.POST)
+    public void editBall(
+            @RequestBody Ball ball,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot edit this ball!");
+        }
+        balls.save(ball);
+    }
+
+    @RequestMapping(path = "/delete-ball/{id}", method = RequestMethod.DELETE)
+    public void deleteBall(
+            @PathVariable("int") int id,
+            HttpSession session
+    )throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot delete this ball!");
+        }
+        balls.delete(id);
+    }
+
+
     //Club Group
-    @RequestMapping(path ="/create-club", method = RequestMethod.POST)
+    @RequestMapping(path = "/create-club", method = RequestMethod.POST)
     public Club addClub(
             @RequestBody Club club,
             HttpSession session
@@ -381,80 +465,6 @@ public class PAMController {
             throw new Exception("You cannot delete this shirt");
         }
         shirts.delete(id);
-    }
-
-
-    //Ball Group
-    @RequestMapping(path = "/create-ball", method = RequestMethod.POST)
-    public Ball createBall(
-            @RequestBody Ball ball,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot create a ball!");
-        }
-        ball.time = LocalDateTime.now().toString();
-        balls.save(ball);
-        return ball;
-    }
-
-    @RequestMapping(path = "edit-ball", method = RequestMethod.POST)
-    public void editBall(
-            @RequestBody Ball ball,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception("You cannot edit this ball!");
-        }
-        balls.save(ball);
-    }
-
-    @RequestMapping(path = "/delete-ball/{id}", method = RequestMethod.DELETE)
-    public void deleteBall(
-            @PathVariable("int") int id,
-            HttpSession session
-    )throws Exception {
-        if (session.getAttribute("username") == null) {
-            throw new Exception("You cannot delete this ball!");
-        }
-        balls.delete(id);
-    }
-
-
-    //Bag Group
-    @RequestMapping(path = "/create-bag", method = RequestMethod.POST)
-    public Bag createBag(
-            @RequestBody Bag bag,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception("You cannot create a bag!");
-        }
-        bag.time = LocalDateTime.now().toString();
-        bags.save(bag);
-        return bag;
-    }
-
-    @RequestMapping(path = "/edit-bag", method = RequestMethod.POST)
-    public void editBag(
-            @RequestBody Bag bag,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception("You cannot edit a bag!");
-        }
-        bags.save(bag);
-    }
-
-    @RequestMapping(path = "/delete-bag/{id}", method = RequestMethod.DELETE)
-    public void deleteBag(
-            @PathVariable("int") int id,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception("You cannot delete this bag!");
-        }
-        bags.delete(id);
     }
 
 

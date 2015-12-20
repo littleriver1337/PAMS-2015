@@ -19,10 +19,8 @@ public class Bag {
     @Column(nullable = false)
     public String harness;
 
-    @Column(nullable = false)
     public String teamName;
 
-    @Column(nullable = false)
     public String schoolName;
 
     @Column(nullable = false)
