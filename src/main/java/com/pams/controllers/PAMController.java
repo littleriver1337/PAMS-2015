@@ -23,7 +23,10 @@ import java.util.Scanner;
 public class PAMController {
 
     @Autowired
-    UserRepository users;
+    BagRepository bags;
+
+    @Autowired
+    BallRepository balls;
 
     @Autowired
     ItemRepository clubs;
@@ -32,81 +35,26 @@ public class PAMController {
     HatRepository hats;
 
     @Autowired
+    PantRepository pants;
+
+    @Autowired
     ShirtRepository shirts;
 
     @Autowired
-    BallRepository balls;
+    ShoeRepository shoes;
 
     @Autowired
-    BagRepository bags;
+    UmbrellaRepository umbrellas;
+
+    @Autowired
+    UserRepository users;
+
 
     static int fakeNum = 1000;
 
     @PostConstruct
-    public void loadData() throws FileNotFoundException { //(has add (tests), edit (tests), delete (tests)
-        if (clubs.count() == 0){
-            Scanner scanner = new Scanner(new File("golf.csv"));
-            scanner.nextLine();
-            while (scanner.hasNext()){
-                String line = scanner.nextLine();
-                String [] columns = line.split(",");
-                Club c = new Club();
-                c.serialNumber = Integer.valueOf(columns[0]);
-                c.maker = columns[1];
-                c.clubType = columns[2];
-                c.year = Integer.valueOf(columns[3]);
-                c.lieAngle = columns[4];
-                c.isAuthentic = true;
-                c.time = LocalDateTime.now().toString();
-                clubs.save(c);
-            }
-        }
-        if (hats.count() == 0){ //(has add, edit, delete) NO TESTS
-            Scanner scanner = new Scanner(new File("hats.csv"));
-            scanner.nextLine();
-            while (scanner.hasNext()){
-                String line = scanner.nextLine();
-                String [] columns = line.split(",");
-                Hat h = new Hat();
-                h.maker = columns[0];
-                h.fit = columns[1];
-                h.color = columns[2];
-                h.price = columns[3];
-                h.time = LocalDateTime.now().toString();
-                hats.save(h);
-            }
-        }
-        if (shirts.count() == 0){ //(has add, edit, and delete) NO TESTS
-            Scanner scanner = new Scanner(new File("shirts.csv"));
-            scanner.nextLine();
-            while (scanner.hasNext()){
-                String line = scanner.nextLine();
-                String [] columns = line.split(",");
-                Shirt s = new Shirt();
-                s.maker = columns[0];
-                s.fit = columns[1];
-                s.color = columns[2];
-                s.price = columns[3];
-                s.time = LocalDateTime.now().toString();
-                shirts.save(s);
-            }
-        }
-        if (balls.count() == 0){ //(has add, edit, and delete) NO TESTS
-            Scanner scanner = new Scanner(new File("balls.csv"));
-            scanner.nextLine();
-            while (scanner.hasNext()){
-                String line = scanner.nextLine();
-                String [] columns = line.split(",");
-                Ball b = new Ball();
-                b.maker = columns[0];
-                b.coating = columns[1];
-                b.layers = columns[2];
-                b.boxCount = columns[3];
-                b.price = columns[4];
-                b.time = LocalDateTime.now().toString();
-                balls.save(b);
-            }
-        }
+    public void loadData() throws FileNotFoundException {
+
         if (bags.count() == 0){ //(has add, edit, and delete) NO TESTS
             Scanner scanner = new Scanner(new File("bags.csv"));
             scanner.nextLine();
@@ -125,7 +73,129 @@ public class PAMController {
             }
         }
 
+        if (balls.count() == 0){ //(has add, edit, and delete) NO TESTS
+            Scanner scanner = new Scanner(new File("balls.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String [] columns = line.split(",");
+                Ball b = new Ball();
+                b.maker = columns[0];
+                b.coating = columns[1];
+                b.layers = columns[2];
+                b.boxCount = columns[3];
+                b.price = columns[4];
+                b.time = LocalDateTime.now().toString();
+                balls.save(b);
+            }
+        }
+
+        if (clubs.count() == 0){
+            Scanner scanner = new Scanner(new File("golf.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String [] columns = line.split(",");
+                Club c = new Club();
+                c.serialNumber = Integer.valueOf(columns[0]);
+                c.maker = columns[1];
+                c.clubType = columns[2];
+                c.year = Integer.valueOf(columns[3]);
+                c.lieAngle = columns[4];
+                c.isAuthentic = true;
+                c.time = LocalDateTime.now().toString();
+                clubs.save(c);
+            }
+        }
+
+        if (hats.count() == 0){ //(has add, edit, delete) NO TESTS
+            Scanner scanner = new Scanner(new File("hats.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String [] columns = line.split(",");
+                Hat h = new Hat();
+                h.maker = columns[0];
+                h.fit = columns[1];
+                h.color = columns[2];
+                h.price = columns[3];
+                h.time = LocalDateTime.now().toString();
+                hats.save(h);
+            }
+        }
+
+        if(pants.count() == 0){
+            Scanner scanner = new Scanner (new File("pants.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String [] columns = line.split(",");
+                Pant p = new Pant();
+                p.maker = columns[0];
+                p.fit = columns[1];
+                p.pantSize = columns[2];
+                p.inseam = columns[3];
+                p.color = columns[4];
+                p.price = columns[5];
+                p.time = LocalDateTime.now().toString();
+                pants.save(p);
+            }
+        }
+
+        if (shirts.count() == 0){ //(has add, edit, and delete) NO TESTS
+            Scanner scanner = new Scanner(new File("shirts.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String [] columns = line.split(",");
+                Shirt s = new Shirt();
+                s.maker = columns[0];
+                s.fit = columns[1];
+                s.color = columns[2];
+                s.price = columns[3];
+                s.time = LocalDateTime.now().toString();
+                shirts.save(s);
+            }
+        }
+
+        if (shoes.count() == 0) {
+            Scanner scanner = new Scanner(new File("shoes.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                String[] columns = line.split(",");
+                Shoe shoe = new Shoe();
+                shoe.maker = columns[0];
+                shoe.fit = columns[1];
+                shoe.spikes = columns[2];
+                shoe.spikeless = columns[3];
+                shoe.color = columns[4];
+                shoe.price = columns[5];
+                shoe.time = LocalDateTime.now().toString();
+                shoes.save(shoe);
+            }
+        }
+
+        if (umbrellas.count() == 0){
+            Scanner scanner = new Scanner(new File("umbrellas.csv"));
+            scanner.nextLine();
+            while (scanner.hasNext()){
+                String line = scanner.nextLine();
+                String[] columns = line.split(",");
+                Umbrella u = new Umbrella();
+                u.maker = columns[0];
+                u.color = columns[1];
+                u.collection = columns[2];
+                u.umbrellaStyle = columns[3];
+                u.pattern = columns[4];
+                u.price = columns[5];
+                u.time = LocalDateTime.now().toString();
+                umbrellas.save(u);
+            }
+        }
     }
+
+
     //Session Group
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User login(
@@ -226,18 +296,7 @@ public class PAMController {
         if (session.getAttribute("username") == null){
             throw new Exception("You cannot create a bag!");
         }
-       Bag tempBag = bags.findOneByMaker(bag.maker);
-        if (tempBag == null){
-            tempBag = new Bag();
-            tempBag.maker = bag.maker;
-            tempBag.stand = bag.stand;
-            tempBag.harness = bag.harness;
-            tempBag.teamName = bag.teamName;
-            tempBag.schoolName = bag.schoolName;
-            tempBag.price = bag.price;
-            tempBag.time = LocalDateTime.now().toString();
-            bags.save(bag);
-        }
+        bags.save(bag);
         return bag;
     }
 
@@ -431,6 +490,43 @@ public class PAMController {
     }
 
 
+    //Pant Group
+    @RequestMapping(path = "/create-pant", method = RequestMethod.POST)
+    public Pant createPant(
+            @RequestBody Pant pant,
+            HttpSession session
+    )throws Exception {
+        if (session.getAttribute("username") == null) {
+            throw new Exception("You cannot create a hat!");
+        }
+        pant.time = LocalDateTime.now().toString();
+        pants.save(pant);
+        return pant;
+    }
+
+    @RequestMapping(path = "/edit-pant", method = RequestMethod.POST)
+    public void editPant(
+            @RequestBody Pant pant,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot edit a hat!");
+        }
+        pants.save(pant);
+    }
+
+    @RequestMapping(path = "/delete-pant/{id}", method = RequestMethod.DELETE)
+    public void deletePant(
+            @PathVariable("int") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot delete a hat!");
+        }
+       pants.delete(id);
+    }
+
+
     //Shirt Group
     @RequestMapping(path = "/create-shirt", method = RequestMethod.POST)
     public Shirt createShirt(
@@ -468,77 +564,109 @@ public class PAMController {
     }
 
 
+    //Shoe Group
+    @RequestMapping(path = "/create-shoe", method = RequestMethod.POST)
+    public Shoe createShoe(
+            @RequestBody Shoe shoe,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot create a shirt!");
+        }
+        shoe.time = LocalDateTime.now().toString();
+        shoes.save(shoe);
+        return shoe;
+    }
+
+    @RequestMapping(path = "/edit-shoe", method = RequestMethod.POST)
+    public void editShoe(
+            @RequestBody Shoe shoe,
+            HttpSession session
+    )throws Exception{
+        if(session.getAttribute("username") == null){
+            throw new Exception("You cannot edit this shirt!");
+        }
+        shoes.save(shoe);
+    }
+
+    @RequestMapping(path = "/delete-shoe/{id}", method = RequestMethod.DELETE)
+    public void deleteShoe(
+            @PathVariable("int") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot delete this shirt");
+        }
+        shoes.delete(id);
+    }
+
+
+    //Umbrella Group
+    @RequestMapping(path = "/create-umbrella", method = RequestMethod.POST)
+    public Umbrella createUmbrella(
+            @RequestBody Umbrella umbrella,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot create a shirt!");
+        }
+        umbrella.time = LocalDateTime.now().toString();
+        umbrellas.save(umbrella);
+        return umbrella;
+    }
+
+    @RequestMapping(path = "/edit-umbrella", method = RequestMethod.POST)
+    public void editUmbrella(
+            @RequestBody Umbrella umbrella,
+            HttpSession session
+    )throws Exception{
+        if(session.getAttribute("username") == null){
+            throw new Exception("You cannot edit this shirt!");
+        }
+        umbrellas.save(umbrella);
+    }
+
+    @RequestMapping(path = "/delete-umbrella/{id}", method = RequestMethod.DELETE)
+    public void deleteUmbrella(
+            @PathVariable("int") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot delete this shirt");
+        }
+        umbrellas.delete(id);
+    }
+
+
     //Import File Group
-    @RequestMapping(path = "/import-file", method = RequestMethod.POST)//Club-Upload
-    public void importFile(
-            HttpSession session,
-            MultipartFile file
-    ) throws Exception {
-        if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot import!");
-        }
-        Scanner scanner = new Scanner (file.getInputStream());
-        scanner.nextLine();
-        while (scanner.hasNext()){
-            String line = scanner.nextLine();
-            String[] columns = line.split(",");
-            Club c = new Club();
-            c.serialNumber = Integer.valueOf(columns[0]);
-            c.maker = columns[1];
-            c.clubType = columns[2];
-            c.year = Integer.valueOf(columns[3]);
-            c.lieAngle = columns[4];
-            c.isAuthentic = true;
-            clubs.save(c);
-        }
-    }
-
-    @RequestMapping(path = "/upload-hats", method = RequestMethod.POST)
-    public void importHats(
+    //Bags Upload
+    @RequestMapping(path = "/upload-bags", method = RequestMethod.POST)
+    public void importBags(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import hats!");
-            }
-        Scanner scanner = new Scanner (file.getInputStream());
-        scanner.nextLine();
-        while (scanner.hasNext()){
-            String line = scanner.nextLine();
-            String[] columns = line.split(",");
-            Hat hat = new Hat();
-            hat.maker = columns[0];
-            hat.fit = columns[1];
-            hat.color = columns[2];
-            hat.price = columns[3];
-            hat.time = LocalDateTime.now().toString();
-            hats.save(hat);
-        }
-    }
-
-    @RequestMapping(path = "/upload-shirts", method = RequestMethod.POST)
-    public void importShirt(
-            HttpSession session,
-            MultipartFile file
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import shirts");
+            throw new Exception("You cannot import bags!");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
         while (scanner.hasNext()){
             String line = scanner.nextLine();
             String[] columns = line.split(",");
-            Shirt shirt = new Shirt();
-            shirt.maker = columns[0];
-            shirt.fit = columns[1];
-            shirt.color = columns[2];
-            shirt.price = columns[3];
-            shirt.time = LocalDateTime.now().toString();
-            shirts.save(shirt);
+            Bag bag = new Bag();
+            bag.maker = columns[0];
+            bag.stand = columns[1];
+            bag.harness = columns[2];
+            bag.teamName = columns[3];
+            bag.schoolName = columns[4];
+            bag.price = columns[5];
+            bag.time = LocalDateTime.now().toString();
+            bags.save(bag);
         }
     }
 
+
+    //Balls Upload
     @RequestMapping(path = "/upload-balls", method = RequestMethod.POST)
     public void importBalls(
             HttpSession session,
@@ -563,28 +691,160 @@ public class PAMController {
         }
     }
 
-    @RequestMapping(path = "/upload-bags", method = RequestMethod.POST)
-    public void importBags(
+
+    //Clubs Upload
+    @RequestMapping(path = "/import-file", method = RequestMethod.POST)//Club-Upload
+    public void importFile(
             HttpSession session,
             MultipartFile file
-    )throws Exception{
+    ) throws Exception {
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import bags!");
+            throw new Exception ("You cannot import!");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
         while (scanner.hasNext()){
             String line = scanner.nextLine();
             String[] columns = line.split(",");
-            Bag bag = new Bag();
-            bag.maker = columns[0];
-            bag.stand = columns[1];
-            bag.harness = columns[2];
-            bag.teamName = columns[3];
-            bag.schoolName = columns[4];
-            bag.price = columns[5];
-            bag.time = LocalDateTime.now().toString();
-            bags.save(bag);
+            Club c = new Club();
+            c.serialNumber = Integer.valueOf(columns[0]);
+            c.maker = columns[1];
+            c.clubType = columns[2];
+            c.year = Integer.valueOf(columns[3]);
+            c.lieAngle = columns[4];
+            c.isAuthentic = true;
+            clubs.save(c);
+        }
+    }
+
+
+    //Hats Upload
+    @RequestMapping(path = "/upload-hats", method = RequestMethod.POST)
+    public void importHats(
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot import hats!");
+            }
+        Scanner scanner = new Scanner (file.getInputStream());
+        scanner.nextLine();
+        while (scanner.hasNext()){
+            String line = scanner.nextLine();
+            String[] columns = line.split(",");
+            Hat hat = new Hat();
+            hat.maker = columns[0];
+            hat.fit = columns[1];
+            hat.color = columns[2];
+            hat.price = columns[3];
+            hat.time = LocalDateTime.now().toString();
+            hats.save(hat);
+        }
+    }
+
+
+    //Pants Upload
+    @RequestMapping(path = "/upload-pants", method = RequestMethod.POST)
+    public void importPants(
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot import hats!");
+        }
+        Scanner scanner = new Scanner (file.getInputStream());
+        scanner.nextLine();
+        while (scanner.hasNext()){
+            String line = scanner.nextLine();
+            String[] columns = line.split(",");
+            Pant p = new Pant();
+            p.maker = columns[0];
+            p.fit = columns[1];
+            p.pantSize = columns[2];
+            p.inseam = columns[3];
+            p.color = columns[4];
+            p.price = columns[5];
+            p.time = LocalDateTime.now().toString();
+            pants.save(p);
+        }
+    }
+
+
+    //Shirts Upload
+    @RequestMapping(path = "/upload-shirts", method = RequestMethod.POST)
+    public void importShirt(
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot import shirts");
+        }
+        Scanner scanner = new Scanner (file.getInputStream());
+        scanner.nextLine();
+        while (scanner.hasNext()){
+            String line = scanner.nextLine();
+            String[] columns = line.split(",");
+            Shirt shirt = new Shirt();
+            shirt.maker = columns[0];
+            shirt.fit = columns[1];
+            shirt.color = columns[2];
+            shirt.price = columns[3];
+            shirt.time = LocalDateTime.now().toString();
+            shirts.save(shirt);
+        }
+    }
+
+
+    //Shoes Upload
+    @RequestMapping(path = "/upload-shoes", method = RequestMethod.POST)
+    public void importShoes(
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot import shirts");
+        }
+        Scanner scanner = new Scanner (file.getInputStream());
+        scanner.nextLine();
+        while (scanner.hasNext()){
+            String line = scanner.nextLine();
+            String[] columns = line.split(",");
+            Shoe shoe = new Shoe();
+            shoe.maker = columns[0];
+            shoe.fit = columns[1];
+            shoe.spikes = columns[2];
+            shoe.spikeless = columns[3];
+            shoe.color = columns[4];
+            shoe.price = columns[5];
+            shoe.time = LocalDateTime.now().toString();
+            shoes.save(shoe);
+        }
+    }
+
+
+    //Umbrellas Upload
+    @RequestMapping(path = "/upload-umbrellas", method = RequestMethod.POST)
+    public void importUmbrellas(
+            HttpSession session,
+            MultipartFile file
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception("You cannot import shirts");
+        }
+        Scanner scanner = new Scanner (file.getInputStream());
+        scanner.nextLine();
+        while (scanner.hasNext()){
+            String line = scanner.nextLine();
+            String[] columns = line.split(",");
+            Umbrella u = new Umbrella();
+            u.maker = columns[0];
+            u.color = columns[1];
+            u.collection = columns[2];
+            u.umbrellaStyle = columns[3];
+            u.pattern = columns[4];
+            u.price = columns[5];
+            u.time = LocalDateTime.now().toString();
+            umbrellas.save(u);
         }
     }
 }
