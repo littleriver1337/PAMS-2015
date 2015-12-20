@@ -16,8 +16,10 @@
     <li><a href="/#/addRetailer">Add Retailer</a></li>
     <li><a href="/#/users">Users</a></li>
     <li><a href="/#/addBag">Add Bag</a></li>
+    <li><a href="/#/addBall">Add Ball</a></li>
     <li><a href="/#/addClub">Add Club</a></li>
     <li><a href="/#/addHat">Add Hat</a></li>
+    <li><a href="/#/addShirt">Add Shirt</a></li>
     <li><a href="/#/admin">Verify Product</a></li>
   </ul>
 </div>
@@ -25,31 +27,31 @@
 <div class="col-md-8 adminMain">
 
   <section class="addItem">
-    <form class="form-horizontal" ng-submit="adminCtrl.addClub(item)">
+    <form class="form-horizontal" ng-submit="adminCtrl.addBall(item)">
       <!-- MAKER -->
       <div class="form-group">
         <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
       </div>
-      <!-- STAND -->
+      <!-- COATING -->
       <div class="form-group">
-        <input type="text" ng-model="item.serialNumber" class="form-control" name="serialNumber" placeholder="Serial Number" required>
+        <input type="text" ng-model="item.coating" class="form-control" name="coating" placeholder="Coating" required>
       </div>
-      <!-- HARNESS -->
+      <!-- LAYERS -->
       <div class="form-group">
-        <input type="text" ng-model="item.clubType" class="form-control" name="clubType" placeholder="Club Type" required>
+        <input type="text" ng-model="item.layers" class="form-control" name="layers" placeholder="Layers" required>
       </div>
-      <!-- TEAM NAME -->
+      <!-- BOX COUNT -->
       <div class="form-group">
-        <input type="text" ng-model="item.year" class="form-control" name="year" placeholder="Year">
+        <input type="text" ng-model="item.boxCount" class="form-control" name="boxCount" placeholder="Box Count">
       </div>
-      <!-- SCHOOL NAME -->
+      <!-- PRICE -->
       <div class="form-group">
-        <input type="text" ng-model="item.lieAngle" class="form-control" name="lieAngle" placeholder="Lie Angle">
+        <input type="text" ng-model="item.price" class="form-control" name="price" placeholder="Price">
       </div>
       <!-- SUBMIT BUTTONS -->
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" name="submitClub">Create Item</button>
+          <button type="submit" class="btn btn-primary" name="submitBall">Create Item</button>
         </div>
       </div>
     </form>
@@ -57,7 +59,7 @@
 
 
   <section class="importSection">
-    <form action="/upload-clubs/" method="POST" enctype="multipart/form-data">
+    <form action="/upload-balls/" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="ImportFile">Import File</label>
         <input type="file" id="ImportFile" ng-model="file" name="file">

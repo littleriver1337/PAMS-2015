@@ -35,6 +35,26 @@
           templateUrl: 'admin/views/addBag.html',
           controller: 'AdminController as adminCtrl',
         })
+        .when('/addClub', {
+          templateUrl: 'admin/views/addClub.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/addHat', {
+          templateUrl: 'admin/views/addHat.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/addShirt', {
+          templateUrl: 'admin/views/addShirt.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/addBall', {
+          templateUrl: 'admin/views/addBall.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/search', {
+          templateUrl: 'admin/views/search.html',
+          controller: 'AdminController as adminCtrl',
+        })
         .when('/:id', {
           templateUrl: 'admin/views/edit.html',
           controller: 'AdminController as adminCtrl',

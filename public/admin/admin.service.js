@@ -8,8 +8,14 @@
       var createClubRoute = "/create-club/";
 
       var createBagRoute = "/create-bag/";
-      var userRoute = "/create-user/";
 
+      var createHatRoute = "/create-hat/";
+
+      var createShirtRoute = "/create-shirt/";
+
+      var createBallRoute = "/create-ball/";
+
+      var userRoute = "/create-user/";
       var editUserRoute = "/edit-user/";
       var findUsersRoute = "/find-users/";
       var deleteUserRoute = "/delete-user/";
@@ -94,6 +100,34 @@
         });
       };
 
+      var addClub = function(item){
+        $http.post(createClubRoute, item).success(function(res){
+          console.log("Club Created: ", item);
+          console.log("Response: ", res);
+        });
+      };
+
+      var addHat = function(item){
+        $http.post(createHatRoute, item).success(function(res){
+          console.log("Hat Created: ", item);
+          console.log("Response: ", res);
+        });
+      };
+
+      var addShirt = function(item){
+        $http.post(createShirtRoute, item).success(function(res){
+          console.log("Shirt Created: ", item);
+          console.log("Response: ", res);
+        });
+      };
+
+      var addBall = function(item){
+        $http.post(createBallRoute, item).success(function(res){
+          console.log("Ball Created: ", item);
+          console.log("Response: ", res);
+        });
+      };
+
       return {
         createAdmin: createAdmin,
         createCompany: createCompany,
@@ -102,7 +136,11 @@
         editUser: editUser,
         deleteUser: deleteUser,
         checkItem: checkItem,
-        addBag: addBag
+        addBag: addBag,
+        addClub: addClub,
+        addHat: addHat,
+        addShirt: addShirt,
+        addBall: addBall
       };
 
     });

@@ -66,5 +66,25 @@ angular
       AdminService.addBag(item);
     };
 
+    vm.addClub = function(item){
+      console.log("SUBMITTED", item);
+      AdminService.addClub(item);
+    };
+
+    vm.addHat = function(item){
+      console.log("SUBMITTED", item);
+      AdminService.addHat(item);
+    };
+
+    vm.addShirt = function(item){
+      console.log("SUBMITTED", item);
+      AdminService.addShirt(item);
+    };
+
+    vm.addBall = function(item){
+      console.log("SUBMITTED", item);
+      AdminService.addBall(item);
+    };
+
   });
 })();
