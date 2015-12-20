@@ -11,8 +11,6 @@ public class Club {
     @GeneratedValue
     public int id;
 
-    public String fileName;
-
     @Column(nullable = false)
     public int serialNumber;
 
