@@ -5,6 +5,7 @@ import com.pams.entities.Club;
 import com.pams.entities.User;
 import com.pams.services.ItemRepository;
 import com.pams.services.UserRepository;
+import org.apache.tomcat.jni.Local;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -44,7 +46,7 @@ public class Pams2015ApplicationTests {
 
 	@Test
 	public void loginTest()
-			throws Exception {
+			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
@@ -62,7 +64,7 @@ public class Pams2015ApplicationTests {
 
 	@Test
 	public void addUserTest()
-			throws Exception {
+			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
@@ -85,7 +87,7 @@ public class Pams2015ApplicationTests {
 
 	@Test
 	public void editTestUser()
-			throws Exception {
+			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
 		user.username = "TestUser";
@@ -161,6 +163,7 @@ public class Pams2015ApplicationTests {
 		club.clubType = "TestType";
 		club.year = 1985;
 		club.lieAngle = "Green";
+		club.time = LocalDateTime.now().toString();
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -181,6 +184,7 @@ public class Pams2015ApplicationTests {
 		club.clubType = "TestType";
 		club.year = 1985;
 		club.lieAngle = "Green";
+		club.time = LocalDateTime.now().toString();
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(
@@ -197,6 +201,7 @@ public class Pams2015ApplicationTests {
 		club2.clubType = "TestEdited";
 		club2.year = 1998;
 		club2.lieAngle = "Red";
+		club2.time = LocalDateTime.now().toString();
 
 		String json2 = mapper2.writeValueAsString(club2);
 		mockMvc.perform(
@@ -217,6 +222,7 @@ public class Pams2015ApplicationTests {
 		club.clubType = "TestType";
 		club.year = 1998;
 		club.lieAngle = "Yellow";
+		club.time = LocalDateTime.now().toString();
 
 		String json = mapper.writeValueAsString(club);
 		mockMvc.perform(

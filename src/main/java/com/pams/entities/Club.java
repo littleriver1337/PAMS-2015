@@ -1,5 +1,4 @@
 package com.pams.entities;
-
 import javax.persistence.*;
 
 /**
@@ -32,16 +31,19 @@ public class Club {
     @Column(nullable=false)
     public boolean isAuthentic;
 
+    public String time;
+
     public Club() {
     }
 
-    public Club(int serialNumber, String maker, String clubType, int year, String lieAngle, boolean isAuthentic) {
+    public Club(int serialNumber, String maker, String clubType, int year, String lieAngle, boolean isAuthentic, String time) {
         this.serialNumber = serialNumber;
         this.maker = maker;
         this.clubType = clubType;
         this.year = year;
         this.lieAngle = lieAngle;
         this.isAuthentic = isAuthentic;
+        this.time = time;
     }
 
     @ManyToOne
