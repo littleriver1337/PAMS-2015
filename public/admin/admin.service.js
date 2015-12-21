@@ -5,6 +5,7 @@
     .factory('AdminService', function($http, _, $location){
 
       var itemRoute = "/find-club/";
+
       var createClubRoute = "/create-club/";
 
       var createBagRoute = "/create-bag/";
@@ -15,10 +16,16 @@
 
       var createBallRoute = "/create-ball/";
 
+
       var userRoute = "/create-user/";
       var editUserRoute = "/edit-user/";
       var findUsersRoute = "/find-users/";
       var deleteUserRoute = "/delete-user/";
+
+      var makerSearchRoute = "/search-by-maker/";
+      var clubTypeSearchRoute = "/search-by-clubType/";
+      var yearSearchRoute = "/search-by-year/";
+      var lieAngleSearchRoute = "/search-by-lie-angle/";
 
       var createAdmin = function(admin){
         admin.accessLevel = "ADMIN";
@@ -128,6 +135,34 @@
         });
       };
 
+      var makerSearch = function(maker){
+        $http.get(makerSearchRoute + maker).success(function(res){
+          console.log("Maker: ", maker);
+          console.log("Response: ", res);
+        });
+      };
+
+      var clubTypeSearch = function(type){
+        $http.get(clubTypeSearchRoute + type).success(function(res){
+          console.log("Club Type: ", type);
+          console.log("Response: ", res);
+        });
+      };
+
+      var yearSearch = function(year){
+        $http.get(yearSearchRoute + year).success(function(res){
+          console.log("Year: ", year);
+          console.log("Response: ", res);
+        });
+      };
+
+      var lieAngleSearch = function(angle){
+        $http.get(lieAngleSearchRoute + angle).success(function(res){
+          console.log("Lie Angle: ", angle);
+          console.log("Response: ", res);
+        });
+      };
+
       return {
         createAdmin: createAdmin,
         createCompany: createCompany,
@@ -140,7 +175,11 @@
         addClub: addClub,
         addHat: addHat,
         addShirt: addShirt,
-        addBall: addBall
+        addBall: addBall,
+        makerSearch: makerSearch,
+        clubTypeSearch: clubTypeSearch,
+        yearSearch: yearSearch,
+        lieAngleSearch: lieAngleSearch
       };
 
     });

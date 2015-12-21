@@ -7,9 +7,8 @@
   </div>
 </header>
 
-<h1>ADMIN</h1>
-
-<div class="col-md-4 adminSidebar">
+<div class="mainContent">
+<div class="col-md-4 sidebar">
   <ul class="menuItems">
     <li><a href="/#/addAdmin">Add Admin</a></li>
     <li><a href="/#/addCompany">Add Company</a></li>
@@ -19,6 +18,7 @@
     <li><a href="/#/addClub">Add Club</a></li>
     <li><a href="/#/addHat">Add Hat</a></li>
     <li><a href="/#/addShirt">Add Shirt</a></li>
+    <li><a href="/#/search">Search</a></li>
     <li><a href="/#/admin">Verify Product</a></li>
   </ul>
 </div>
@@ -26,7 +26,7 @@
 <div class="col-md-8 adminMain">
 
   <section class="addItem">
-    <form class="form-horizontal" ng-submit="adminCtrl.addShirt(item)">
+    <form class="form-horizontal" ng-submit="addItemsCtrl.addShirt(item)">
       <!-- MAKER -->
       <div class="form-group">
         <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
@@ -61,4 +61,5 @@
       <input type="submit" name="upload" value="Upload" class="btn btn-success">
     </form>
   </section>
+</div>
 </div>

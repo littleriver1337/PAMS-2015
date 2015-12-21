@@ -24,7 +24,7 @@ body {
 }
 
 .slogan {
-  background-color: $mainColor;
+  background-color: $darkerColor;
   height: 100px;
   color: white;
   h1 {
@@ -46,6 +46,11 @@ body {
     padding: 2%;
     background-color: $mainColor;
   }
+}
+
+.mainContent {
+  height: auto;
+  min-height: 550px;
 }
 
 // HOMEPAGE NARRATIVE
@@ -99,7 +104,7 @@ body {
 }
 
 .bg {
-  height: 500px;
+  height: 550px;
   background-image: url(../security-vector.jpg);
   background-repeat: no-repeat;
   background-size: cover;

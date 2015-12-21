@@ -3,7 +3,7 @@
 
 angular
   .module('pamsAdmin')
-  .controller('AdminController', function ($scope, AdminService, LoginService, VerificationService, CompanyService, RetailerService, $routeParams, _) {
+  .controller('AdminController', function ($scope, AdminService, LoginService, VerificationService, CompanyService, RetailerService, AddItemsService, $routeParams, _) {
     var vm = this;
 
     vm.addAdmin = function(admin){
@@ -84,6 +84,26 @@ angular
     vm.addBall = function(item){
       console.log("SUBMITTED", item);
       AdminService.addBall(item);
+    };
+
+    vm.makerSearch = function(maker){
+      console.log("SUBMITTED", maker);
+      AdminService.makerSearch(maker);
+    };
+
+    vm.clubTypeSearch = function(type){
+      console.log("SUBMITTED", type);
+      AdminService.clubTypeSearch(type);
+    };
+
+    vm.yearSearch = function(year){
+      console.log("SUBMITTED", year);
+      AdminService.yearSearch(year);
+    };
+
+    vm.lieAngleSearch = function(angle){
+      console.log("SUBMITTED", angle);
+      AdminService.lieAngleSearch(angle);
     };
 
   });

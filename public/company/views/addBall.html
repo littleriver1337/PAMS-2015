@@ -1,0 +1,67 @@
+<header>
+  <div class="col-md-4 logo">
+    <h1>P.A.M.S</h1>
+  </div>
+  <div class="col-md-8 slogan">
+    <h1>Product Authentication & Management System</h1>
+  </div>
+</header>
+
+<h1>COMPANY</h1>
+
+<div class="col-md-4 companySidebar">
+  <ul class="menuItems">
+    <li><a href="/#/files">Import File</a></li>
+    <li><a href="/#/addBagC">Add Bag</a></li>
+    <li><a href="/#/addBallC">Add Ball</a></li>
+    <li><a href="/#/addClubC">Add Club</a></li>
+    <li><a href="/#/addHatC">Add Hat</a></li>
+    <li><a href="/#/addShirtC">Add Shirt</a></li>
+    <li><a href="/#/verifyC">Verify Product</a></li>
+  </ul>
+</div>
+
+<div class="col-md-8 adminMain">
+
+  <section class="addItem">
+    <form class="form-horizontal" ng-submit="addItemsCtrl.addBall(item)">
+      <!-- MAKER -->
+      <div class="form-group">
+        <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
+      </div>
+      <!-- COATING -->
+      <div class="form-group">
+        <input type="text" ng-model="item.coating" class="form-control" name="coating" placeholder="Coating" required>
+      </div>
+      <!-- LAYERS -->
+      <div class="form-group">
+        <input type="text" ng-model="item.layers" class="form-control" name="layers" placeholder="Layers" required>
+      </div>
+      <!-- BOX COUNT -->
+      <div class="form-group">
+        <input type="text" ng-model="item.boxCount" class="form-control" name="boxCount" placeholder="Box Count">
+      </div>
+      <!-- PRICE -->
+      <div class="form-group">
+        <input type="text" ng-model="item.price" class="form-control" name="price" placeholder="Price">
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="submitBall">Create Item</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+
+  <section class="importSection">
+    <form action="/upload-balls/" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="ImportFile">Import File</label>
+        <input type="file" id="ImportFile" ng-model="file" name="file">
+      </div>
+      <input type="submit" name="upload" value="Upload" class="btn btn-success">
+    </form>
+  </section>
+</div>
