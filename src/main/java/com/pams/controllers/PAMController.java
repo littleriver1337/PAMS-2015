@@ -3,6 +3,7 @@ package com.pams.controllers;
 import com.pams.entities.*;
 import com.pams.services.*;
 import com.pams.utils.PasswordHash;
+import com.simplify.payments.PaymentsApi;
 import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -387,6 +388,10 @@ public class PAMController {
         }
         else{
             Club jackClub = new Club(serialNumber, "Fake Make", "Fake Club Type", (fakeNum+1), "Fake Lie Angle", false, LocalDateTime.now().toString());
+            jackClub.user.getAddress();
+            jackClub.user.getCity();
+            jackClub.user.getState();
+            jackClub.user.getZip();
             clubs.save(jackClub);
             return jackClub;
         }
