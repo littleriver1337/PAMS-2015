@@ -388,10 +388,10 @@ public class PAMController {
         }
         else{
             Club jackClub = new Club(serialNumber, "Fake Make", "Fake Club Type", (fakeNum+1), "Fake Lie Angle", false, LocalDateTime.now().toString());
-            jackClub.user.getAddress();
-            jackClub.user.getCity();
-            jackClub.user.getState();
-            jackClub.user.getZip();
+            jackClub.user.setAddress(jackClub.user.getAddress());
+            jackClub.user.setCity(jackClub.user.getCity());
+            jackClub.user.setState(jackClub.user.getState());
+            jackClub.user.setZip(jackClub.user.getZip());
             clubs.save(jackClub);
             return jackClub;
         }
