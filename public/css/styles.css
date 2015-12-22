@@ -40,6 +40,9 @@ body {
   height: auto;
   min-height: 550px; }
 
+.angular-google-map-container {
+  height: 400px; }
+
 .narrative {
   background-color: white;
   border-radius: 5%;

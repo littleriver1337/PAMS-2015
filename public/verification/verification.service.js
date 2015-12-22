@@ -22,6 +22,10 @@
       });
     };
 
+    // counterfeit item --> user.address, user.city, user.state
+  //  "/list-jacks/" POST
+  //  "/find-club/" GET
+
       return {
         checkItem: checkItem
       };

@@ -68,6 +68,9 @@
           templateUrl: 'admin/views/search.html',
           controller: 'AdminController as adminCtrl',
         })
+        .when('/map', {
+          templateUrl: 'geocode/views/map.html',
+        })
         .when('/:id', {
           templateUrl: 'admin/views/edit.html',
           controller: 'AdminController as adminCtrl',

@@ -1,0 +1,117 @@
+<header>
+  <div class="col-md-4 logo">
+    <h1>P.A.M.S</h1>
+  </div>
+  <div class="col-md-8 slogan">
+    <h1>Product Authentication & Management System</h1>
+  </div>
+</header>
+
+<div class="mainContent">
+<div class="col-md-4 sidebar">
+  <ul class="menuItems">
+    <li><a href="/#/addAdmin">Add Admin</a></li>
+    <li><a href="/#/addCompany">Add Company</a></li>
+    <li><a href="/#/addRetailer">Add Retailer</a></li>
+    <li><a href="/#/users">Users</a></li>
+    <li><a href="/#/addBag">Add Bag</a></li>
+    <li><a href="/#/addBall">Add Ball</a></li>
+    <li><a href="/#/addClub">Add Club</a></li>
+    <li><a href="/#/addHat">Add Hat</a></li>
+    <li><a href="/#/addShirt">Add Shirt</a></li>
+    <li><a href="/#/search">Search</a></li>
+    <li><a href="/#/admin">Verify Product</a></li>
+  </ul>
+</div>
+
+<style>
+     body { margin:0; padding:0; }
+     #map { position:absolute; top:0; bottom:0; width:100%; }
+ </style>
+
+<div class="col-md-8 adminMain">
+
+  <div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsaWVqYXJzZW5hdWx0IiwiYSI6ImNpaWd1OHQ3MTAybTh1YmtzejFkNTVjaHMifQ.v-yStmlH0hAp0OvirtK8GA';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+    center: [-74.50, 40], // starting position
+    zoom: 9 // starting zoom
+});
+</script>
+
+
+  <!-- <div ng-app="myApp" ng-controller="Example">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+  </div>
+
+  <script type="text/javascript">
+  angular.module("myApp", ['uiGmapgoogle-maps'])
+        .controller("Example", function($scope, $interval) {
+                $scope.map = {
+                        center: {
+                                latitude: 56.162939,
+                                longitude: 10.203921
+                        },
+                        zoom: 8
+                };
+        });
+  </script>
+ -->
+
+<!-- /*<style type="text/css">
+    html, body { height: 80%; margin: 0; padding: 0; }
+    #map { height: 80%; }
+  </style>
+
+  <div id="floating-panel">
+        <input id="address" type="textbox" value="Sydney, NSW">
+        <input id="submit" type="button" value="Geocode">
+    </div>
+<div id="map"></div>
+<script type="text/javascript">
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 32.779991, lng: -79.934250},
+    zoom: 8
+  });
+  var marker = new google.maps.Marker({
+    position: {lat: 32.779991, lng: -79.934250},
+    map: map,
+    title: "PAMS"
+  });
+  marker.setMap(map);
+
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+
+  function geocodeAddress(geocoder, resultsMap) {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+}
+
+</script>*/ -->
+</div>
+</div>
+
+<!-- <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvyDipzh4gBNgAbT3Av77p_Mqv452Seeo&callback=initMap"></script> -->
