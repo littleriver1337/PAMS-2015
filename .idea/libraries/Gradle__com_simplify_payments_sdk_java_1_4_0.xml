@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.simplify:payments-sdk-java:1.4.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.simplify/payments-sdk-java/1.4.0/b5c1483e1c47cf704fb403440f3d4107b99d57ac/payments-sdk-java-1.4.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.simplify/payments-sdk-java/1.4.0/9acd1162f263e2ab80073838b5027054883154a5/payments-sdk-java-1.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
