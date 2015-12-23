@@ -4,12 +4,12 @@ function initMap() {
     center: {lat: 32.779991, lng: -79.934250},
     zoom: 8
   });
-  var marker = new google.maps.Marker({
+  var marker1 = new google.maps.Marker({
     position: {lat: 32.779991, lng: -79.934250},
     map: map,
     title: "PAMS"
   });
-  marker.setMap(map);
+  marker1.setMap(map);
 
   var geocoder = new google.maps.Geocoder();
 
@@ -34,7 +34,7 @@ function initMap() {
 
   function loadPins() {
     $.ajax({
-      url: '/#/find-club/111231',
+      url: '/#/find-club/',
       method: 'GET',
       success: function(data){
         console.log("success: ", data);
@@ -46,6 +46,23 @@ function initMap() {
   }
   loadPins();
 }
+
+
+// function geocodeAddress(geocoder, resultsMap) {
+//   var address = document.getElementById('address').value;
+//   geocoder.geocode({'address': address}, function(results, status) {
+//     if (status === google.maps.GeocoderStatus.OK) {
+//       resultsMap.setCenter(results[0].geometry.location);
+//       var marker = new google.maps.Marker({
+//         map: resultsMap,
+//         position: results[0].geometry.location
+//       });
+//     } else {
+//       alert('Geocode was not successful for the following reason: ' + status);
+//     }
+//   });
+// }
+
 
 
 // function loadPins() {
