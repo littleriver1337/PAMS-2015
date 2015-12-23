@@ -6,10 +6,6 @@ angular
   .controller('RetailerController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, $routeParams) {
     var vm = this;
 
-    vm.importFile = function(file) {
-      console.log("SUBMITTED", file);
-      CompanyService.importFile(file);
-    };
 
   });
 })();

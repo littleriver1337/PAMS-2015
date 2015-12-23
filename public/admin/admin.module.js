@@ -7,7 +7,8 @@
       'pamsLogin',
       'pamsVerification',
       'pamsCompany',
-      'pamsRetailer'
+      'pamsRetailer',
+      'pamsAddItems'
     ])
     .config(function ($routeProvider) {
       $routeProvider
@@ -31,17 +32,56 @@
           templateUrl: 'admin/views/users.html',
           controller: 'AdminController as adminCtrl',
         })
+        .when('/addBag', {
+          templateUrl: 'admin/views/addBag.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addClub', {
+          templateUrl: 'admin/views/addClub.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addHat', {
+          templateUrl: 'admin/views/addHat.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addShirt', {
+          templateUrl: 'admin/views/addShirt.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addBall', {
+          templateUrl: 'admin/views/addBall.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addPants', {
+          templateUrl: 'admin/views/addPants.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addShoes', {
+          templateUrl: 'admin/views/addShoes.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addUmbrella', {
+          templateUrl: 'admin/views/addUmbrella.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/search', {
+          templateUrl: 'admin/views/search.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/map', {
+          templateUrl: 'geocode/views/map.html',
+        })
         .when('/:id', {
           templateUrl: 'admin/views/edit.html',
           controller: 'AdminController as adminCtrl',
         })
         .when('/true', {
-          templateUrl: 'verification/views/true.html',
-          controller: 'AdminController as adminCtrl',
+          templateUrl: 'admin/views/true.html',
+          controller: 'VerificationController as verificationCtrl',
         })
         .when('/false', {
-          templateUrl: 'verification/views/false.html',
-          controller: 'AdminController as adminCtrl',
+          templateUrl: 'admin/views/false.html',
+          controller: 'VerificationController as verificationCtrl',
         })
         .otherwise({ redirectTo: '/404'});
     });

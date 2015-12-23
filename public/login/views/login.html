@@ -1,35 +1,47 @@
 <!-- HOMEPAGE NARRATIVE -->
-<div class="col-md-8">
-  <section class="narrative">
-    <h2>PAMS determines the authenticity of brand name products in order to ensure the protection of consumers, retailers and brands.</h2>
-    <p>
-     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-   </p>
-   <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-  </section>
-</div>
-<!-- LOGIN DIV -->
-<div class="col-md-4">
-  <div class="login">
-  <h3>LOGIN</h3>
-  <form class="form-horizontal" ng-submit="loginCtrl.login(user)">
-    <!-- USERNAME INPUT -->
-    <div class="form-group">
-      <input type="text" ng-model="user.username" class="form-control" name="username"  placeholder="username" required>
-    </div>
-    <!-- PASSWORD INPUT -->
-    <div class="form-group">
-      <input type="password" ng-model="user.password" class="form-control" name="password" placeholder="password" required>
-    </div>
-    <!-- SUBMIT BUTTONS -->
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-success" name="submitLogin">Guest</button>
-        <button type="submit" class="btn btn-primary" name="submitLogin">Login</button>
+<header>
+  <div class="col-md-4 logo">
+    <h1>P.A.M.S</h1>
+  </div>
+  <div class="col-md-8 slogan">
+    <h1>Product Authentication & Management System</h1>
+  </div>
+</header>
+<div class="bg">
+  <div class="col-md-8">
+    <section class="narrative">
+      <h2>PAMS determines the authenticity of brand name products in order to ensure the protection of consumers, retailers and brands.</h2>
+      <p>
+       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+     </p>
+     <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    </section>
+  </div>
+  <!-- LOGIN DIV -->
+  <div class="col-md-4">
+    <div class="login">
+    <h3>
+      LOGIN
+    </h3>
+    <form class="form-horizontal" ng-submit="loginCtrl.login(user)">
+      <!-- USERNAME INPUT -->
+      <div class="form-group">
+        <input type="text" ng-model="user.username" class="form-control" name="username"  placeholder="username" required>
       </div>
-    </div>
-  </form>
- </div>
+      <!-- PASSWORD INPUT -->
+      <div class="form-group">
+        <input type="password" ng-model="user.password" class="form-control" name="password" placeholder="password" required>
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button class="btn btn-success" name="submitLogin">Guest</button>
+          <button type="submit" class="btn btn-primary" name="submitLogin">Login</button>
+        </div>
+      </div>
+    </form>
+   </div>
+  </div>
 </div>

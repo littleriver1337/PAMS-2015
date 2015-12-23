@@ -1,0 +1,88 @@
+<header>
+  <div class="col-md-4 logo">
+    <h1>P.A.M.S</h1>
+  </div>
+  <div class="col-md-8 slogan">
+    <h1>Product Authentication & Management System</h1>
+  </div>
+</header>
+
+<div class="mainContent">
+<div class="col-md-4 sidebar">
+  <ul class="menuItems">
+    <li><a href="/#/addAdmin">Add Admin</a></li>
+    <li><a href="/#/addCompany">Add Company</a></li>
+    <li><a href="/#/addRetailer">Add Retailer</a></li>
+    <li><a href="/#/users">Users</a></li>
+    <li><a href="/#/addBag">Add Bag</a></li>
+    <li><a href="/#/addBall">Add Ball</a></li>
+    <li><a href="/#/addClub">Add Club</a></li>
+    <li><a href="/#/addHat">Add Hat</a></li>
+    <li><a href="/#/addShirt">Add Shirt</a></li>
+    <li><a href="/#/search">Search</a></li>
+    <li><a href="/#/admin">Verify Product</a></li>
+  </ul>
+</div>
+
+<div class="col-md-8 adminMain">
+
+  <section class="searchItem">
+    <form class="form-horizontal" ng-submit="adminCtrl.makerSearch(maker)">
+      <!-- MAKER -->
+      <div class="form-group">
+        <input type="text" ng-model="maker" class="form-control" name="maker" placeholder="Maker" required>
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="searchMaker">Search</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="searchItem">
+    <form class="form-horizontal" ng-submit="adminCtrl.clubTypeSearch(type)">
+      <!-- CLUB TYPE -->
+      <div class="form-group">
+        <input type="text" ng-model="type" class="form-control" name="clubType" placeholder="Club Type" required>
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="searchClubType">Search</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+    <section class="searchItem">
+      <form class="form-horizontal" ng-submit="adminCtrl.yearSearch(year)">
+        <!-- YEAR -->
+        <div class="form-group">
+          <input type="text" ng-model="year" class="form-control" name="year" placeholder="Year" required>
+        </div>
+        <!-- SUBMIT BUTTONS -->
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" name="searchYear">Search</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="searchItem">
+      <form class="form-horizontal" ng-submit="adminCtrl.lieAngleSearch(angle)">
+        <!-- LIE ANGLE -->
+        <div class="form-group">
+          <input type="text" ng-model="angle" class="form-control" name="lieAngle" placeholder="Lie Angle" required>
+        </div>
+        <!-- SUBMIT BUTTONS -->
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" name="searchLieAngle">Search</button>
+          </div>
+        </div>
+      </form>
+    </section>
+</div>

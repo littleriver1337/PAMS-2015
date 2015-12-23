@@ -19,6 +19,7 @@
           $location.path('/files/');
         } else if (currentUser.accessLevel === "RETAILER_USER") {
           console.log("User is a Retailer");
+          $location.path('/verifyR/');
         } else {
           console.log("User doesn't exist");
         }

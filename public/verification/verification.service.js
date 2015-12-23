@@ -11,13 +11,20 @@
         console.log("Posted Item: ", item);
         console.log("Response: ", res);
         var currentItem = res;
-        if (res.isAuthentic) {
-          $location.path("/true/");
+        var clubType = res.clubType;
+        if (currentItem.isAuthentic) {
+          $('.true').removeClass('hidden');
+          $('.true').append("Club Type: " + clubType);
+          return currentItem;
         } else {
           $location.path("/false/");
         }
       });
     };
+
+    // counterfeit item --> user.address, user.city, user.state
+  //  "/list-jacks/" POST
+  //  "/find-club/" GET
 
       return {
         checkItem: checkItem

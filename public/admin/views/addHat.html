@@ -1,0 +1,66 @@
+<header>
+  <div class="col-md-4 logo">
+    <h1>P.A.M.S</h1>
+  </div>
+  <div class="col-md-8 slogan">
+    <h1>Product Authentication & Management System</h1>
+  </div>
+</header>
+
+<div class="mainContent">
+<div class="col-md-4 sidebar">
+  <ul class="menuItems">
+    <li><a href="/#/addAdmin">Add Admin</a></li>
+    <li><a href="/#/addCompany">Add Company</a></li>
+    <li><a href="/#/addRetailer">Add Retailer</a></li>
+    <li><a href="/#/users">Users</a></li>
+    <li><a href="/#/addBag">Add Bag</a></li>
+    <li><a href="/#/addClub">Add Club</a></li>
+    <li><a href="/#/addHat">Add Hat</a></li>
+    <li><a href="/#/addShirt">Add Shirt</a></li>
+    <li><a href="/#/search">Search</a></li>
+    <li><a href="/#/admin">Verify Product</a></li>
+  </ul>
+</div>
+
+<div class="col-md-8 adminMain">
+
+  <section class="addItem">
+    <form class="form-horizontal" ng-submit="addItemsCtrl.addHat(item)">
+      <!-- MAKER -->
+      <div class="form-group">
+        <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
+      </div>
+      <!-- FIT -->
+      <div class="form-group">
+        <input type="text" ng-model="item.fit" class="form-control" name="fit" placeholder="Fit" required>
+      </div>
+      <!-- COLOR -->
+      <div class="form-group">
+        <input type="text" ng-model="item.color" class="form-control" name="color" placeholder="Color" required>
+      </div>
+      <!-- PRICE -->
+      <div class="form-group">
+        <input type="text" ng-model="item.price" class="form-control" name="price" placeholder="Price">
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="submitHat">Create Item</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+
+  <section class="importSection">
+    <form action="/upload-hats/" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="ImportFile">Import File</label>
+        <input type="file" id="ImportFile" ng-model="file" name="file">
+      </div>
+      <input type="submit" name="upload" value="Upload" class="btn btn-success">
+    </form>
+  </section>
+</div>
+</div>

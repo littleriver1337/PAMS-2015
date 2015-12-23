@@ -1,0 +1,62 @@
+<header>
+  <div class="col-md-4 logo">
+    <h1>P.A.M.S</h1>
+  </div>
+  <div class="col-md-8 slogan">
+    <h1>Product Authentication & Management System</h1>
+  </div>
+</header>
+
+<h1>COMPANY</h1>
+
+<div class="col-md-4 companySidebar">
+  <ul class="menuItems">
+    <li><a href="/#/files">Import File</a></li>
+    <li><a href="/#/addBagC">Add Bag</a></li>
+    <li><a href="/#/addBallC">Add Ball</a></li>
+    <li><a href="/#/addClubC">Add Club</a></li>
+    <li><a href="/#/addHatC">Add Hat</a></li>
+    <li><a href="/#/addShirtC">Add Shirt</a></li>
+    <li><a href="/#/verifyC">Verify Product</a></li>
+  </ul>
+</div>
+<div class="col-md-8 adminMain">
+
+  <section class="addItem">
+    <form class="form-horizontal" ng-submit="addItemsCtrl.addHat(item)">
+      <!-- MAKER -->
+      <div class="form-group">
+        <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
+      </div>
+      <!-- FIT -->
+      <div class="form-group">
+        <input type="text" ng-model="item.fit" class="form-control" name="fit" placeholder="Fit" required>
+      </div>
+      <!-- COLOR -->
+      <div class="form-group">
+        <input type="text" ng-model="item.color" class="form-control" name="color" placeholder="Color" required>
+      </div>
+      <!-- PRICE -->
+      <div class="form-group">
+        <input type="text" ng-model="item.price" class="form-control" name="price" placeholder="Price">
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="submitHat">Create Item</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+
+  <section class="importSection">
+    <form action="/upload-hats/" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="ImportFile">Import File</label>
+        <input type="file" id="ImportFile" ng-model="file" name="file">
+      </div>
+      <input type="submit" name="upload" value="Upload" class="btn btn-success">
+    </form>
+  </section>
+</div>
