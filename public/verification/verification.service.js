@@ -10,11 +10,16 @@
       $http.get(itemRoute + item.serialNumber).success(function(res){
         console.log("Posted Item: ", item);
         console.log("Response: ", res);
-        var currentItem = res;
         var clubType = res.clubType;
-        if (currentItem.isAuthentic) {
+        var lieAngle = res.lieAngle;
+        var year = res.year;
+        if (res.isAuthentic) {
           $('.true').removeClass('hidden');
-          $('.true').append("Club Type: " + clubType);
+          $('.true').append(
+            "Club Type: " + clubType + "<br>" +
+            "Lie Angle: " + lieAngle + "<br>" +
+            "Year: " + year + "<br>"
+          );
           return currentItem;
         } else {
           $location.path("/false/");
