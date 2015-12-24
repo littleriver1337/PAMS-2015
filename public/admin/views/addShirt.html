@@ -8,24 +8,33 @@
 </header>
 
 <div class="mainContent">
-<div class="col-md-4 sidebar">
-  <ul class="menuItems">
-    <li><a href="/#/addAdmin">Add Admin</a></li>
-    <li><a href="/#/addCompany">Add Company</a></li>
-    <li><a href="/#/addRetailer">Add Retailer</a></li>
-    <li><a href="/#/users">Users</a></li>
-    <li><a href="/#/addBag">Add Bag</a></li>
-    <li><a href="/#/addClub">Add Club</a></li>
-    <li><a href="/#/addHat">Add Hat</a></li>
-    <li><a href="/#/addShirt">Add Shirt</a></li>
-    <li><a href="/#/search">Search</a></li>
-    <li><a href="/#/admin">Verify Product</a></li>
-  </ul>
-</div>
+  <div class="col-md-4 sidebar">
+    <ul class="menuItems"> <h2>ADMIN</h2>
+      <h3>CONTROL PANEL</h3>
+      <li><img src="../../assets/add-user.svg" class="menuIcon" alt="Create Users"><br>
+        <a href="/#/addUsers">Create<br>User</a></li>
+
+      <li><img src="../../assets/users.svg" class="menuIcon" alt="Manage Users"><br>
+        <a href="/#/users">Manage<br>Users</a></li>
+
+      <li><img src="../../assets/upload.svg" class="menuIcon" alt="Import Items"><br>
+        <a href="/#/addItems">Import<br>Products</a></li>
+
+      <li><img src="../../assets/magnifying-glass.svg" class="menuIcon" alt="Search"><br>
+        <a href="/#/search">Search<br>Products</a></li>
+
+      <li><img src="../../assets/map.svg" class="menuIcon" alt="Map"><br>
+        <a href="../../map.html" target="new">Counterfeit<br>Map</a></li>
+
+      <li><img src="../../assets/shield.svg" class="menuIcon" alt="Verify Product"><br>
+        <a href="/#/admin">Verify<br>Product</a></li>
+    </ul>
+  </div>
 
 <div class="col-md-8 adminMain">
 
   <section class="addItem">
+  <h3>Add Golf Shirt:</h3>
     <form class="form-horizontal" ng-submit="addItemsCtrl.addShirt(item)">
       <!-- MAKER -->
       <div class="form-group">

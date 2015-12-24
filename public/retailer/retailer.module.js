@@ -6,7 +6,8 @@
       'underscore',
       'pamsLogin',
       'pamsAdmin',
-      'pamsVerification'
+      'pamsVerification',
+      'pamsGuest'
     ])
     .config(function ($routeProvider) {
       $routeProvider

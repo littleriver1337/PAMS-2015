@@ -8,12 +8,13 @@
       'pamsAdmin',
       'pamsVerification',
       'pamsRetailer',
-      'pamsAddItems'
+      'pamsAddItems',
+      'pamsGuest'
     ])
     .config(function ($routeProvider) {
       $routeProvider
-        .when('/files', {
-          templateUrl: 'company/views/files.html',
+        .when('/addItemsC', {
+          templateUrl: 'company/views/addItemsC.html',
           controller: 'CompanyController as companyCtrl',
         })
         .when('/verifyC', {
@@ -38,6 +39,10 @@
         })
         .when('/addBallC', {
           templateUrl: 'company/views/addBall.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/searchC', {
+          templateUrl: 'company/views/searchC.html',
           controller: 'AddItemsController as addItemsCtrl',
         })
         .otherwise({ redirectTo: '/404'});

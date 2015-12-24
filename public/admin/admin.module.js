@@ -8,13 +8,19 @@
       'pamsVerification',
       'pamsCompany',
       'pamsRetailer',
-      'pamsAddItems'
+      'pamsAddItems',
+      'ui.bootstrap.tpls',
+      'pamsGuest'
     ])
     .config(function ($routeProvider) {
       $routeProvider
         .when('/admin', {
           templateUrl: 'admin/views/list.html',
           controller: 'VerificationController as verificationCtrl',
+        })
+        .when('/addUsers', {
+          templateUrl: 'admin/views/addUsers.html',
+          controller: 'AdminController as adminCtrl',
         })
         .when('/addAdmin', {
           templateUrl: 'admin/views/addAdmin.html',
@@ -30,6 +36,10 @@
         })
         .when('/users', {
           templateUrl: 'admin/views/users.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/addItems', {
+          templateUrl: 'admin/views/addItems.html',
           controller: 'AdminController as adminCtrl',
         })
         .when('/addBag', {
