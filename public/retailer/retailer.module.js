@@ -6,13 +6,14 @@
       'underscore',
       'pamsLogin',
       'pamsAdmin',
-      'pamsVerification'
+      'pamsVerification',
+      'pamsGuest'
     ])
     .config(function ($routeProvider) {
       $routeProvider
-        .when('/verify', {
+        .when('/verifyR', {
           templateUrl: 'retailer/views/verify.html',
-          controller: 'RetailerController as retailerCtrl',
+          controller: 'VerificationController as verificationCtrl',
         })
         .otherwise({ redirectTo: '/404'});
     });

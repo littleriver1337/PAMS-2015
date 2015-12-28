@@ -16,9 +16,10 @@
           $location.path('/admin/');
         } else if (currentUser.accessLevel === "COMPANY_USER") {
           console.log("User is a Company");
-          $location.path('/files/');
+          $location.path('/verifyC/');
         } else if (currentUser.accessLevel === "RETAILER_USER") {
           console.log("User is a Retailer");
+          $location.path('/verifyR/');
         } else {
           console.log("User doesn't exist");
         }
@@ -28,6 +29,7 @@
     var guest = function () {
       $http.post(loginRoute).success(function(res){
         console.log("Guest access");
+        $location.path('/verifyG/');
       });
     };
 

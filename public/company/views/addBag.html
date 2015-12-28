@@ -1,0 +1,77 @@
+<header>
+  <div class="col-md-4 logo">
+    <h1>P.A.M.S</h1>
+  </div>
+  <div class="col-md-8 slogan">
+    <!-- <h1>Product Authentication & Management System</h1> -->
+  </div>
+</header>
+
+<div class="mainContent">
+  <div class="col-md-4 sidebar">
+    <ul class="menuItems"> <h2>COMPANY</h2>
+      <h3>CONTROL PANEL</h3>
+
+      <li><img src="../../assets/upload.svg" class="menuIcon" alt="Import Items"><br>
+        <a href="/#/addItemsC">Import<br>Products</a></li>
+
+      <li><img src="../../assets/magnifying-glass.svg" class="menuIcon" alt="Search"><br>
+        <a href="/#/searchC">Search<br>Products</a></li>
+
+      <li><img src="../../assets/map.svg" class="menuIcon" alt="Map"><br>
+        <a href="../../map.html" target="new">Counterfeit<br>Map</a></li>
+
+      <li><img src="../../assets/shield.svg" class="menuIcon" alt="Verify Product"><br>
+        <a href="/#/verifyC">Verify<br>Product</a></li>
+    </ul>
+  </div>
+
+<div class="col-md-8 adminMain">
+
+  <section class="addItem">
+    <h3>Create New Bag:</h3>
+    <form class="form-horizontal" ng-submit="addItemsCtrl.addBag(item)">
+      <!-- MAKER -->
+      <div class="form-group">
+        <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
+      </div>
+      <!-- STAND -->
+      <div class="form-group">
+        <input type="text" ng-model="item.stand" class="form-control" name="stand" placeholder="Stand" required>
+      </div>
+      <!-- HARNESS -->
+      <div class="form-group">
+        <input type="text" ng-model="item.harness" class="form-control" name="harness" placeholder="Harness" required>
+      </div>
+      <!-- TEAM NAME -->
+      <div class="form-group">
+        <input type="text" ng-model="item.teamName" class="form-control" name="teamName" placeholder="Team Name">
+      </div>
+      <!-- SCHOOL NAME -->
+      <div class="form-group">
+        <input type="text" ng-model="item.schoolName" class="form-control" name="schoolName" placeholder="School Name">
+      </div>
+      <!-- PRICE -->
+      <div class="form-group">
+        <input type="text" ng-model="item.price" class="form-control" name="price" placeholder="Price" required>
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="submitBag">Create Item</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+
+  <section class="importSection">
+    <form action="/upload-bags/" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="ImportFile">Import File</label>
+        <input type="file" id="ImportFile" ng-model="file" name="file">
+      </div>
+      <input type="submit" name="upload" value="Upload" class="btn btn-success">
+    </form>
+  </section>
+</div>

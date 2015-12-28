@@ -3,13 +3,9 @@
 
 angular
   .module('pamsRetailer')
-  .controller('RetailerController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, $routeParams) {
+  .controller('RetailerController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, GuestService, $routeParams) {
     var vm = this;
 
-    vm.importFile = function(file) {
-      console.log("SUBMITTED", file);
-      CompanyService.importFile(file);
-    };
 
   });
 })();

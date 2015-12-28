@@ -3,7 +3,7 @@
 
 angular
   .module('pamsCompany')
-  .controller('CompanyController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, $routeParams) {
+  .controller('CompanyController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, GuestService, $routeParams) {
     var vm = this;
 
     vm.importFile = function(file) {

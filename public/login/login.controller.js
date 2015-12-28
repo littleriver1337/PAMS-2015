@@ -3,7 +3,7 @@
 
 angular
   .module('pamsLogin')
-  .controller('LoginController', function ($scope, LoginService, AdminService, VerificationService, CompanyService, RetailerService, $routeParams) {
+  .controller('LoginController', function ($scope, LoginService, AdminService, VerificationService, CompanyService, RetailerService, GuestService, $routeParams) {
     var vm = this;
 
     console.log("INSTATIATED");
@@ -11,6 +11,11 @@ angular
     vm.login = function(userInfo){
       console.log("SUBMITTED", userInfo);
       LoginService.login(userInfo);
+    };
+
+    vm.guest = function(){
+      console.log("GUEST");
+      LoginService.guest();
     };
 
   });
