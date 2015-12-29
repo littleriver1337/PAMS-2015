@@ -56,7 +56,8 @@ body {
     transition: all 1s ease-in-out;
     border-radius: 5%; }
     .menuItems li:hover {
-      cursor: pointer; }
+      cursor: pointer;
+      background-color: #DDDDE0; }
   .menuItems h2, .menuItems h3 {
     font-family: "Orbitron", sans-serif;
     text-align: center;
@@ -186,6 +187,27 @@ div.slide-right h1 {
     -moz-box-shadow: 11px 13px 15px -8px rgba(0, 0, 0, 0.4);
     box-shadow: 11px 13px 15px -8px rgba(0, 0, 0, 0.4); }
     .addItemsList li:hover {
+      background-color: #DDDDE0;
+      -webkit-box-shadow: 8px 8px 15px -8px rgba(0, 0, 0, 0.26);
+      -moz-box-shadow: 8px 8px 15px -8px rgba(0, 0, 0, 0.26);
+      box-shadow: 8px 8px 15px -8px rgba(0, 0, 0, 0.26); }
+
+.searchList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+  .searchList li {
+    display: inline-block;
+    width: 40%;
+    background-color: #CDCDCF;
+    padding: 3%;
+    margin: 2%;
+    border: 1px solid grey;
+    transition: .5s all ease-in-out;
+    -webkit-box-shadow: 11px 13px 15px -8px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 11px 13px 15px -8px rgba(0, 0, 0, 0.4);
+    box-shadow: 11px 13px 15px -8px rgba(0, 0, 0, 0.4); }
+    .searchList li:hover {
       background-color: #DDDDE0;
       -webkit-box-shadow: 8px 8px 15px -8px rgba(0, 0, 0, 0.26);
       -moz-box-shadow: 8px 8px 15px -8px rgba(0, 0, 0, 0.26);

@@ -78,6 +78,22 @@
           templateUrl: 'admin/views/search.html',
           controller: 'AdminController as adminCtrl',
         })
+        .when('/clubType', {
+          templateUrl: 'admin/views/clubType.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/lieAngle', {
+          templateUrl: 'admin/views/lieAngle.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/maker', {
+          templateUrl: 'admin/views/maker.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/year', {
+          templateUrl: 'admin/views/year.html',
+          controller: 'AdminController as adminCtrl',
+        })
         .when('/map', {
           templateUrl: 'geocode/views/map.html',
         })
