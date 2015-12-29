@@ -213,6 +213,16 @@ div.slide-right h1 {
       -moz-box-shadow: 8px 8px 15px -8px rgba(0, 0, 0, 0.26);
       box-shadow: 8px 8px 15px -8px rgba(0, 0, 0, 0.26); }
 
+.searchItems {
+  width: 80%;
+  margin: 0 auto; }
+  .searchItems a {
+    font-size: 1.3em;
+    margin-left: 2%; }
+  .searchItems h3 {
+    font-weight: bold;
+    font-family: "Orbitron", sans-serif; }
+
 .userList {
   font-size: 1.3em; }
 
