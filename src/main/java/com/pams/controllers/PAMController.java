@@ -18,7 +18,11 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
- * Created by MattBrown on 12/8/15.
+ * Created by
+ * Allie Arsenault
+ * Earl "Duke" Bozarth
+ * Matt Brown
+ * Cameron Oakley
  */
 @RestController
 public class PAMController {
@@ -50,9 +54,16 @@ public class PAMController {
     @Autowired
     UserRepository users;
 
-
+    //Create a static fake number to help keep track of year for fake club.
+    //Will want to incorporate correct year on full version.
     static int fakeNum = 1000;
 
+    /*
+    Load pre-existing data from project.
+    Load csv files if there is no information in the database
+    Items include:
+    Bag, Ball, Club, Hat, Pant, Shirt, Shoe, Umbrella
+     */
     @PostConstruct
     public void loadData() throws FileNotFoundException {
 
@@ -196,8 +207,13 @@ public class PAMController {
         }
     }
 
-
-    //Session Group
+    /*
+    Login Route
+    When a user logs in it will check to see if they exist.
+    If User does exist, the username and password must match to progress through program.
+    If User and password do not match, "Wrong password" is the return error message.
+    If User does not exist that user will be added to database as a Guest/Joe Schmoe user
+     */
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User login(
             @RequestBody User user,
@@ -209,6 +225,8 @@ public class PAMController {
             tempUser.username = user.username;
             tempUser.password = PasswordHash.createHash(user.password);
             tempUser.accessLevel = User.AccessLevel.ADMIN;
+            //Change default access level to Joe Schmoe
+            //If no Users exists, need to create at least ONE admin user for demo purposes
             users.save(tempUser);
         }
         else if (!PasswordHash.validatePassword(user.password, tempUser.password)){
@@ -218,6 +236,10 @@ public class PAMController {
         return tempUser;
     }
 
+    /*
+    Logout
+    Terminates the Current Session, and allows a new user to log in
+     */
     @RequestMapping("/logout")
     public void logout(
             HttpServletRequest request){
@@ -225,8 +247,11 @@ public class PAMController {
         session.invalidate();
     }
 
-
-    //User Group
+    /*
+    Create a new user
+    Front end will notify user of required information and optional information that is needed to user input.
+    Not all users have addresses, so it is important to make sure that all NON-NULL fields are entered.
+     */
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public User addUser(
             @RequestBody User user,
@@ -253,6 +278,12 @@ public class PAMController {
         return tempUser;
     }
 
+    /*
+    Find Users
+    Generate a list of all users(no-matter the access level)
+    This is to see who is registered with PAMS
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/find-users" , method = RequestMethod.GET)
     public Iterable<User> findUsers(
             HttpSession session
@@ -263,6 +294,12 @@ public class PAMController {
         return users.findAll();
     }
 
+    /*
+    Edit User
+    If a user needs to change information, i.e. address, email, etc.
+    Must Be Logged in to perform action
+    Needs a current logged-in user to edit.
+     */
     @RequestMapping(path = "/edit-user", method = RequestMethod.PUT)
     public User editUser(
             @RequestBody User user,
@@ -276,6 +313,11 @@ public class PAMController {
         return user;
     }
 
+    /*
+    Delete User
+    If an admin needs to delete a user for XYZ reasons. (Contract expire, poor business relations, etc)
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-user/{id}", method = RequestMethod.DELETE)
     public void deleteUser(
             @PathVariable("id") int id,
@@ -287,8 +329,10 @@ public class PAMController {
         users.delete(id);
     }
 
-
-    //Bag Group
+    /*
+    Create Bag
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-bag", method = RequestMethod.POST)
     public Bag createBag(
             @RequestBody Bag bag,
@@ -301,6 +345,10 @@ public class PAMController {
         return bag;
     }
 
+    /*
+    Edit Bag
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/edit-bag", method = RequestMethod.POST)
     public void editBag(
             @RequestBody Bag bag,
@@ -312,6 +360,10 @@ public class PAMController {
         bags.save(bag);
     }
 
+    /*
+    Delete Bag
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-bag/{id}", method = RequestMethod.DELETE)
     public void deleteBag(
             @PathVariable("int") int id,
@@ -323,8 +375,10 @@ public class PAMController {
         bags.delete(id);
     }
 
-
-    //Ball Group
+    /*
+    Create Ball
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-ball", method = RequestMethod.POST)
     public Ball createBall(
             @RequestBody Ball ball,
@@ -338,6 +392,10 @@ public class PAMController {
         return ball;
     }
 
+    /*
+    Edit Ball
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "edit-ball", method = RequestMethod.POST)
     public void editBall(
             @RequestBody Ball ball,
@@ -349,6 +407,10 @@ public class PAMController {
         balls.save(ball);
     }
 
+    /*
+    Delete Ball
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-ball/{id}", method = RequestMethod.DELETE)
     public void deleteBall(
             @PathVariable("int") int id,
@@ -360,8 +422,10 @@ public class PAMController {
         balls.delete(id);
     }
 
-
-    //Club Group
+    /*
+    Create Club
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-club", method = RequestMethod.POST)
     public Club addClub(
             @RequestBody Club club,
@@ -375,6 +439,45 @@ public class PAMController {
         return club;
     }
 
+    /*
+    Edit Club
+    Must Be Logged in to perform action
+     */
+    @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
+    public void editClub(
+            @RequestBody Club club,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot edit this club!");
+        }
+        clubs.save(club);
+    }
+
+    /*
+    Delete Club by ID
+    Must Be Logged in to perform action
+     */
+    @RequestMapping(path = "/delete-club/{id}", method = RequestMethod.DELETE)
+    public void deleteClub(
+            @PathVariable ("id") int id,
+            HttpSession session
+    )throws Exception{
+        if (session.getAttribute("username") == null){
+            throw new Exception ("You cannot delete this club!");
+        }
+        clubs.delete(id);
+    }
+
+    /*
+    Find Club/Authenticate Club by Serial Number
+    If the club is found successfully, return the Club object.
+    If the club is NOT found, A fake club will be created for a Database entry
+    The Serial Number entered in, will then be recorded and stored in the Database
+    A Club Object will return with information, letting user know if Club is authentic or not
+    If a fake club is to be reported, there is a timestamp to know when exactly that club was reported
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/find-club/{serialNumber}" , method = RequestMethod.GET)
     public Club findClub(
             @PathVariable ("serialNumber") int serialNumber,
@@ -401,6 +504,10 @@ public class PAMController {
         }
     }
 
+    /*
+    List all counterfeits that are currently in the Database
+    Must Be Logged in to perform search for list of counterfeits
+     */
     @RequestMapping(path = "/list-jacks", method = RequestMethod.POST)
     public Iterable<Club> listJacks(
             HttpSession session
@@ -411,6 +518,9 @@ public class PAMController {
         return clubs.findAllByIsAuthentic(false);
     }
 
+    /*
+    List all clubs by Maker(Titleist, Ping, Nike)
+     */
     @RequestMapping(path = "/search-by-maker/{maker}", method = RequestMethod.GET)
     public Iterable<Club> searchByMaker(
             @PathVariable ("maker") String maker
@@ -418,6 +528,9 @@ public class PAMController {
         return clubs.findAllByMaker(maker);
     }
 
+    /*
+    List all clubs by club type (i.e. Driver, Wood, Iron, Wedge, Putter)
+     */
     @RequestMapping(path = "/search-by-clubType/{clubType}", method = RequestMethod.GET)
     public Iterable<Club> searchByClubType(
             @PathVariable ("clubType") String clubType
@@ -425,6 +538,9 @@ public class PAMController {
         return clubs.findAllByClubType(clubType);
     }
 
+    /*
+    List all clubs for given year (All clubs in year XYZ)
+     */
     @RequestMapping(path = "/search-by-year/{year}", method = RequestMethod.GET)
     public Iterable<Club> searchByYear(
             @PathVariable ("year") int year
@@ -432,6 +548,9 @@ public class PAMController {
         return clubs.findAllByYear(year);
     }
 
+    /*
+    List all clubs by Lie Angle (Standard, +1, -1, etc)
+     */
     @RequestMapping(path = "/search-by-lie-angle/{lieAngle}", method = RequestMethod.GET)
     public Iterable<Club> searchByLieAngle(
             @PathVariable ("lieAngle") String lieAngle
@@ -439,30 +558,10 @@ public class PAMController {
         return clubs.findAllByLieAngle(lieAngle);
     }
 
-    @RequestMapping(path = "/edit-club", method = RequestMethod.POST)
-    public void editClub(
-            @RequestBody Club club,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot edit this club!");
-        }
-        clubs.save(club);
-    }
-
-    @RequestMapping(path = "/delete-club/{id}", method = RequestMethod.DELETE)
-    public void deleteClub(
-            @PathVariable ("id") int id,
-            HttpSession session
-    )throws Exception{
-        if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot delete this club!");
-        }
-        clubs.delete(id);
-    }
-
-
-    //Hat Group
+    /*
+    Create a Hat
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-hat", method = RequestMethod.POST)
     public Hat createHat(
             @RequestBody Hat hat,
@@ -476,6 +575,10 @@ public class PAMController {
         return hat;
     }
 
+    /*
+    Edit a Hat
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/edit-hat", method = RequestMethod.POST)
     public void editHat(
             @RequestBody Hat hat,
@@ -487,6 +590,10 @@ public class PAMController {
         hats.save(hat);
     }
 
+    /*
+    Delete A Hat by ID
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-hat/{id}", method = RequestMethod.DELETE)
     public void deleteHat(
             @PathVariable("int") int id,
@@ -498,8 +605,10 @@ public class PAMController {
         hats.delete(id);
     }
 
-
-    //Pant Group
+    /*
+    Create Pant(s)
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-pant", method = RequestMethod.POST)
     public Pant createPant(
             @RequestBody Pant pant,
@@ -513,6 +622,10 @@ public class PAMController {
         return pant;
     }
 
+    /*
+    Edit Pant(s)
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/edit-pant", method = RequestMethod.POST)
     public void editPant(
             @RequestBody Pant pant,
@@ -524,6 +637,10 @@ public class PAMController {
         pants.save(pant);
     }
 
+    /*
+    Delete Pant(s) by ID
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-pant/{id}", method = RequestMethod.DELETE)
     public void deletePant(
             @PathVariable("int") int id,
@@ -535,8 +652,10 @@ public class PAMController {
        pants.delete(id);
     }
 
-
-    //Shirt Group
+    /*
+    Create a Shirt
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-shirt", method = RequestMethod.POST)
     public Shirt createShirt(
             @RequestBody Shirt shirt,
@@ -550,6 +669,10 @@ public class PAMController {
         return shirt;
     }
 
+    /*
+    Edit a Shirt
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/edit-shirt", method = RequestMethod.POST)
     public void editShirt(
             @RequestBody Shirt shirt,
@@ -561,6 +684,10 @@ public class PAMController {
         shirts.save(shirt);
     }
 
+    /*
+    Delete a Shirt By ID
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-shirt/{id}", method = RequestMethod.DELETE)
     public void deleteShirt(
             @PathVariable("int") int id,
@@ -572,8 +699,10 @@ public class PAMController {
         shirts.delete(id);
     }
 
-
-    //Shoe Group
+    /*
+    Create a Shoe
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-shoe", method = RequestMethod.POST)
     public Shoe createShoe(
             @RequestBody Shoe shoe,
@@ -587,6 +716,10 @@ public class PAMController {
         return shoe;
     }
 
+    /*
+    Edit Shoe
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/edit-shoe", method = RequestMethod.POST)
     public void editShoe(
             @RequestBody Shoe shoe,
@@ -598,6 +731,10 @@ public class PAMController {
         shoes.save(shoe);
     }
 
+    /*
+    Delete Shoe By ID
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-shoe/{id}", method = RequestMethod.DELETE)
     public void deleteShoe(
             @PathVariable("int") int id,
@@ -609,8 +746,10 @@ public class PAMController {
         shoes.delete(id);
     }
 
-
-    //Umbrella Group
+    /*
+    Create Umbrella
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/create-umbrella", method = RequestMethod.POST)
     public Umbrella createUmbrella(
             @RequestBody Umbrella umbrella,
@@ -624,6 +763,10 @@ public class PAMController {
         return umbrella;
     }
 
+    /*
+    Edit Umbrella
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/edit-umbrella", method = RequestMethod.POST)
     public void editUmbrella(
             @RequestBody Umbrella umbrella,
@@ -635,6 +778,10 @@ public class PAMController {
         umbrellas.save(umbrella);
     }
 
+    /*
+    Delete Umbrella by ID
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/delete-umbrella/{id}", method = RequestMethod.DELETE)
     public void deleteUmbrella(
             @PathVariable("int") int id,
@@ -647,15 +794,26 @@ public class PAMController {
     }
 
 
-    //Import File Group
-    //Bags Upload
+    /*
+     UploadFiles
+    This is designed to add multiple items of each category at once,
+    rather than adding/creating a new club each individual time.
+    Each Item has its own fields and thus requires different upload methods
+    to account for each field for each type of item. (i.e. bags differ from clubs, which differ from shoes, etc)
+    Must Be Logged in to perform action
+     */
+
+    /*
+    Upload Bag File
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/upload-bags", method = RequestMethod.POST)
-    public void importBags(
+    public void uploadBags(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import bags!");
+            throw new Exception("You cannot upload bags!");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -674,15 +832,17 @@ public class PAMController {
         }
     }
 
-
-    //Balls Upload
+    /*
+    Upload Balls File
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/upload-balls", method = RequestMethod.POST)
-    public void importBalls(
+    public void uploadBalls(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import balls!");
+            throw new Exception("You cannot upload balls!");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -701,14 +861,17 @@ public class PAMController {
     }
 
 
-    //Clubs Upload
-    @RequestMapping(path = "/import-file", method = RequestMethod.POST)//Club-Upload
-    public void importFile(
+    /*
+    Upload Clubs File
+    Must Be Logged in to perform action
+     */
+    @RequestMapping(path = "/upload-clubs", method = RequestMethod.POST)
+    public void uploadClubs(
             HttpSession session,
             MultipartFile file
     ) throws Exception {
         if (session.getAttribute("username") == null){
-            throw new Exception ("You cannot import!");
+            throw new Exception ("You cannot upload!");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -727,14 +890,17 @@ public class PAMController {
     }
 
 
-    //Hats Upload
+    /*
+    Upload Hats File
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/upload-hats", method = RequestMethod.POST)
-    public void importHats(
+    public void uploadHats(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import hats!");
+            throw new Exception("You cannot upload hats!");
             }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -752,14 +918,17 @@ public class PAMController {
     }
 
 
-    //Pants Upload
+    /*
+    Upload Pants File
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/upload-pants", method = RequestMethod.POST)
-    public void importPants(
+    public void uploadPants(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import hats!");
+            throw new Exception("You cannot upload hats!");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -779,14 +948,17 @@ public class PAMController {
     }
 
 
-    //Shirts Upload
+    /*
+    Upload Shirts File
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/upload-shirts", method = RequestMethod.POST)
-    public void importShirt(
+    public void uploadShirt(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import shirts");
+            throw new Exception("You cannot upload shirts");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -804,14 +976,17 @@ public class PAMController {
     }
 
 
-    //Shoes Upload
+    /*
+    Upload Shoes File
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/upload-shoes", method = RequestMethod.POST)
-    public void importShoes(
+    public void uploadShoes(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import shirts");
+            throw new Exception("You cannot upload shirts");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -831,14 +1006,17 @@ public class PAMController {
     }
 
 
-    //Umbrellas Upload
+    /*
+    Upload Umbrellas File
+    Must Be Logged in to perform action
+     */
     @RequestMapping(path = "/upload-umbrellas", method = RequestMethod.POST)
-    public void importUmbrellas(
+    public void uploadUmbrellas(
             HttpSession session,
             MultipartFile file
     )throws Exception{
         if (session.getAttribute("username") == null){
-            throw new Exception("You cannot import shirts");
+            throw new Exception("You cannot upload shirts");
         }
         Scanner scanner = new Scanner (file.getInputStream());
         scanner.nextLine();
@@ -857,6 +1035,10 @@ public class PAMController {
         }
     }
 }
+
+/*
+Future Ideas that were not able to implemented during project time frame
+ */
 
 /*@RequestMapping(path = "/edit-inventory", method = RequestMethod.POST)
     public void editInventory(
