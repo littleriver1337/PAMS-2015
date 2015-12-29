@@ -491,14 +491,16 @@ public class PAMController {
         }
         else{
             Club jackClub = new Club(serialNumber, "Fake Make", "Fake Club Type", (fakeNum+1), "Fake Lie Angle", false, LocalDateTime.now().toString());
+            /*
+            Intention was to save the user to searched for club
+            The user would have an address so it could then be used for
+            further investigations in the market
+
             jackClub.user.setAddress(jackClub.user.getAddress());
             jackClub.user.setCity(jackClub.user.getCity());
             jackClub.user.setState(jackClub.user.getState());
             jackClub.user.setZip(jackClub.user.getZip());
-            //jackClub.user.getAddress();
-            //jackClub.user.getCity();
-            //jackClub.user.getState();
-            //jackClub.user.getZip();
+            */
             clubs.save(jackClub);
             return jackClub;
         }
@@ -860,7 +862,6 @@ public class PAMController {
         }
     }
 
-
     /*
     Upload Clubs File
     Must Be Logged in to perform action
@@ -889,7 +890,6 @@ public class PAMController {
         }
     }
 
-
     /*
     Upload Hats File
     Must Be Logged in to perform action
@@ -916,7 +916,6 @@ public class PAMController {
             hats.save(hat);
         }
     }
-
 
     /*
     Upload Pants File
@@ -947,7 +946,6 @@ public class PAMController {
         }
     }
 
-
     /*
     Upload Shirts File
     Must Be Logged in to perform action
@@ -974,7 +972,6 @@ public class PAMController {
             shirts.save(shirt);
         }
     }
-
 
     /*
     Upload Shoes File
@@ -1004,7 +1001,6 @@ public class PAMController {
             shoes.save(shoe);
         }
     }
-
 
     /*
     Upload Umbrellas File
