@@ -33,29 +33,21 @@
 
 <div class="col-md-8 adminMain">
 
-  <section class="searchItems">
+      <section class="searchItem">
+        <form class="form-horizontal" ng-submit="adminCtrl.makerSearch(maker)">
+          <!-- MAKER -->
+          <div class="form-group">
+            <input type="text" ng-model="maker" class="form-control" name="maker" placeholder="Maker" required>
+          </div>
+          <!-- SUBMIT BUTTONS -->
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary" name="searchMaker">Search</button>
+            </div>
+          </div>
+        </form>
+      </section>
 
-    <ul class="searchList">
-      <a href="#/clubType">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Club Type</li>
-      </a>
-
-      <a href="#/lieAngle">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Lie Angle</li>
-      </a>
-
-      <a href="#/maker">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Maker</li>
-      </a>
-
-      <a href="#/year">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Year</li>
-      </a>
-    </ul>
-
+    </form>
   </section>
 </div>

@@ -9,7 +9,12 @@ function initMap() {
     map: map,
     title: "PAMS"
   });
-  marker1.setMap(map);
+  var marker2 = new google.maps.Marker({
+    position: {lat: 33.808354, lng: -78.711687},
+    map: map,
+    title: "Golfsmith"
+  });
+  marker2.setMap(map);
 
   var geocoder = new google.maps.Geocoder();
 

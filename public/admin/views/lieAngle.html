@@ -33,29 +33,21 @@
 
 <div class="col-md-8 adminMain">
 
-  <section class="searchItems">
+  <section class="searchItem">
+    <form class="form-horizontal" ng-submit="adminCtrl.lieAngleSearch(angle)">
+      <!-- LIE ANGLE -->
+      <div class="form-group">
+        <input type="text" ng-model="angle" class="form-control" name="lieAngle" placeholder="Lie Angle" required>
+      </div>
+      <!-- SUBMIT BUTTONS -->
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="searchLieAngle">Search</button>
+        </div>
+      </div>
+    </form>
+  </section>
 
-    <ul class="searchList">
-      <a href="#/clubType">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Club Type</li>
-      </a>
-
-      <a href="#/lieAngle">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Lie Angle</li>
-      </a>
-
-      <a href="#/maker">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Maker</li>
-      </a>
-
-      <a href="#/year">
-        <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-          Search by Year</li>
-      </a>
-    </ul>
-
+    </form>
   </section>
 </div>
