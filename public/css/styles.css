@@ -29,10 +29,57 @@ body {
   height: 100px;
   color: white; }
   .slogan h1 {
-    font-family: "Philosopher", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 2.9em;
     padding-left: 1%;
     padding-top: 1%; }
+
+.topTitle {
+  opacity: .7;
+  color: black;
+  margin: 15% auto;
+  width: 35%; }
+  .topTitle h1 {
+    background-color: white;
+    font-size: 7em;
+    font-family: "Orbitron", sans-serif;
+    text-align: center;
+    margin: 5%;
+    padding: 2%; }
+  .topTitle h2 {
+    background-color: white;
+    text-align: center; }
+
+.directions {
+  height: 600px;
+  font-size: 3.5em;
+  font-family: "Josefin Sans", sans-serif;
+  margin: 5% auto;
+  line-height: 2em; }
+  .directions h2 {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 300; }
+
+.homepageList {
+  margin: 5% auto;
+  width: 100%;
+  padding: 0;
+  line-height: 2.25em; }
+  .homepageList li {
+    padding: 0; }
+
+#one {
+  margin-left: 15%; }
+
+#two {
+  margin-left: 30%; }
+
+#three {
+  margin-left: 45%; }
+
+#four {
+  margin-left: 60%; }
 
 .hidden {
   display: none; }
@@ -77,30 +124,33 @@ body {
   height: 400px; }
 
 .narrative {
-  background-color: white;
-  border-radius: 5%;
-  opacity: .85;
-  width: 90%;
-  margin: 7.5% auto;
-  font-family: "Philosopher", sans-serif;
+  background-color: #010A43;
+  width: 100%;
+  height: 600px;
+  margin: 0 auto;
+  margin-top: -1px;
   font-size: 1.4em;
-  line-height: 1.3em; }
+  color: white; }
   .narrative h2 {
-    font-family: "Philosopher", sans-serif;
-    font-size: 1.75em;
-    padding: 2%; }
-  .narrative p {
-    padding: 2%; }
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2.3em;
+    padding: 2%;
+    line-height: 1.5em;
+    margin: 0 auto;
+    margin-top: 17%;
+    opacity: .75; }
+
+.loginSec {
+  padding-top: 5%;
+  width: 100%;
+  background-color: #010A43;
+  height: auto; }
 
 .login {
-  margin: 28% auto;
+  margin: 0 auto;
   width: 90%;
-  background-color: #0C1055;
+  background-color: #010A43;
   min-height: 250px;
-  margin-bottom: 15%;
-  padding-left: 8%;
-  padding-right: 8%;
-  float: left;
   border-radius: 2%; }
   .login h3 {
     color: white;
@@ -119,7 +169,7 @@ body {
 
 .bg {
   height: 550px;
-  background-image: url(../assets/security-vector.jpg);
+  background-image: url(../assets/security-vector2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -265,6 +315,32 @@ div.slide-right h1 {
 
 #upload {
   float: left; }
+
+.true {
+  background-color: #CDCDCF;
+  border: 1px solid #494A5C;
+  height: 300px;
+  overflow-y: scroll;
+  margin-top: 5%; }
+  .true h3 {
+    margin-left: 2%;
+    font-size: 1.75em; }
+  .true p {
+    margin-left: 2%;
+    font-size: 1.25em; }
+
+.false {
+  background-color: #CDCDCF;
+  border: 1px solid #494A5C;
+  height: 300px;
+  overflow-y: scroll;
+  margin-top: 5%; }
+  .false h3 {
+    margin-left: 2%;
+    font-size: 1.75em; }
+  .false p {
+    margin-left: 2%;
+    font-size: 1.25em; }
 
 footer {
   width: 100%;

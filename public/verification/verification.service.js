@@ -13,23 +13,27 @@
         var clubType = res.clubType;
         var lieAngle = res.lieAngle;
         var year = res.year;
+        var maker = res.maker;
+        var serialNumber = res.serialNumber;
         if (res.isAuthentic) {
+          $('.false').addClass('hidden');
           $('.true').removeClass('hidden');
-          $('.true').append(
-            "Club Type: " + clubType + "<br>" +
-            "Lie Angle: " + lieAngle + "<br>" +
-            "Year: " + year + "<br>"
+          $('.true').html(
+            "<h3> AUTHENTIC </h3> " +
+            "<p> Please check to ensure the following details match the product.</p>" +
+            "<p> <b>Club Type</b>: " + clubType + "<br>" +
+            "<b>Maker</b>: " + maker + "<br>" +
+            "<b>Lie Angle</b>: " + lieAngle + "<br>" +
+            "<b>Serial Number</b>: " + serialNumber + "<br>" +
+            "<b>Year</b>: " + year + "<br></p>"
           );
           return currentItem;
         } else {
-          $location.path("/false/");
+          $('.true').addClass('hidden');
+          $('.false').removeClass('hidden');
         }
       });
     };
-
-    // counterfeit item --> user.address, user.city, user.state
-  //  "/list-jacks/" POST
-  //  "/find-club/" GET
 
       return {
         checkItem: checkItem
