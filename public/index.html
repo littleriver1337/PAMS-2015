@@ -3,67 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>PAMS | Product Authentication & Management System</title>
-  <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900' rel='stylesheet' type='text/css'>
+
+  <!-- BOOTSTRAP -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Righteous|Philosopher:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,700|Josefin+Sans:300,400,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- FONTS -->
+  <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900|Raleway:400,700|Josefin+Sans:400,300,700|Ubuntu:400,300,700|Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+
+  <!-- STYLES -->
   <link rel="stylesheet" href="/css/styles.css" media="screen" title="styles" charset="utf-8">
 </head>
 
 <body ng-app="pamsLogin">
-
-<!-- /*<style type="text/css">
-    html, body { height: 80%; margin: 0; padding: 0; }
-    #map { height: 80%; }
-  </style>
-
-  <div id="floating-panel">
-        <input id="address" type="textbox" value="Sydney, NSW">
-        <input id="submit" type="button" value="Geocode">
-    </div>
-<div id="map"></div>
-<script type="text/javascript">
-
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 32.779991, lng: -79.934250},
-    zoom: 8
-  });
-  var marker = new google.maps.Marker({
-    position: {lat: 32.779991, lng: -79.934250},
-    map: map,
-    title: "PAMS"
-  });
-  marker.setMap(map);
-
-  var geocoder = new google.maps.Geocoder();
-
-  document.getElementById('submit').addEventListener('click', function() {
-    geocodeAddress(geocoder, map);
-  });
-
-  function geocodeAddress(geocoder, resultsMap) {
-    var address = document.getElementById('address').value;
-    geocoder.geocode({'address': address}, function(results, status) {
-      if (status === google.maps.GeocoderStatus.OK) {
-        resultsMap.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-          map: resultsMap,
-          position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-  }
-
-}
-
-    </script>*/ -->
-
 
   <ng-view>
     <!-- This is where templates load into   -->
@@ -75,58 +26,51 @@ function initMap() {
     </div>
   </footer> -->
 
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.1/mapbox-gl.js'></script>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
-
-
+<!-- ANGULAR -->
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-  <!-- <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvyDipzh4gBNgAbT3Av77p_Mqv452Seeo&callback=initMap"></script>
-  <script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
-  <script type="text/javascript" src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
-  <script type="text/javascript" src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script> -->
-  <!-- <script type="text/javascript" src="googleMaps.js"></script> -->
-
-
-  <!-- LIBRARIES -->
-  <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
   <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+  <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!-- LIBRARIES -->
+  <script type="text/javascript" src="bower_components/moment/moment.js"></script>
   <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 
-<!-- LOGIN MODULE -->
-  <script src="login/login.module.js" charset="utf-8"></script>
-  <script src="login/login.controller.js" charset="utf-8"></script>
-  <script src="login/login.service.js" charset="utf-8"></script>
-
-<!-- ADMIN MODULE -->
+<!-- MODULES -->
+<!-- ADMIN -->
   <script src="admin/admin.module.js" charset="utf-8"></script>
   <script src="admin/admin.controller.js" charset="utf-8"></script>
   <script src="admin/admin.service.js" charset="utf-8"></script>
 
-<!-- ADMIN MODULE -->
-  <script src="verification/verification.module.js" charset="utf-8"></script>
-  <script src="verification/verification.controller.js" charset="utf-8"></script>
-  <script src="verification/verification.service.js" charset="utf-8"></script>
+<!-- ADD ITEMS --> 
+  <script src="addItems/addItems.module.js" charset="utf-8"></script>
+  <script src="addItems/addItems.controller.js" charset="utf-8"></script>
+  <script src="addItems/addItems.service.js" charset="utf-8"></script>
 
-<!-- COMPANY MODULE -->
+<!-- COMPANY -->
   <script src="company/company.module.js" charset="utf-8"></script>
   <script src="company/company.controller.js" charset="utf-8"></script>
   <script src="company/company.service.js" charset="utf-8"></script>
 
-<!-- RETAILER MODULE -->
-  <script src="retailer/retailer.module.js" charset="utf-8"></script>
-  <script src="retailer/retailer.controller.js" charset="utf-8"></script>
-  <script src="retailer/retailer.service.js" charset="utf-8"></script>
-
-<!-- GUEST MODULE -->
+<!-- GUEST -->
   <script src="guest/guest.module.js" charset="utf-8"></script>
   <script src="guest/guest.controller.js" charset="utf-8"></script>
   <script src="guest/guest.service.js" charset="utf-8"></script>
 
-<!-- ADD ITEMS MODULE -->
-  <script src="addItems/addItems.module.js" charset="utf-8"></script>
-  <script src="addItems/addItems.controller.js" charset="utf-8"></script>
-  <script src="addItems/addItems.service.js" charset="utf-8"></script>
+<!-- LOGIN -->
+  <script src="login/login.module.js" charset="utf-8"></script>
+  <script src="login/login.controller.js" charset="utf-8"></script>
+  <script src="login/login.service.js" charset="utf-8"></script>
+
+<!-- RETAILER -->
+  <script src="retailer/retailer.module.js" charset="utf-8"></script>
+  <script src="retailer/retailer.controller.js" charset="utf-8"></script>
+  <script src="retailer/retailer.service.js" charset="utf-8"></script>
+
+<!-- VERIFICATION -->
+  <script src="verification/verification.module.js" charset="utf-8"></script>
+  <script src="verification/verification.controller.js" charset="utf-8"></script>
+  <script src="verification/verification.service.js" charset="utf-8"></script>
+
 </body>
 </html>
