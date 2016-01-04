@@ -6,10 +6,16 @@ a {
     color: $mainColor;
     text-decoration: none;
   }
+  &:active {
+    text-decoration: none;
+  }
 }
 
 header {
-  height: 100px;
+  height: 80px;
+  position: relative;
+  z-index: 100;
+  box-shadow: -2px 2px 7px 1px rgba(0, 0, 0, .4);
 }
 
 body {
@@ -17,31 +23,74 @@ body {
   font-family: $font;
 }
 
-.logo {
-  background-color: $darkerColor;
-  height: 100px;
-  color: white;
-  h1 {
-    font-family: $h1Font;
-    font-size: 5.5em;
-    padding-left: 10%;
+.hidden {
+  display: none;
+}
+
+
+// BUTTONS
+.btn {
+  width: 25%;
+  margin-left: 2%;
+  text-align: center;
+  float: right;
+}
+
+.btn-primary {
+  background-color: #2B367B;
+  border: 1px solid #2B367B;
+  transition: all 1s ease-in-out;
+  &:hover {
+    background-color: $darkerColor;
+    border: 1px solid $darkerColor;
+  }
+  &:active {
+    background-color: $darkerColor;
+    border: 1px solid $darkerColor;
+  }
+  &:visited {
+    background-color: $darkerColor;
+    border: 1px solid $darkerColor;
   }
 }
 
-#logoImg {
-  height: 100px;
+.btn-success {
+  background-color: #0A6233;
+  border: 1px solid #0A6233;
+  transition: all 1s ease-in-out;
+  &:hover {
+    background-color: #004420;
+    border: 1px solid #004420;
+  }
+  &:active {
+    background-color: #004420;
+    border: 1px solid #004420;
+  }
 }
 
-.slogan {
-  background-color: $darkerColor;
-  height: 100px;
-  color: white;
-  h1 {
-    font-family: $secondaryFont;
-    font-size: 2.9em;
-    padding-left: 1%;
-    padding-top: 1%;
+.btn-danger {
+  background-color: #9B2D2D;
+  border: 1px solid #9B2D2D;
+  transition: all 1s ease-in-out;
+  &:hover {
+    background-color: #490000;
+    border: 1px solid #490000;
   }
+  &:active {
+    background-color: #490000;
+    border: 1px solid #490000;
+  }
+}
+
+
+// LOGIN HOMEPAGE
+.bg {
+  height: 550px;
+  background-image: url(../assets/security-vector2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: .8;
 }
 
 .topTitle {
@@ -60,9 +109,25 @@ body {
   h2 {
     background-color: white;
     text-align: center;
-    // font-family: $h1Font;
-    // margin: 0;
-    // padding: 0;
+  }
+}
+
+.narrative {
+  background-color: $darkerColor;
+  width: 100%;
+  height: 600px;
+  margin: 0 auto;
+  margin-top: -1px;
+  font-size: 1.4em;
+  color: white;
+  h2 {
+    font-family: $secondaryFont;
+    font-size: 2.3em;
+    padding: 2%;
+    line-height: 1.5em;
+    margin: 0 auto;
+    margin-top: 17%;
+    opacity: .75;
   }
 }
 
@@ -100,23 +165,121 @@ body {
 
 #three {
   margin-left: 45%;
-  // font-family: 'Lobster Two', cursive;
-  // font-size: 1.5em;
 }
 
 #four {
   margin-left: 60%;
 }
 
-.hidden {
-  display: none;
+  // LOGIN SECTION
+.loginSec {
+  padding-top: 5%;
+  width: 100%;
+  background-color: $darkerColor;
+  height: auto;
 }
 
-// SIDE MENU
+.login {
+  margin: 0 auto;
+  width: 90%;
+  background-color: $darkerColor;
+  min-height: 250px;
+  border-radius: 2%;
+  h3 {
+    color: white;
+    font-size: 2.5em;
+    font-family: $font;
+    text-align: center;
+    padding-bottom: 1%;
+  }
+  form {
+    text-align: center;
+  }
+}
+
+
+// HEADER - LOGO
+.logo {
+  background-color: $darkerColor;
+  height: 80px;
+  color: white;
+  // position: relative;
+  // z-index: 100;
+  #logoIcon {
+    opacity: .7;
+    width: 15%;
+    display: inline-block;
+  }
+  h1 {
+    font-family: $h1Font;
+    font-size: 5em;
+    opacity: .7;
+    display: inline-block;
+  }
+}
+
+#logoIcon, #logoTitle {
+  margin: 5px 0;
+  vertical-align: top;
+  // text-shadow: -5px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+
+// HEADER - SLOGAN
+.slogan {
+  background-color: $darkerColor;
+  height: 80px;
+  color: white;
+  overflow: hidden;
+  // position: relative;
+  // z-index: 100;
+  h1 {
+    font-family: $secondaryFont;
+    font-size: 2.9em;
+    padding-left: 1%;
+    padding-top: 1%;
+  }
+  a {
+    color: white;
+    opacity: .7;
+    font-family: $secondaryFont;
+    font-size: 1.75em;
+    float: right;
+    &:visited {
+      color: white;
+    }
+  }
+  span {
+    float: right;
+    margin-top: 3%;
+    width: auto;
+  }
+}
+
+
+// HEADER - LOGOUT
+#logoutLink {
+  margin-left: 5px;
+  margin-right: 5px;
+  text-shadow: -5px 2px 1px rgba(0, 0, 0, 0.5)
+}
+
+#logoutIcon {
+  width: 10%;
+  position: relative;
+  bottom: 2px;
+  float: right;
+  opacity: .7;
+}
+
+
+// SIDEBAR
 .sidebar {
   height: 550px;
   background-color: $sidebarColor;
-  // font-family: $h1Font;
+  position: relative;
+  z-index: 0;
+  box-shadow: 1px 2px 7px 1px rgba(0, 0, 0, .4);
 }
 
 .menuItems {
@@ -132,10 +295,21 @@ body {
     margin-top: 2.5%;
     background-color: $bodyBG;
     transition: all 1s ease-in-out;
+    border-bottom: 3px solid $menuBorder;
+    border-left: 1px solid $menuBorder;
     border-radius: 5%;
     &:hover {
       cursor: pointer;
-      background-color: #DDDDE0;
+      background-color: $menuItems;
+      border-bottom: 3px solid $sidebarColor;
+      border-left: 1px solid $sidebarColor;
+    }
+    a {
+      font-weight: bold;
+      color: $darkerColor;
+      &:visited {
+        color: $darkerColor;
+      }
     }
   }
   h2, h3 {
@@ -143,6 +317,7 @@ body {
     text-align: center;
     color: white;
     margin-top: 10px;
+    text-shadow: -3px 2px 3px rgba(0, 0, 0, 0.5);
   }
   h2 {
     margin-top: 20px;
@@ -153,106 +328,18 @@ body {
   width: 40%;
 }
 
+
+// MAIN CONTENT
 .mainContent {
   height: auto;
   min-height: 550px;
 }
 
-.angular-google-map-container {
-  height: 400px;
+.adminMain {
+  padding: 1% 2%;
 }
 
-// HOMEPAGE NARRATIVE
-.narrative {
-  background-color: $darkerColor;
-  width: 100%;
-  height: 600px;
-  margin: 0 auto;
-  margin-top: -1px;
-  font-size: 1.4em;
-  color: white;
-  h2 {
-    font-family: $secondaryFont;
-    font-size: 2.3em;
-    padding: 2%;
-    line-height: 1.5em;
-    margin: 0 auto;
-    margin-top: 17%;
-    opacity: .75;
-  }
-}
-
-// HOMEPAGE LOGIN
-.loginSec {
-  padding-top: 5%;
-  width: 100%;
-  background-color: $darkerColor;
-  height: auto;
-}
-
-.login {
-  margin: 0 auto;
-  width: 90%;
-  background-color: $darkerColor;
-  min-height: 250px;
-  // padding-left: 8%;
-  // padding-right: 8%;
-  // float: left;
-  border-radius: 2%;
-  h3 {
-    color: white;
-    font-size: 2.5em;
-    font-family: $font;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-  form {
-    text-align: center;
-  }
-}
-
-.btn {
-  width: 25%;
-  margin-left: 2%;
-  text-align: center;
-  float: right;
-}
-
-.bg {
-  height: 550px;
-  background-image: url(../assets/security-vector2.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  opacity: .8;
-}
-
-.login, .narrative {
-  vertical-align: middle;
-}
-
-// ANIMATION
-div.slide-right {
-  width: 100%;
-  overflow:hidden;
-}
-div.slide-right h1 {
-  animation: 4s slide-right forwards;
-}
-
-@keyframes slide-right {
-  from {
-    margin-left: -100%;
-    width: 300%;
-  }
-
-  to {
-    margin-left: -5%;
-    width: 100%;
-  }
-}
-
-// ADD ADMIN/COMPANY/RETAILER
+  // CREATE USERS
 .addUsers {
   width: 80%;
   margin: 0 auto;
@@ -261,32 +348,84 @@ div.slide-right h1 {
     margin-left: 2%;
   }
   h3 {
-    font-weight: bold;
-    font-family: $h1Font;
+    // font-weight: bold;
+    font-family: $h3Font;
+    color: $darkerColor;
+    font-size: 2.5em;
   }
 }
 
 .addUsersList {
   list-style-type: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
   li {
     background-color: #CDCDCF;
-    padding: 5%;
     border: 1px solid grey;
-    transition: .5s all ease-in-out;
-    -webkit-box-shadow: 11px 13px 15px -8px rgba(0,0,0,0.4);
-    -moz-box-shadow: 11px 13px 15px -8px rgba(0,0,0,0.4);
     box-shadow: 11px 13px 15px -8px rgba(0,0,0,0.4);
+      -moz-box-shadow: 11px 13px 15px -8px rgba(0,0,0,0.4);
+      -webkit-box-shadow: 11px 13px 15px -8px rgba(0,0,0,0.4);
+    font-weight: bold;
+    padding: 5%;
+    transition: .5s all ease-in-out;
     &:hover {
       background-color: #DDDDE0;
-      -webkit-box-shadow: 8px 8px 15px -8px rgba(0,0,0,0.26);
-      -moz-box-shadow: 8px 8px 15px -8px rgba(0,0,0,0.26);
       box-shadow: 8px 8px 15px -8px rgba(0,0,0,0.26);
+        -moz-box-shadow: 8px 8px 15px -8px rgba(0,0,0,0.26);
+        -webkit-box-shadow: 8px 8px 15px -8px rgba(0,0,0,0.26);
     }
   }
 }
 
+.userIcons {
+  width: 10%;
+  margin-right: 2%;
+}
+
+.addUser {
+  width: 80%;
+  margin: 0 auto;
+  h3 {
+    font-family: $h3Font;
+    color: $darkerColor;
+    font-size: 2.5em;
+  }
+}
+
+  // MANAGE USERS
+.userList {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.3em;
+  h3 {
+    font-family: $h3Font;
+    color: $darkerColor;
+    font-size: 2em;
+  }
+}
+
+.userInfo {
+  height: 550px;
+  width: 80%;
+  margin: 0 auto;
+  overflow-x: visible;
+  overflow-y: scroll;
+  h3 {
+    font-family: $h3Font;
+    font-size: 2em;
+    span {
+      font-family: $font;
+      font-weight: bold;
+      color: $darkerColor;
+    }
+  }
+  form {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+  // IMPORT PRODUCTS
 .addItemsList {
   list-style-type: none;
   padding: 0;
@@ -311,6 +450,43 @@ div.slide-right h1 {
   }
 }
 
+.itemIcons {
+  width: 10%;
+  margin-right: 2%;
+}
+
+.addItem {
+  width: 80%;
+  margin: 0 auto;
+  h3 {
+    font-family: $h3Font;
+    color: $darkerColor;
+    font-size: 2.5em;
+  }
+}
+
+.importSection {
+  width: 80%;
+  margin: 0 auto;
+  h3 {
+    font-family: $h3Font;
+    color: $darkerColor;
+    font-size: 2.5em;
+    display: inline-block;
+  }
+  h4 {
+    font-family: $h3Font;
+    // color: $darkerColor;
+    font-size: 1.5em;
+    display: inline-block;
+  }
+}
+
+#upload {
+  float: left;
+}
+
+  // SEARCH PRODUCTS
 .searchList {
   list-style-type: none;
   padding: 0;
@@ -343,74 +519,104 @@ div.slide-right h1 {
     margin-left: 2%;
   }
   h3 {
+    font-family: $h3Font;
+    color: $darkerColor;
+    font-size: 2.5em;
+  }
+}
+
+.searchItem {
+  // width: 80%;
+  // margin: 0 auto;
+  h3 {
+    font-family: 4em;
+    font-weight: 700;
+    color: $darkerColor;
+    margin-bottom: 2%;
+  }
+  label {
+    color: $darkerColor;
     font-weight: bold;
-    font-family: $h1Font;
+    font-size: 1.10em;
   }
 }
 
-.userList {
-  font-size: 1.3em;
-}
-
-.userInfo {
-  height: 550px;
-  overflow-x: visible;
+.searchRes {
+  background-color: #CDCDCF;
+  border: 1px solid #494A5C;
+  height: 300px;
   overflow-y: scroll;
-}
-
-.userIcons {
-  width: 10%;
-  margin-right: 2%;
-}
-
-.itemIcons {
-  width: 10%;
-  margin-right: 2%;
-}
-
-.addItem {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.addAdmin {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.addCompany {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.addRetailer {
-  width: 80%;
-  margin: 0 auto;
-}
-
-  // EDIT USER
-  .userInfo {
-    width: 80%;
-    margin: 0 auto;
+  margin-top: 3%;
+  h3 {
+    font-family: $h3Font;
+    color: $darkerColor;
+    margin-left: 2%;
+    font-size: 1.75em;
   }
-
-//COMPANY SECTION
-.importSection {
-  width: 80%;
-  margin: 0 auto;
+  p {
+    margin-left: 2%;
+    font-size: 1.25em;
+  }
 }
 
-#upload {
-  float: left;
+
+// GOOGLE MAPS
+.angular-google-map-container {
+  height: 400px;
 }
 
-// VERIFY
+
+// VERIFY PRODUCT
+.productVerification {
+  h3 {
+    font-family: 4em;
+    font-weight: 700;
+    color: $darkerColor;
+    margin-bottom: 2%;
+  }
+  label {
+    color: $darkerColor;
+    font-weight: bold;
+    font-size: 1.10em;
+  }
+}
+
+.authImg {
+  display: inline-block;
+  width: 30%;
+  img {
+    width: 90%;
+    padding-top: 5%;
+  }
+}
+
+.authTxt {
+  display: inline-block;
+  width: 65%;
+  padding-top: 2%;
+  h3 {
+    font-family: 4em;
+    font-weight: 700;
+    color: $darkerColor;
+    margin-bottom: 2%;
+  }
+}
+
+.authImg, .authTxt {
+  vertical-align: top;
+}
+
+#notAuth {
+  width: 75%;
+  padding-left: 5%;
+}
+
 .true {
   background-color: #CDCDCF;
   border: 1px solid #494A5C;
   height: 300px;
   overflow-y: scroll;
-  margin-top: 5%;
+  margin-top: 3%;
   h3 {
     margin-left: 2%;
     font-size: 1.75em;
@@ -426,7 +632,7 @@ div.slide-right h1 {
   border: 1px solid #494A5C;
   height: 300px;
   overflow-y: scroll;
-  margin-top: 5%;
+  margin-top: 3%;
   h3 {
     margin-left: 2%;
     font-size: 1.75em;
@@ -439,10 +645,48 @@ div.slide-right h1 {
 
 // FOOTER
 footer {
+  clear: both;
   width: 100%;
-  height: 80px;
+  height: 100px;
   color: white;
   text-align: center;
-  padding-top: 2%;
+  padding-top: .75%;
   background-color: $darkerColor;
+  a {
+    color: white;
+    font-weight: bold;
+    &:hover {
+      color: white;
+      opacity: 1;
+      text-decoration: underline;
+    }
+    &:visited {
+      color: white;
+    }
+  }
+  p {
+    margin: 0;
+    font-family: $h3Font;
+    font-size: .75em;
+    opacity: .7;
+  }
+}
+
+.socialIcon {
+  width: 30px;
+  opacity: .7;
+  padding: 2px;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+// UNIQUE ADJUSTMENTS
+.medLong {
+  height: 600px;
+}
+
+.extraLong {
+  height: 650px;
 }

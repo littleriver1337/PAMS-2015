@@ -31,6 +31,10 @@
         admin.accessLevel = "ADMIN";
         $http.post(userRoute, admin).success(function(res){
           console.log("New admin posted: ", admin);
+          $('input[name="username"]').val('');
+          $('input[name="password"]').val('');
+          $('input[name="passwordVerify"]').val('');
+          $('input[name="email"]').val('');
           console.log("Response: ", res);
         });
       };
@@ -144,6 +148,23 @@
 
       var clubTypeSearch = function(type){
         $http.get(clubTypeSearchRoute + type).success(function(res){
+          var searchHTML = "";
+          _.each(res, function(el, idx, arr){
+            searchHTML += "<div class='authTxt'> " +
+            "<p><b>Club Type: </b>" +
+            el.clubType + "<br>" +
+            "<b>Maker: </b>" +
+            el.maker + "<br>" +
+            "<b>Lie Angle: </b>" +
+            el.lieAngle + "<br>" +
+            "<b>Serial Number: </b>" +
+            el.serialNumber + "<br>" +
+            "<b>Year: </b>" +
+            el.year +
+            "<br></p></div>";
+          });
+          $('.searchRes').removeClass('hidden');
+          $('.actualResults').html(searchHTML);
           console.log("Club Type: ", type);
           console.log("Response: ", res);
         });
