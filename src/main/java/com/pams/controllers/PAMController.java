@@ -501,6 +501,16 @@ public class PAMController {
             jackClub.user.setState(jackClub.user.getState());
             jackClub.user.setZip(jackClub.user.getZip());
             */
+
+            /*
+            Storing session user attribute to user field for jackClub Object
+             */
+            User tempUser = users.findOneByUsername(session.getAttribute("username").toString());
+            jackClub.user = tempUser;
+
+            /*
+            Saving counterfeit club to database with fake serial number, user who authenticated it, and time stamp
+             */
             clubs.save(jackClub);
             return jackClub;
         }
