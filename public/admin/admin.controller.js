@@ -48,7 +48,15 @@ angular
       $scope.user.state = vm.user.state;
       $scope.user.zip = vm.user.zip;
       window.thing = vm.user;
-      console.log("user: ", vm.user);
+      console.log("whole user: ", vm.user);
+      if(vm.user.accessLevel == "ADMIN"){
+        $('input[name="address"]').addClass('hidden');
+        $('input[name="city"]').addClass('hidden');
+        $('input[name="companyName"]').addClass('hidden');
+        $('input[name="state"]').addClass('hidden');
+        $('input[name="zip"]').addClass('hidden');
+        // console.log("test: " + input[name="username"]);
+      }
     });
 
     vm.editUser = function(user){

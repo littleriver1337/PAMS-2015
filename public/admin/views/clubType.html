@@ -1,43 +1,54 @@
 <header>
   <div class="col-md-4 logo">
-    <h1>P.A.M.S</h1>
+    <img src="../../assets/lock.png" id="logoIcon" alt="">
+    <h1 id="logoTitle">PAMS</h1>
   </div>
   <div class="col-md-8 slogan">
-    <h1>Product Authentication & Management System</h1>
+
+    <section id="tester" ng-controller="LoginController">
+
+    </section>
+    <!-- <h1>Product Authentication & Management System</h1> -->
+    <span><a id="logoutLink" href="#/logout/">LOGOUT</a><img src="../../assets/log-out.png" id="logoutIcon" alt="Logout"></span>
   </div>
 </header>
 
 <div class="mainContent">
-  <div class="col-md-4 sidebar">
-    <ul class="menuItems"> <h2>ADMIN</h2>
-      <h3>CONTROL PANEL</h3>
-      <li><img src="../../assets/add-user.svg" class="menuIcon" alt="Create Users"><br>
-        <a href="/#/addUsers">Create<br>User</a></li>
+<div class="col-md-4 sidebar">
+  <ul class="menuItems"> <h2>ADMIN</h2>
+    <h3>CONTROL PANEL</h3>
+    <li><img src="../../assets/add-user.png" class="menuIcon" alt="Create Users"><br>
+      <a href="/#/addUsers">Create<br>Users</a></li>
 
-      <li><img src="../../assets/users.svg" class="menuIcon" alt="Manage Users"><br>
-        <a href="/#/users">Manage<br>Users</a></li>
+    <li><img src="../../assets/users.png" class="menuIcon" alt="Manage Users"><br>
+      <a href="/#/users">Manage<br>Users</a></li>
 
-      <li><img src="../../assets/upload.svg" class="menuIcon" alt="Import Items"><br>
-        <a href="/#/addItems">Import<br>Products</a></li>
+    <li><img src="../../assets/upload.png" class="menuIcon" alt="Import Items"><br>
+      <a href="/#/addItems">Import<br>Products</a></li>
 
-      <li><img src="../../assets/magnifying-glass.svg" class="menuIcon" alt="Search"><br>
-        <a href="/#/search">Search<br>Products</a></li>
+    <li><img src="../../assets/magnifying-glass.png" class="menuIcon" alt="Search"><br>
+      <a href="/#/search">Search<br>Products</a></li>
 
-      <li><img src="../../assets/map.svg" class="menuIcon" alt="Map"><br>
-        <a href="../../map.html" target="new">Counterfeit<br>Map</a></li>
+    <li><img src="../../assets/map.png" class="menuIcon" alt="Map"><br>
+      <a href="../../map.html" target="new">Counterfeit<br>Map</a></li>
 
-      <li><img src="../../assets/shield.svg" class="menuIcon" alt="Verify Product"><br>
-        <a href="/#/admin">Verify<br>Product</a></li>
-    </ul>
-  </div>
+    <li><img src="../../assets/shield.png" class="menuIcon" alt="Verify Product"><br>
+      <a href="/#/admin">Verify<br>Product</a></li>
+  </ul>
+</div>
 
 <div class="col-md-8 adminMain">
 
   <section class="searchItem">
+    <h3>Search by Club Type:</h3>
+
     <form class="form-horizontal" ng-submit="adminCtrl.clubTypeSearch(type)">
       <!-- CLUB TYPE -->
       <div class="form-group">
-        <input type="text" ng-model="type" class="form-control" name="clubType" placeholder="Club Type" required>
+      <label for="clubType" class="col-sm-2 control-label">Club Type</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="type" class="form-control" name="clubType" required>
+      </div>
       </div>
       <!-- SUBMIT BUTTONS -->
       <div class="form-group">
@@ -47,7 +58,25 @@
       </div>
     </form>
   </section>
-
     </form>
+
+    <section class="searchRes hidden">
+        <h3>Search Results: </h3>
+        <section class="actualResults">
+
+        </section>
+    </section>
+
   </section>
 </div>
+
+<footer>
+  <div class="col-md-12">
+    <p>Connect with PAMS on social media:</p>
+    <a href="https://twitter.com/@Pams2016" target="_blank"><img src="../../assets/twitter.png" class="socialIcon" alt="Twitter"></a>
+    <a href="https://www.facebook.com/Pams2015-1550404305277834/?skip_nax_wizard=true" target="_blank"><img src="../../assets/facebook.png" class="socialIcon" alt="Facebook"></a>
+    <br>
+    <p>&copy; PAMS, Inc. 2015</p>
+    <p><a href="http://www.entypo.com">Entypo +</a> pictograms by Daniel Bruce</p>
+  </div>
+</footer>

@@ -11,9 +11,11 @@
         console.log("Login info posted: ", userInfo);
         console.log("Response: ", res);
         var currentUser = res;
+        var username = res.username;
         if (currentUser.accessLevel === "ADMIN") {
           console.log("User is an Admin");
           $location.path('/admin/');
+          $('#tester').html(username);
         } else if (currentUser.accessLevel === "COMPANY_USER") {
           console.log("User is a Company");
           $location.path('/verifyC/');
