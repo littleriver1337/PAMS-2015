@@ -40,11 +40,16 @@
 <div class="col-md-8 adminMain">
 
   <section class="searchItem">
+    <h3>Search by Lie Angle:</h3>
+
     <form class="form-horizontal" ng-submit="adminCtrl.lieAngleSearch(angle)">
       <!-- LIE ANGLE -->
       <div class="form-group">
-        <input type="text" ng-model="angle" class="form-control" name="lieAngle" placeholder="Lie Angle" required>
-      </div>
+        <label for="lieAngle" class="col-sm-2 control-label">Lie Angle</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="angle" class="form-control" name="lieAngle" required>
+        </div>
+        </div>
       <!-- SUBMIT BUTTONS -->
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
@@ -55,6 +60,14 @@
   </section>
 
     </form>
+
+    <section class="searchRes hidden">
+        <h3>Search Results: </h3>
+        <section class="actualResults">
+
+        </section>
+    </section>
+
   </section>
 </div>
 
