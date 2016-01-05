@@ -4,24 +4,21 @@
     .module('pamsAdmin')
     .factory('AdminService', function($http, _, $location){
 
+      // CREATE PRODUCT ROUTES
       var itemRoute = "/find-club/";
-
       var createClubRoute = "/create-club/";
-
       var createBagRoute = "/create-bag/";
-
       var createHatRoute = "/create-hat/";
-
       var createShirtRoute = "/create-shirt/";
-
       var createBallRoute = "/create-ball/";
 
-
+      // USER MANAGEMENT ROUTES
       var userRoute = "/create-user/";
       var editUserRoute = "/edit-user/";
       var findUsersRoute = "/find-users/";
       var deleteUserRoute = "/delete-user/";
 
+      // SEARCH ROUTES
       var makerSearchRoute = "/search-by-maker/";
       var clubTypeSearchRoute = "/search-by-clubType/";
       var yearSearchRoute = "/search-by-year/";
@@ -141,6 +138,23 @@
 
       var makerSearch = function(maker){
         $http.get(makerSearchRoute + maker).success(function(res){
+          var searchHTML = "";
+          _.each(res, function(el, idx, arr){
+            searchHTML += "<div class='authTxt'> " +
+            "<p><b>Club Type: </b>" +
+            el.clubType + "<br>" +
+            "<b>Maker: </b>" +
+            el.maker + "<br>" +
+            "<b>Lie Angle: </b>" +
+            el.lieAngle + "<br>" +
+            "<b>Serial Number: </b>" +
+            el.serialNumber + "<br>" +
+            "<b>Year: </b>" +
+            el.year +
+            "<br></p></div>";
+          });
+          $('.searchRes').removeClass('hidden');
+          $('.actualResults').html(searchHTML);
           console.log("Maker: ", maker);
           console.log("Response: ", res);
         });
@@ -172,6 +186,23 @@
 
       var yearSearch = function(year){
         $http.get(yearSearchRoute + year).success(function(res){
+          var searchHTML = "";
+          _.each(res, function(el, idx, arr){
+            searchHTML += "<div class='authTxt'> " +
+            "<p><b>Club Type: </b>" +
+            el.clubType + "<br>" +
+            "<b>Maker: </b>" +
+            el.maker + "<br>" +
+            "<b>Lie Angle: </b>" +
+            el.lieAngle + "<br>" +
+            "<b>Serial Number: </b>" +
+            el.serialNumber + "<br>" +
+            "<b>Year: </b>" +
+            el.year +
+            "<br></p></div>";
+          });
+          $('.searchRes').removeClass('hidden');
+          $('.actualResults').html(searchHTML);
           console.log("Year: ", year);
           console.log("Response: ", res);
         });
@@ -179,6 +210,23 @@
 
       var lieAngleSearch = function(angle){
         $http.get(lieAngleSearchRoute + angle).success(function(res){
+          var searchHTML = "";
+          _.each(res, function(el, idx, arr){
+            searchHTML += "<div class='authTxt'> " +
+            "<p><b>Club Type: </b>" +
+            el.clubType + "<br>" +
+            "<b>Maker: </b>" +
+            el.maker + "<br>" +
+            "<b>Lie Angle: </b>" +
+            el.lieAngle + "<br>" +
+            "<b>Serial Number: </b>" +
+            el.serialNumber + "<br>" +
+            "<b>Year: </b>" +
+            el.year +
+            "<br></p></div>";
+          });
+          $('.searchRes').removeClass('hidden');
+          $('.actualResults').html(searchHTML);
           console.log("Lie Angle: ", angle);
           console.log("Response: ", res);
         });

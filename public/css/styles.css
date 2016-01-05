@@ -73,7 +73,7 @@ body {
 .topTitle {
   opacity: .7;
   color: black;
-  margin: 15% auto;
+  margin: 15% auto 0 auto;
   width: 35%; }
   .topTitle h1 {
     background-color: white;
@@ -104,10 +104,11 @@ body {
     opacity: .75; }
 
 .directions {
-  height: 600px;
+  display: block;
+  height: 750px;
   font-size: 3.5em;
   font-family: "Josefin Sans", sans-serif;
-  margin: 5% auto;
+  margin: 5% auto 0 auto;
   line-height: 2em; }
   .directions h2 {
     text-align: center;
@@ -134,11 +135,45 @@ body {
 #four {
   margin-left: 60%; }
 
+.authExplaination {
+  background-color: #37417D;
+  height: 950px;
+  width: 100%;
+  margin: 0 auto; }
+  .authExplaination h2 {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+    font-size: 3em;
+    padding: 5%;
+    color: white;
+    opacity: .8;
+    line-height: 1.5em; }
+
+#homepageMap {
+  text-align: center;
+  width: 100%; }
+
+#map {
+  border: 3px solid white; }
+
 .loginSec {
   padding-top: 5%;
-  width: 100%;
   background-color: #010A43;
-  height: auto; }
+  height: 400px; }
+  .loginSec h3 {
+    text-align: center;
+    font-family: "Josefin Sans", sans-serif;
+    color: white;
+    font-size: 2.9em;
+    line-height: 1.2em;
+    opacity: .7; }
+  .loginSec p {
+    padding: 5%;
+    font-family: "Josefin Sans", sans-serif;
+    color: white;
+    font-size: 2em;
+    line-height: 1.25em;
+    opacity: .7; }
 
 .login {
   margin: 0 auto;

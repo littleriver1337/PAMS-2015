@@ -96,7 +96,7 @@ body {
 .topTitle {
   opacity: .7;
   color: black;
-  margin: 15% auto;
+  margin: 15% auto 0 auto;
   width: 35%;
   h1 {
     background-color: white;
@@ -132,10 +132,11 @@ body {
 }
 
 .directions {
-  height: 600px;
+  display: block;
+  height: 750px;
   font-size: 3.5em;
   font-family: $secondaryFont;
-  margin: 5% auto;
+  margin: 5% auto 0 auto;
   line-height: 2em;
   h2 {
     text-align: center;
@@ -171,12 +172,54 @@ body {
   margin-left: 60%;
 }
 
+.authExplaination {
+  background-color: #37417D;
+  height: 950px;
+  width: 100%;
+  margin: 0 auto;
+  h2 {
+    font-family: $secondaryFont;
+    font-weight: 400;
+    font-size: 3em;
+    padding: 5%;
+    color: white;
+    opacity: .8;
+    line-height: 1.5em;
+  }
+}
+
+#homepageMap {
+  text-align: center;
+  width: 100%;
+}
+
+#map {
+  border: 3px solid white;
+  // box-shadow: -2px 2px 7px 1px rgba(0, 0, 0, .4);
+
+}
+
   // LOGIN SECTION
 .loginSec {
   padding-top: 5%;
-  width: 100%;
   background-color: $darkerColor;
-  height: auto;
+  height: 400px;
+  h3 {
+    text-align: center;
+    font-family: $secondaryFont;
+    color: white;
+    font-size: 2.9em;
+    line-height: 1.2em;
+    opacity: .7;
+  }
+  p {
+    padding: 5%;
+    font-family: $secondaryFont;
+    color: white;
+    font-size: 2em;
+    line-height: 1.25em;
+    opacity: .7;
+  }
 }
 
 .login {
