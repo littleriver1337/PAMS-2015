@@ -3,7 +3,7 @@
 
 angular
   .module('pamsRetailer')
-  .controller('RetailerController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, GuestService, $routeParams) {
+  .controller('RetailerController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, $routeParams) {
     var vm = this;
 
 

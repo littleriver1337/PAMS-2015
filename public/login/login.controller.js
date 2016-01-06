@@ -3,7 +3,7 @@
 
 angular
   .module('pamsLogin')
-  .controller('LoginController', function ($scope, LoginService, AdminService, VerificationService, CompanyService, RetailerService, GuestService, $routeParams) {
+  .controller('LoginController', function ($scope, LoginService, AdminService, VerificationService, CompanyService, RetailerService, $routeParams) {
     var vm = this;
 
     console.log("INSTATIATED");

@@ -556,11 +556,25 @@ footer {
       text-decoration: underline; }
     footer a:visited {
       color: white; }
-  footer p {
-    margin: 0;
+  footer p, footer h3 {
     font-family: "Ubuntu", sans-serif;
-    font-size: .75em;
+    margin: 0;
+    padding: 0;
     opacity: .7; }
+  footer h3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 1em; }
+  footer p {
+    font-size: .75em; }
+
+.personalContact1 {
+  text-align: left; }
+  .personalContact1 p {
+    padding-left: 50px; }
+
+.personalContact2 {
+  text-align: left; }
 
 .socialIcon {
   width: 30px;

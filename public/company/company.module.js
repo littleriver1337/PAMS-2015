@@ -8,8 +8,7 @@
       'pamsAdmin',
       'pamsVerification',
       'pamsRetailer',
-      'pamsAddItems',
-      'pamsGuest'
+      'pamsAddItems'
     ])
     .config(function ($routeProvider) {
       $routeProvider
@@ -41,9 +40,37 @@
           templateUrl: 'company/views/addBall.html',
           controller: 'AddItemsController as addItemsCtrl',
         })
+        .when('/addPantsC', {
+          templateUrl: 'company/views/addPants.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addShoesC', {
+          templateUrl: 'company/views/addShoes.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/addUmbrellaC', {
+          templateUrl: 'company/views/addUmbrella.html',
+          controller: 'AddItemsController as addItemsCtrl',
+        })
         .when('/searchC', {
           templateUrl: 'company/views/searchC.html',
           controller: 'AddItemsController as addItemsCtrl',
+        })
+        .when('/makerC', {
+          templateUrl: 'company/views/maker.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/lieAngleC', {
+          templateUrl: 'company/views/lieAngle.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/yearC', {
+          templateUrl: 'company/views/year.html',
+          controller: 'AdminController as adminCtrl',
+        })
+        .when('/clubTypeC', {
+          templateUrl: 'company/views/clubType.html',
+          controller: 'AdminController as adminCtrl',
         })
         .otherwise({ redirectTo: '/404'});
     });
