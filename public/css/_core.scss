@@ -608,6 +608,12 @@ body {
   height: 400px;
 }
 
+#mapHeader {
+  font-family: $h1Font;
+  text-align: right;
+  opacity: .7;
+}
+
 
 // VERIFY PRODUCT
 .productVerification {
