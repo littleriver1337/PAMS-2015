@@ -15,65 +15,68 @@
 <div class="mainContent">
 
 <!-- SIDEBAR -->
-<div class="col-md-4 sidebar">
-  <ul class="menuItems">
+  <div class="col-md-4 sidebar">
+    <ul class="menuItems"> <h2>COMPANY</h2>
+      <h3>CONTROL PANEL</h3>
 
-    <h2>ADMIN</h2>
-    <h3>CONTROL PANEL</h3>
+      <li><img src="../../assets/upload.png" class="menuIcon" alt="Import Items"><br>
+        <a href="/#/addItemsC">Import<br>Products</a></li>
 
-    <li><img src="../../assets/add-user.png" class="menuIcon" alt="Create Users"><br>
-      <a href="/#/addUsers">Create<br>Users</a></li>
+      <li><img src="../../assets/magnifying-glass.png" class="menuIcon" alt="Search"><br>
+        <a href="/#/searchC">Search<br>Products</a></li>
 
-    <li><img src="../../assets/users.png" class="menuIcon" alt="Manage Users"><br>
-      <a href="/#/users">Manage<br>Users</a></li>
+      <li><img src="../../assets/map.png" class="menuIcon" alt="Map"><br>
+        <a href="../../map.html" target="new">Counterfeit<br>Map</a></li>
 
-    <li><img src="../../assets/upload.png" class="menuIcon" alt="Import Items"><br>
-      <a href="/#/addItems">Import<br>Products</a></li>
-
-    <li><img src="../../assets/magnifying-glass.png" class="menuIcon" alt="Search"><br>
-      <a href="/#/search">Search<br>Products</a></li>
-
-    <li><img src="../../assets/map.png" class="menuIcon" alt="Map"><br>
-      <a href="../../map.html" target="new">Counterfeit<br>Map</a></li>
-
-    <li><img src="../../assets/shield.png" class="menuIcon" alt="Verify Product"><br>
-      <a href="/#/admin">Verify<br>Product</a></li>
-  </ul>
-</div>
+      <li><img src="../../assets/shield.png" class="menuIcon" alt="Verify Product"><br>
+        <a href="/#/verifyC">Verify<br>Product</a></li>
+    </ul>
+  </div>
 
 <!-- MAIN CONTENT -->
 <div class="col-md-8 adminMain">
 
-  <section class="searchItem">
-    <h3>Search by Year:</h3>
-
-    <form class="form-horizontal" ng-submit="adminCtrl.yearSearch(year)">
-      <!-- YEAR -->
+  <section class="addItem">
+    <h3>Individual Import for Golf Pants:</h3>
+    <form class="form-horizontal" ng-submit="addItemsCtrl.addPants(item)">
+      <!-- MAKER -->
       <div class="form-group">
-        <label for="yearSearch" class="col-sm-2 control-label">Year</label>
-        <div class="col-sm-10">
-          <input type="text" ng-model="year" class="form-control" name="yearSearch" required>
-        </div>
-        </div>
+        <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
+      </div>
+      <!-- FIT -->
+      <div class="form-group">
+        <input type="text" ng-model="item.fit" class="form-control" name="fit" placeholder="Fit" required>
+      </div>
+      <!-- COLOR -->
+      <div class="form-group">
+        <input type="text" ng-model="item.color" class="form-control" name="color" placeholder="Color" required>
+      </div>
+      <!-- PRICE -->
+      <div class="form-group">
+        <input type="text" ng-model="item.price" class="form-control" name="price" placeholder="Price">
+      </div>
       <!-- SUBMIT BUTTONS -->
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" name="searchYear">Search</button>
+          <button type="submit" class="btn btn-primary" name="submitHat">Create Item</button>
         </div>
       </div>
     </form>
   </section>
 
+
+  <section class="importSection">
+    <h3>Bulk Import: </h3>
+    <h4> .CSV and .XML files accepted</h4>
+    <form action="/upload-pants/" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="ImportFile">Import File</label>
+        <input type="file" id="ImportFile" ng-model="file" name="file">
+      </div>
+      <input type="submit" name="upload" value="Upload" class="btn btn-success">
     </form>
-
-    <section class="searchRes hidden">
-        <h3>Search Results: </h3>
-        <section class="actualResults">
-
-        </section>
-    </section>
-
   </section>
+</div>
 </div>
 
 

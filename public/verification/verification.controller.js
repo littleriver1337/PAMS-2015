@@ -3,7 +3,7 @@
 
 angular
   .module('pamsVerification')
-  .controller('VerificationController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, GuestService, $routeParams) {
+  .controller('VerificationController', function ($scope, VerificationService, LoginService, AdminService, CompanyService, RetailerService, $routeParams) {
     var vm = this;
 
     vm.check = function(item) {

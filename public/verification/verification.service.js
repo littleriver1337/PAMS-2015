@@ -16,7 +16,6 @@
         var maker = res.maker;
         var serialNumber = res.serialNumber;
         var time = res.time;
-        // var user = res.user.username;
         if (res.isAuthentic) {
           $('.false').addClass('hidden');
           $('.true').removeClass('hidden');
@@ -32,8 +31,8 @@
             "<b>Serial Number</b>: " + serialNumber + "<br>" +
             "<b>Year</b>: " + year + "<br></p></div>"
           );
-          return currentItem;
         } else {
+          var user = res.user.username;
           $('.true').addClass('hidden');
           $('.false').removeClass('hidden');
           $('.false').html(
@@ -42,9 +41,9 @@
             "</div> <div class='authTxt'>" +
             "<h3> WARNING: NOT AUTHENTIC </h3> " +
             "<p> This item has automatically been reported to PAMS, and it was recorded in the counterfeit tracking system at: <br><b>" +
-            moment(time).format("h:mm:ss A [on] dddd, MMMM D, YYYY") + "</b> <br><br></p></div>"
-            // "Entered by: <b>" + user + "</b>." +
-            //  "</p></div>"
+            moment(time).format("h:mm:ss A [on] dddd, MMMM D, YYYY") + "</b> <br><br>" +
+            "Entered by: <b>" + user + "</b>." +
+             "</p></div>"
           );
         }
       });

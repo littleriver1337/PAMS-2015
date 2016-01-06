@@ -9,8 +9,7 @@
       'pamsCompany',
       'pamsRetailer',
       'pamsAddItems',
-      'ui.bootstrap.tpls',
-      'pamsGuest'
+      'ui.bootstrap.tpls'
     ])
     .config(function ($routeProvider) {
       $routeProvider
