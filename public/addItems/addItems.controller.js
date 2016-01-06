@@ -3,7 +3,7 @@
 
 angular
   .module('pamsAddItems')
-  .controller('AddItemsController', function ($scope, AdminService, LoginService, VerificationService, CompanyService, RetailerService, AddItemsService, GuestService, $routeParams, _) {
+  .controller('AddItemsController', function ($scope, AdminService, LoginService, VerificationService, CompanyService, RetailerService, AddItemsService, $routeParams, _) {
     var vm = this;
 
     vm.addBag = function(item){

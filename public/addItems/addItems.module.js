@@ -8,8 +8,7 @@
       'pamsVerification',
       'pamsCompany',
       'pamsRetailer',
-      'pamsAdmin',
-      'pamsGuest'
+      'pamsAdmin'
     ])
     .config(function ($routeProvider) {
       $routeProvider

@@ -33,36 +33,50 @@
     </ul>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="col-md-8 adminMain">
+<!-- MAIN CONTENT -->
+<div class="col-md-8 adminMain">
 
-    <section class="searchItems">
-
-      <h3>Search by Category:</h3>
-
-      <ul class="searchList">
-        <a href="#/clubTypeC">
-          <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-            Search by Club Type</li>
-        </a>
-
-        <a href="#/lieAngleC">
-          <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-            Search by Lie Angle</li>
-        </a>
-
-        <a href="#/makerC">
-          <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-            Search by Maker</li>
-        </a>
-
-        <a href="#/yearC">
-          <li><img src="../../assets/magnifying-glass.svg"  class="itemIcons" alt="">
-            Search by Year</li>
-        </a>
-      </ul>
-
+    <section class="addItem">
+      <h3>Individual Import for Golf Umbrella:</h3>
+      <form class="form-horizontal" ng-submit="addItemsCtrl.addUmbrella(item)">
+        <!-- MAKER -->
+        <div class="form-group">
+          <input type="text" ng-model="item.maker" class="form-control" name="maker" placeholder="Maker" required>
+        </div>
+        <!-- FIT -->
+        <div class="form-group">
+          <input type="text" ng-model="item.fit" class="form-control" name="fit" placeholder="Fit" required>
+        </div>
+        <!-- COLOR -->
+        <div class="form-group">
+          <input type="text" ng-model="item.color" class="form-control" name="color" placeholder="Color" required>
+        </div>
+        <!-- PRICE -->
+        <div class="form-group">
+          <input type="text" ng-model="item.price" class="form-control" name="price" placeholder="Price">
+        </div>
+        <!-- SUBMIT BUTTONS -->
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" name="submitHat">Create Item</button>
+          </div>
+        </div>
+      </form>
     </section>
+
+
+    <section class="importSection">
+      <h3>Bulk Import: </h3>
+      <h4> .CSV and .XML files accepted</h4>
+      <form action="/upload-umbrellas/" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="ImportFile">Import File</label>
+          <input type="file" id="ImportFile" ng-model="file" name="file">
+        </div>
+        <input type="submit" name="upload" value="Upload" class="btn btn-success">
+      </form>
+    </section>
+  </div>
   </div>
 
   <!-- FOOTER -->

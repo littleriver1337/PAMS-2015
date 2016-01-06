@@ -713,12 +713,31 @@ footer {
       color: white;
     }
   }
-  p {
-    margin: 0;
+  p, h3 {
     font-family: $h3Font;
-    font-size: .75em;
+    margin: 0;
+    padding: 0;
     opacity: .7;
   }
+  h3 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 1em;
+  }
+  p {
+    font-size: .75em;
+  }
+}
+
+.personalContact1 {
+  text-align: left;
+  p {
+    padding-left: 50px;
+  }
+}
+
+.personalContact2 {
+  text-align: left;
 }
 
 .socialIcon {
