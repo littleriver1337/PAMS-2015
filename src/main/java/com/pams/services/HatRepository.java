@@ -8,4 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface HatRepository extends CrudRepository<Hat, Integer> {
     Hat findOneByPrice(String price);
+    Hat findOneById(int id);
 }

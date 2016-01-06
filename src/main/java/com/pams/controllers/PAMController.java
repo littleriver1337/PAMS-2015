@@ -366,7 +366,7 @@ public class PAMController {
      */
     @RequestMapping(path = "/delete-bag/{id}", method = RequestMethod.DELETE)
     public void deleteBag(
-            @PathVariable("int") int id,
+            @PathVariable("id") int id,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
@@ -413,7 +413,7 @@ public class PAMController {
      */
     @RequestMapping(path = "/delete-ball/{id}", method = RequestMethod.DELETE)
     public void deleteBall(
-            @PathVariable("int") int id,
+            @PathVariable("id") int id,
             HttpSession session
     )throws Exception {
         if (session.getAttribute("username") == null) {
@@ -608,7 +608,7 @@ public class PAMController {
      */
     @RequestMapping(path = "/delete-hat/{id}", method = RequestMethod.DELETE)
     public void deleteHat(
-            @PathVariable("int") int id,
+            @PathVariable("id") int id,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
@@ -655,7 +655,7 @@ public class PAMController {
      */
     @RequestMapping(path = "/delete-pant/{id}", method = RequestMethod.DELETE)
     public void deletePant(
-            @PathVariable("int") int id,
+            @PathVariable("id") int id,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
@@ -702,7 +702,7 @@ public class PAMController {
      */
     @RequestMapping(path = "/delete-shirt/{id}", method = RequestMethod.DELETE)
     public void deleteShirt(
-            @PathVariable("int") int id,
+            @PathVariable("id") int id,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
@@ -749,7 +749,7 @@ public class PAMController {
      */
     @RequestMapping(path = "/delete-shoe/{id}", method = RequestMethod.DELETE)
     public void deleteShoe(
-            @PathVariable("int") int id,
+            @PathVariable("id") int id,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
@@ -796,7 +796,7 @@ public class PAMController {
      */
     @RequestMapping(path = "/delete-umbrella/{id}", method = RequestMethod.DELETE)
     public void deleteUmbrella(
-            @PathVariable("int") int id,
+            @PathVariable("id") int id,
             HttpSession session
     )throws Exception{
         if (session.getAttribute("username") == null){
