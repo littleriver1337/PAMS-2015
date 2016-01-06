@@ -24,6 +24,8 @@
       var yearSearchRoute = "/search-by-year/";
       var lieAngleSearchRoute = "/search-by-lie-angle/";
 
+  // CREATE USERS
+    //ADMIN
       var createAdmin = function(admin){
         admin.accessLevel = "ADMIN";
         $http.post(userRoute, admin).success(function(res){
@@ -36,18 +38,36 @@
         });
       };
 
+    //COMPANY
       var createCompany = function(company){
         company.accessLevel = "COMPANY_USER";
         $http.post(userRoute, company).success(function(res){
           console.log("New company posted: ", company);
+          $('input[name="username"]').val('');
+          $('input[name="password"]').val('');
+          $('input[name="passwordVerify"]').val('');
+          $('input[name="email"]').val('');
+          $('input[name="address"]').val('');
+          $('input[name="town"]').val('');
+          $('input[name="state"]').val('');
+          $('input[name="zip"]').val('');
           console.log("Response: ", res);
         });
       };
 
+    //RETAILER
       var createRetailer = function(retailer){
         retailer.accessLevel = "RETAILER_USER";
         $http.post(userRoute, retailer).success(function(res){
           console.log("New retailer posted: ", retailer);
+          $('input[name="username"]').val('');
+          $('input[name="password"]').val('');
+          $('input[name="passwordVerify"]').val('');
+          $('input[name="email"]').val('');
+          $('input[name="address"]').val('');
+          $('input[name="town"]').val('');
+          $('input[name="state"]').val('');
+          $('input[name="zip"]').val('');
           console.log("Response: ", res);
         });
       };
@@ -69,12 +89,14 @@
         });
       };
 
+  // GET USERS
       var getUsers = function(){
         return $http.get(findUsersRoute).then(function(user){
           return mapData(user.data);
         });
       };
 
+  // EDIT USER
       var editUser = function(user){
         $http.put(editUserRoute, user).success(function(res){
           console.log("SUCCESSFUL PUT: ", user);
@@ -82,12 +104,14 @@
         });
       };
 
+  // DELETE USER
       var deleteUser = function(user){
         $http.delete(deleteUserRoute + user.id).success(function(res){
           console.log("DELETED USER: ", user);
         });
       };
 
+  // VERIFY PRODUCT
       var checkItem = function(item) {
         $http.get(itemRoute + item.serialNumber).success(function(res){
           console.log("Posted Item: ", item);
@@ -101,6 +125,7 @@
         });
       };
 
+// IMPORT SINGLE ITEMS
       var addBag = function(item){
         $http.post(createBagRoute, item).success(function(res){
           console.log("Bag Created: ", item);
@@ -136,6 +161,7 @@
         });
       };
 
+// SEARCH BY CATEGORY
       var makerSearch = function(maker){
         $http.get(makerSearchRoute + maker).success(function(res){
           var searchHTML = "";

@@ -473,6 +473,11 @@ body {
 .angular-google-map-container {
   height: 400px; }
 
+#mapHeader {
+  font-family: "Orbitron", sans-serif;
+  text-align: right;
+  opacity: .7; }
+
 .productVerification h3 {
   font-family: 4em;
   font-weight: 700;
