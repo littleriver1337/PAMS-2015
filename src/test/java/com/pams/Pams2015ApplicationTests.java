@@ -1,11 +1,14 @@
 package com.pams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pams.entities.Bag;
 import com.pams.entities.Club;
+import com.pams.entities.Hat;
 import com.pams.entities.User;
+import com.pams.services.BagRepository;
+import com.pams.services.HatRepository;
 import com.pams.services.ItemRepository;
 import com.pams.services.UserRepository;
-import org.apache.tomcat.jni.Local;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,9 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,6 +33,13 @@ public class Pams2015ApplicationTests {
 	@Autowired
 	ItemRepository clubRepo;
 
+	@Autowired
+	HatRepository hatRepo;
+
+	@Autowired
+	BagRepository bagRepo;
+
+
 	MockMvc mockMvc;
 
 	@Autowired
@@ -41,6 +49,8 @@ public class Pams2015ApplicationTests {
 	public void before() {
 		userRepo.deleteAll();
 		clubRepo.deleteAll();
+		hatRepo.deleteAll();
+		bagRepo.deleteAll();
 		mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
 	}
 
@@ -238,6 +248,188 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(clubRepo.count() == 0);
 	}
+
+
+
+	/*
+	Hat
+	 */
+	@Test
+	public void addHatTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Hat hat = new Hat();
+		//hat.id= 1;
+		hat.maker = "Test Maker";
+		hat.fit = "Test Fit";
+		hat.color = "Black";
+		hat.price = "12.99";
+		//hat.time = LocalDateTime.now().toString();
+		String json = mapper.writeValueAsString(hat);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-hat")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(hatRepo.count() == 1);
+	}
+	@Test
+	public void editTestHat()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Hat hat = new Hat();
+		hat.id = 1;
+		hat.maker = "Test Maker";
+		hat.fit = "Test Fit";
+		hat.color = "Black";
+		hat.price = "12.99";
+		hat.time = LocalDateTime.now().toString();
+
+		String json = mapper.writeValueAsString(hat);
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-hat")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+
+		Hat hat2 = hatRepo.findOneById(hat.id);
+		hat.maker = "Test Maker Edit";
+		hat.fit = "Test Fit Edit";
+		hat.color = "Black Edit";
+		hat.price = "12.99 Edit";
+		hat.time = LocalDateTime.now().toString();
+
+		ObjectMapper mapper2 = new ObjectMapper();
+
+		String json2 = mapper.writeValueAsString(hat2);
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-hat") //when this is set to put it does not work for some reason? Ask Zac.
+						.content(json2)
+						.header("Content-Type", "application/json") //what does this do specifically?  Ask Zac.
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(hatRepo.count() == 1);
+	}
+	@Test
+	public void deleteHatTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Hat hat = new Hat();
+		//hat.id = 1;
+		hat.maker = "Test Maker";
+		hat.fit = "Test Fit";
+		hat.color = "Black";
+		hat.price = "12.99";
+		hat.time = LocalDateTime.now().toString();
+		String json = mapper.writeValueAsString(hat);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-hat")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+		hat = hatRepo.findAll().iterator().next();
+		//Hat hat2 = hatRepo.findOneById(hat.id);
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/delete-hat/" + hat.id)
+						.sessionAttr("username", "TestUser")
+		);
+		long count = hatRepo.count();
+		assertTrue(count == 0);
+	}
+
+	/*
+	   Bag
+	 */
+
+	@Test
+	public void addBagTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Bag bag = new Bag();
+		bag.maker = "Test Bag Maker";
+		bag.stand = "Test Bag Stand";
+		bag.harness = "Test Bag Stand";
+		bag.price = "119.99";
+		String json = mapper.writeValueAsString(bag);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-bag")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(bagRepo.count() == 1);
+	}
+	@Test
+	public void editBagTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Bag bag = new Bag();
+		bag.maker = "Test Bag Maker";
+		bag.stand = "Test Bag Stand";
+		bag.harness = "Test Bag Stand";
+		bag.price = "119.99";
+		String json = mapper.writeValueAsString(bag);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-bag")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+
+		Bag bag2 = bagRepo.findAll().iterator().next();
+		bag2.maker = "Edit Bag Maker";
+		bag2.stand = "Edit Bag Stand";
+		bag2.harness = "Edit Bag Stand";
+		bag2.price = "109.99";
+
+		ObjectMapper mapper2 = new ObjectMapper();
+
+		String json2 = mapper2.writeValueAsString(bag2);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-bag") //when this is set to put it does not work for some reason? Ask Zac.
+						.content(json2)
+						.header("Content-Type", "application/json") //what does this do specifically?  Ask Zac.
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(bagRepo.count() == 1);
+	}
+	@Test
+	public void deleteBagTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Bag bag = new Bag();
+		bag.id = 1;
+		bag.maker = "Test Bag Maker";
+		bag.stand = "Test Bag Stand";
+		bag.harness = "Test Bag Stand";
+		bag.price = "119.99";
+		String json = mapper.writeValueAsString(bag);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-bag")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "TestUser")
+		);
+
+
+		Bag bag2 = bagRepo.findAll().iterator().next();
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/delete-bag/" + bag2.id)
+						.sessionAttr("username", "TestUser")
+		);
+		assertTrue(bagRepo.count() == 0);
+	}
+
+
+
+
+
+
 
 	/*@Test
 	public void importFileTest()throws Exception{

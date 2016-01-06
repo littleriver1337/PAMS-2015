@@ -8,4 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface BagRepository extends CrudRepository<Bag, Integer> {
     Bag findOneByMaker(String maker);
+    Bag findOneById(int searchId);
 }
