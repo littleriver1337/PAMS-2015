@@ -1,17 +1,12 @@
 package com.pams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pams.entities.Bag;
-import com.pams.entities.Club;
-import com.pams.entities.Hat;
-import com.pams.entities.User;
-import com.pams.services.BagRepository;
-import com.pams.services.HatRepository;
-import com.pams.services.ItemRepository;
-import com.pams.services.UserRepository;
+import com.pams.entities.*;
+import com.pams.services.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -27,6 +22,10 @@ import static org.junit.Assert.assertTrue;
 @SpringApplicationConfiguration(classes = Pams2015Application.class)
 @WebAppConfiguration
 public class Pams2015ApplicationTests {
+
+	@Autowired
+	BallRepository ballRepo;
+
 	@Autowired
 	UserRepository userRepo;
 
@@ -49,6 +48,7 @@ public class Pams2015ApplicationTests {
 	public void before() {
 		userRepo.deleteAll();
 		clubRepo.deleteAll();
+		ballRepo.deleteAll();
 		hatRepo.deleteAll();
 		bagRepo.deleteAll();
 		mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
@@ -249,7 +249,64 @@ public class Pams2015ApplicationTests {
 		assertTrue(clubRepo.count() == 0);
 	}
 
+	@Test
+	public void addBallTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Ball ball = new Ball();
+		ball.maker = "Titlest";
+		ball.coating = "sync";
+		ball.layers = "3";
+		ball.boxCount = "12";
+		ball.price = "143.00";
 
+		String json = mapper.writeValueAsString(ball);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-ball")
+				.content(json)
+				.header("Content-Type", "application/json")
+				.sessionAttr("username", "Test User")
+		);
+		assertTrue(ballRepo.count() == 1);
+	}
+
+
+	@Test
+	public void editTestBall()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Ball ball = new Ball();
+		ball.maker = "Titlest";
+		ball.coating = "syn";
+		ball.layers = "3";
+		ball.boxCount = "12";
+		ball.price = "12.33";
+
+		String json = mapper.writeValueAsString(ball);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-ball")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "Test User")
+		);
+
+		ObjectMapper mapper2 = new ObjectMapper();
+		Ball ball2 = ballRepo.findOneByPrice(ball.price);
+		ball2.maker = "Ping";
+		ball2.coating = "syn";
+		ball2.layers = "4";
+		ball2.boxCount = "24";
+		ball2.price = "14.33";
+
+		String json2 = mapper2.writeValueAsString(ball2);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-ball")
+						.content(json2)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "Test User")
+		);
+		assertTrue(ballRepo.count() == 1);
+	}
 
 	/*
 	Hat
@@ -259,12 +316,10 @@ public class Pams2015ApplicationTests {
 			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		Hat hat = new Hat();
-		//hat.id= 1;
 		hat.maker = "Test Maker";
 		hat.fit = "Test Fit";
 		hat.color = "Black";
 		hat.price = "12.99";
-		//hat.time = LocalDateTime.now().toString();
 		String json = mapper.writeValueAsString(hat);
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-hat")
@@ -274,12 +329,12 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(hatRepo.count() == 1);
 	}
+
 	@Test
 	public void editTestHat()
 			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		Hat hat = new Hat();
-		hat.id = 1;
 		hat.maker = "Test Maker";
 		hat.fit = "Test Fit";
 		hat.color = "Black";
@@ -296,15 +351,15 @@ public class Pams2015ApplicationTests {
 		);
 
 		Hat hat2 = hatRepo.findOneById(hat.id);
-		hat.maker = "Test Maker Edit";
-		hat.fit = "Test Fit Edit";
-		hat.color = "Black Edit";
-		hat.price = "12.99 Edit";
-		hat.time = LocalDateTime.now().toString();
+		hat2.maker = "Test Maker Edit";
+		hat2.fit = "Test Fit Edit";
+		hat2.color = "Black Edit";
+		hat2.price = "12.99 Edit";
+		hat2.time = LocalDateTime.now().toString();
 
 		ObjectMapper mapper2 = new ObjectMapper();
 
-		String json2 = mapper.writeValueAsString(hat2);
+		String json2 = mapper2.writeValueAsString(hat2);
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/edit-hat") //when this is set to put it does not work for some reason? Ask Zac.
@@ -314,12 +369,38 @@ public class Pams2015ApplicationTests {
 		);
 		assertTrue(hatRepo.count() == 1);
 	}
+
+	@Test
+	public void deleteBallTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Ball ball = new Ball();
+		ball.maker = "Titlest";
+		ball.coating = "sync";
+		ball.layers = "3";
+		ball.boxCount = "12";
+		ball.price = "143.00";
+		String json = mapper.writeValueAsString(ball);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-ball")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "Test User")
+		);
+		ball = ballRepo.findAll().iterator().next();
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/delete-ball/" + ball.id)
+						.sessionAttr("username", "TestUser")
+		);
+		long count = ballRepo.count();
+		assertTrue(count == 0);
+	}
+
 	@Test
 	public void deleteHatTest()
 			throws Exception{
 		ObjectMapper mapper = new ObjectMapper();
 		Hat hat = new Hat();
-		//hat.id = 1;
 		hat.maker = "Test Maker";
 		hat.fit = "Test Fit";
 		hat.color = "Black";
@@ -333,7 +414,6 @@ public class Pams2015ApplicationTests {
 						.sessionAttr("username", "TestUser")
 		);
 		hat = hatRepo.findAll().iterator().next();
-		//Hat hat2 = hatRepo.findOneById(hat.id);
 		mockMvc.perform(
 				MockMvcRequestBuilders.delete("/delete-hat/" + hat.id)
 						.sessionAttr("username", "TestUser")
