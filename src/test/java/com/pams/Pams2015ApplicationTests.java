@@ -530,6 +530,91 @@ public class Pams2015ApplicationTests {
 		assertTrue(count == 0);
 	}
 
+	//Add Shirt Test
+	@Test
+	public void addShirtTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Shirt shirt = new Shirt();
+		shirt.maker = "Nike";
+		shirt.fit = "L";
+		shirt.color = "Green";
+		shirt.price = "123.44";
+
+		String json = mapper.writeValueAsString(shirt);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-shirt")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "Test User")
+		);
+		assertTrue(shirtRepo.count() == 1);
+	}
+
+	//Edit Shirt Test
+	@Test
+	public void editShirtTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Shirt shirt = new Shirt();
+		shirt.maker = "Nike";
+		shirt.fit = "L";
+		shirt.color = "Green";
+		shirt.price = "133.33";
+
+		String json = mapper.writeValueAsString(shirt);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-shirt")
+						.content(json)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "Test User")
+		);
+
+		ObjectMapper mapper2 = new ObjectMapper();
+		Shirt shirt2 = shirtRepo.findOneByPrice(shirt.price);
+		shirt2.maker = "Ping";
+		shirt2.fit = "S";
+		shirt2.color = "Red";
+		shirt2.price = "122.22";
+
+		String json2 = mapper2.writeValueAsString(shirt2);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-shirt")
+						.content(json2)
+						.header("Content-Type", "application/json")
+						.sessionAttr("username", "Test User")
+		);
+		assertTrue(shirtRepo.count() == 1);
+	}
+
+	//Delete Shirt Test
+	@Test
+	public void deleteShirtTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Shirt shirt = new Shirt();
+		shirt.maker = "Nike";
+		shirt.fit = "XXL";
+		shirt.color = "Red";
+		shirt.price = "144.44";
+
+		String json = mapper.writeValueAsString(shirt);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-shirt")
+				.content(json)
+				.header("Content-Type", "application/json")
+				.sessionAttr("username", "Test User")
+		);
+
+		shirt = shirtRepo.findOneByPrice(shirt.price);
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/delete-shirt/" + shirt.id)
+				.sessionAttr("username", "Test User")
+		);
+		long count = shirtRepo.count();
+		assertTrue(count == 0);
+	}
+
 	//Add User Test
 	@Test
 	public void addUserTest()
