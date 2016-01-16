@@ -615,6 +615,92 @@ public class Pams2015ApplicationTests {
 		assertTrue(count == 0);
 	}
 
+	//Add Shoe Test
+	@Test
+	public void addShoeTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Shoe shoe  = new Shoe();
+		shoe.maker = "Nike";
+		shoe.fit = "12";
+		shoe.spikes = "Yes";
+		shoe.spikeless = "No";
+		shoe.color = "Green";
+
+		String json = mapper.writeValueAsString(shoe);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-shoe")
+				.content(json)
+				.header("Content-Type", "application/json")
+				.sessionAttr("username", "Test User")
+		);
+		assertTrue(shoeRepo.count() == 1);
+	}
+
+	//Edit Shoe Test
+	@Test
+	public void editShoeTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Shoe shoe = new Shoe();
+		shoe.maker = "Ping";
+		shoe.fit = "13";
+		shoe.spikes = "No";
+		shoe.spikeless = "Yes";
+		shoe.color = "Yellow";
+
+		String json = mapper.writeValueAsString(shoe);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-shoe")
+				.content(json)
+				.header("Content-Type", "application/json")
+				.sessionAttr("username", "Test User")
+		);
+		Shoe shoe2 = shoeRepo.findOneByMaker(shoe.maker);
+		shoe2.maker = "Nike";
+		shoe2.fit = "9";
+		shoe2.spikes = "Yes";
+		shoe2.spikeless = "No";
+		shoe2.color = "Green";
+
+		String json2 = mapper.writeValueAsString(shoe2);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-shoe")
+				.content(json2)
+				.header("Content-Type", "application/json")
+				.sessionAttr("username", "Test User")
+		);
+		assertTrue(shoeRepo.count() == 1);
+	}
+
+	//Delete Shoe Test
+	@Test
+	public void deleteShoeTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Shoe shoe = new Shoe();
+		shoe.maker = "Nike";
+		shoe.fit = "9";
+		shoe.spikes = "Yes";
+		shoe.spikeless = "No";
+		shoe.color = "Yellow";
+
+		String json = mapper.writeValueAsString(shoe);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-shoe")
+				.content(json)
+				.header("Content-Type", "application/json")
+				.sessionAttr("username", "Test User")
+		);
+		shoe = shoeRepo.findOneByMaker(shoe.maker);
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/delete-shoe/" + shoe.id)
+				.sessionAttr("username", "Test User")
+		);
+		long count = shoeRepo.count();
+		assertTrue(count == 0);
+	}
+
 	//Add User Test
 	@Test
 	public void addUserTest()
