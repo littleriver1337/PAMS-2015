@@ -701,6 +701,30 @@ public class Pams2015ApplicationTests {
 		assertTrue(count == 0);
 	}
 
+	//Add Umbrella Test
+	@Test
+	public void addUmbrellaTest()
+			throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		Umbrella umbrella = new Umbrella();
+		umbrella.maker = "Ping";
+		umbrella.color = "Yellow";
+		umbrella.collection = "IDK";
+		umbrella.umbrellaStyle = "LOLWUT";
+		umbrella.pattern = "NOPE";
+		umbrella.price = "123.33";
+
+		String json = mapper.writeValueAsString(umbrella);
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-umbrella")
+				.content(json)
+				.header("Content-Type", "application/json")
+				.header("username", "Test User")
+		);
+		assertTrue(umbrellaRepo.count() == 1);
+	}
+
+
 	//Add User Test
 	@Test
 	public void addUserTest()
